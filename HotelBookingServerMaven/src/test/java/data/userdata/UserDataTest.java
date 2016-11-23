@@ -1,9 +1,7 @@
 package data.userdata;
 
 import static org.junit.Assert.*;
-
-import data.userData.UserData;
-import data.userdata.*;
+import data.userData.*;
 
 import org.junit.Test;
 
