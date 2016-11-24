@@ -3,7 +3,7 @@
   <groupId>cn.nju</groupId>
   <artifactId>HotelBookingServer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>HoteBookinglServer</name>
+  <name>HotelBookingServer</name>
   <description>互联网酒店预订系统服务端</description>
   <dependencies>
 		<dependency>
