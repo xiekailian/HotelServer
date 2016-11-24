@@ -5,10 +5,15 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import data.hotelData.HotelData;
+import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
+import data.orderData.OrderDataMock;
 import data.promotionData.PromotionData;
+import data.promotionData.PromotionDataMock;
 import data.searchData.SearchData;
+import data.searchData.SearchDataMock;
 import data.userData.UserData;
+import data.userData.UserDataMock;
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
@@ -34,11 +39,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 	private UserDataService userdataservice;
 	
 	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Service�ľ��巽��
-		hoteldataservice=new HotelData();
-		orderdataService=new OrderData();
-		promotiondataService=new PromotionData();
-		searchdataservice=new SearchData();
-		userdataservice=new UserData();
+		hoteldataservice=new HotelDataMock();
+//		orderdataService=new OrderData();
+//		promotiondataService=new PromotionData();
+//		searchdataservice=new SearchData();
+//		userdataservice=new UserData();
 	}
 	public ArrayList<SearchPO> showSearchHistory(String username) throws RemoteException {
 		// TODO Auto-generated method stub
