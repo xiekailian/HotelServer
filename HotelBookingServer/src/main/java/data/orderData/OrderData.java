@@ -8,7 +8,7 @@ import data.dataHelperImpl.DataFactoryImpl;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
-public class OrderData /*implements OrderDataService*/ {
+public class OrderData implements OrderDataService {
 
 	private ArrayList<OrderPO> list = null;
 
@@ -20,7 +20,7 @@ public class OrderData /*implements OrderDataService*/ {
 
 	public static OrderData getOrderData() {
 		if (orderData == null) {
-			orderData = new OrderData();
+			orderData = new OrderDataMock();
 			return orderData;
 		}
 		return orderData;

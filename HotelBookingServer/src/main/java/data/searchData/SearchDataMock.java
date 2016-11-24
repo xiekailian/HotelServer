@@ -2,10 +2,9 @@ package data.searchData;
 
 import java.util.ArrayList;
 
-import dataService.searchDataService.SearchDataService;
 import po.SearchPO;
 
-public class SearchDataMock implements SearchDataService{
+public class SearchDataMock extends SearchData{
 	ArrayList<SearchPO> allsearchhistory=new ArrayList<SearchPO>();
 	public SearchDataMock(){
 		SearchPO sp1=new SearchPO("wuxiufeng", null, "酒店1");
@@ -20,6 +19,7 @@ public class SearchDataMock implements SearchDataService{
 	}
 
 	
+	@Override
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		// TODO Auto-generated method stub
 		ArrayList<SearchPO> result=new ArrayList<SearchPO>();
@@ -32,11 +32,13 @@ public class SearchDataMock implements SearchDataService{
 		return result;
 	}
 
+	@Override
 	public boolean addSearchHistory(SearchPO s) {
 		allsearchhistory.add(s);
 		return true;
 	}
 
+	@Override
 	public boolean deleteSearchHistory(SearchPO s) {
 		allsearchhistory.remove(s);
 		return true;
