@@ -1,8 +1,12 @@
 package data.userData;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import po.HotelWorkerPO;
 import po.MarketPO;
@@ -10,7 +14,7 @@ import po.PersonPO;
 import data.jdbcConnector.Builder;
 import dataService.*;
 import dataService.userDataService.UserDataService;
-public class UserData /*implements UserDataService*/{
+public class UserData implements UserDataService{
 	Connection conn=null;
 	PreparedStatement ps=null;
 	Builder builder=new Builder();
@@ -21,11 +25,10 @@ public class UserData /*implements UserDataService*/{
 	 * @return boolean
 	 */
 	public boolean addPerson(PersonPO personInfo) {
-		
 		int lastID=0;
 		try {
 			String select="select * from `Person`;";
-			String insert="insert into Person (id,用户名,密码,vip等级,vip信息,信用值) values(?,?,?,?,?,?);";
+			String insert="insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日) values(?,?,?,?,?,?,?,?);";
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
@@ -34,6 +37,7 @@ public class UserData /*implements UserDataService*/{
 					lastID=rs.getInt(1);
 				}
 				if(rs.getString(2).equals(personInfo.getuserName())){
+					rs.close();
 					return false;
 				}
 			}
@@ -42,9 +46,17 @@ public class UserData /*implements UserDataService*/{
 			ps.setInt(1, lastID+1);
 			ps.setString(2, personInfo.getuserName());
 			ps.setString(3, personInfo.getpassword());
-			ps.setInt(4, 0);
-			ps.setString(5, "");
-			ps.setInt(6, 0);
+			ps.setString(4, personInfo.getVipType());
+			ps.setInt(5, 0);
+			ps.setString(6, personInfo.getEnterpriseName());
+			ps.setInt(7, 0);
+			int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
+			personInfo.getBirthday().set(Calendar.DATE, temp);
+			java.util.Date date=personInfo.getBirthday().getTime();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			String birth=sdf.format(date);
+			java.sql.Date bd=java.sql.Date.valueOf(birth);
+			ps.setDate(8, bd);
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -60,10 +72,9 @@ public class UserData /*implements UserDataService*/{
 	 * @return PersonPO
 	 */		
 	public PersonPO findPerson(String personname) {
-		
 		PersonPO pp=new PersonPO();
 		try {
-			String select="select * from `Person`;";
+			String select="select * from `person`;";
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
@@ -72,9 +83,14 @@ public class UserData /*implements UserDataService*/{
 					pp.setPersonID(rs.getInt(1));
 					pp.setuserName(rs.getString(2));
 					pp.setpassword("");
-					pp.setVIPlevel(rs.getInt(4));
-					pp.setVIPinfo(rs.getString(5));
-					pp.setCredit(rs.getInt(6));
+					pp.setVipType(rs.getString(4));
+					pp.setVIPlevel(rs.getInt(5));
+					pp.setEnterpriseName(rs.getString(6));
+					pp.setCredit(rs.getInt(7));
+					if(rs.getDate(8)!=null){
+						Calendar cal=Calendar.getInstance();  
+						cal.setTime(rs.getDate(8)); 
+						pp.setBirthday(cal);}
 					return pp;
 				}
 			}
@@ -84,7 +100,7 @@ public class UserData /*implements UserDataService*/{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		}
-		
+
 		return null;
 	}
 	/**
@@ -92,12 +108,10 @@ public class UserData /*implements UserDataService*/{
 	 * @author xiamutian
 	 * @return boolean
 	 */	
-	public boolean modifyPerson(PersonPO personInfo) {
-			
-		PersonPO pp=new PersonPO();
+	public boolean modifyPerson(PersonPO personInfo) {	
 		try {
-			String select="select * from `Person`;";
-			String update="update person set `用户名`=?,`密码`=?,`vip等级`=?,`vip信息`=?,`信用值`=? where id=?;";
+			String select="select * from `person`;";
+			String update="update person set `用户名`=?,`密码`=?,`vip类型`=?,`vip等级`=?,`企业会员名`=?,`信用值`=?,`生日`=? where id=?;";
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
@@ -106,10 +120,19 @@ public class UserData /*implements UserDataService*/{
 					ps=conn.prepareStatement(update);
 					ps.setString(1, personInfo.getuserName());
 					ps.setString(2, personInfo.getpassword());
-					ps.setInt(3, personInfo.getVIPlevel());
-					ps.setString(4, personInfo.getVIPinfo());
-					ps.setInt(5, personInfo.getCredit());
-					ps.setInt(6, rs.getInt(1));
+					ps.setString(3,personInfo.getVipType());
+					ps.setInt(4, personInfo.getVIPlevel());
+					ps.setString(5, personInfo.getEnterpriseName());
+					ps.setInt(6, personInfo.getCredit());
+					int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
+					personInfo.getBirthday().set(Calendar.DATE, temp);
+					java.util.Date date=personInfo.getBirthday().getTime();
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+					String birth=sdf.format(date);
+					java.sql.Date bd=java.sql.Date.valueOf(birth);
+					ps.setDate(7, bd);
+					System.out.println(rs.getInt(1));
+					ps.setInt(8, rs.getInt(1));
 					ps.execute();
 					return true;
 				}
@@ -131,7 +154,7 @@ public class UserData /*implements UserDataService*/{
 	public boolean personLogin(String personname, String password) {
 			
 		try {
-			String select="select * from `Person`;";
+			String select="select * from `person`;";
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
@@ -149,68 +172,256 @@ public class UserData /*implements UserDataService*/{
 		}	
 		return false;
 	}
-
+	/**
+	 * @author xiamutian
+	 * 寻找一个网站营销人员
+	 */
 	public MarketPO findMarket(String marketname) {
-		/**
-		 * @author xiamutian
-		 * 寻找一个网站营销人员
-		 */		return null;
-	}
+		MarketPO mp=new MarketPO();
+		try {
+			String select="select * from `market`;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(marketname)){
+					mp.setUsername(rs.getString(1));
+					mp.setPassword(rs.getString(2));
+					return mp;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		}
 
+		return null;
+	}
+	/**
+	 * @author xiamutian
+	 * 改变一个网站营销人员信息
+	 */	
 	public boolean modifyMarket(MarketPO marketInfo) {
-		/**
-		 * @author xiamutian
-		 * 改变一个网站营销人员信息
-		 */		return false;
-	}
+		try {
+			String select="select * from `market`;";
+			String update="update market set `密码`=? where 用户名=?;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(marketInfo.getUsername())){
+					ps=conn.prepareStatement(update);
+					ps.setString(1, marketInfo.getPassword());
+					ps.setString(2, marketInfo.getUsername());
+					ps.execute();
+					return true;
+				}
+			}
 
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		}
+		
+		return false;
+	}
+	/**
+	 * @author xiamutian
+	 * 网站营销人员登陆
+	 */
 	public boolean marketLogin(String marketname, String password) {
-		/**
-		 * @author xiamutian
-		 * 网站营销人员登陆
-		 */		return false;
-	}
+				
+		try {
+			String select="select * from `market`;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(marketname)&&rs.getString(2).equals(password)){
+					return true;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}	
+		return false;
+	}
+	/**
+	 * @author xiamutian
+	 * 改变一个客户的信用值
+	 */	
 	public boolean changeCredit(String username, int credit) {
-		/**
-		 * @author xiamutian
-		 * 改变一个客户的信用值
-		 */		return false;
+		try {
+			String select="select * from `person`;";
+			String update="update person set `信用值`=? where id=?;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(2).equals(username)){
+					ps=conn.prepareStatement(update);
+					ps.setInt(2, rs.getInt(1));
+					ps.setInt(1, rs.getInt(7)+credit);
+					ps.execute();
+					return true;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		}
+		
+		return false;
 	}
-
+	/**
+	 * @author xiamutian
+	 * 寻找一个酒店工作人员信息
+	 */	
 	public HotelWorkerPO findHotelWorker(String hotelWorkername) {
-		/**
-		 * @author xiamutian
-		 * 寻找一个酒店工作人员信息
-		 */		return null;
-	}
+		HotelWorkerPO hp=new HotelWorkerPO();
+			try {
+				String select="select * from `hotelworker`;";
+				conn=builder.BuildConnection();
+				ps=conn.prepareStatement(select);
+				rs=ps.executeQuery();
+				while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+					if(rs.getString(1).equals(hotelWorkername)){
+						hp.setUsername(rs.getString(1));
+						hp.setPassword(rs.getString(2));
+						hp.setHotelname(rs.getString(3));
+						return hp;
+					}
+				}
+				rs.close();
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+			}
 
+			return null;
+		}
+	
+	/**
+	 * @author xiamutian
+	 * 改变一个酒店工作人员信息
+	 */	
 	public boolean modifyHotelWorker(HotelWorkerPO hotelWorkerInfo) {
-		/**
-		 * @author xiamutian
-		 * 改变一个酒店工作人员信息
-		 */		return false;
-	}
+		
+		try {
+			String select="select * from `hotelworker`;";
+			String update="update hotelworker set `密码`=?,`酒店名`=? where 用户名=?;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(hotelWorkerInfo.getUsername())){
+					ps=conn.prepareStatement(update);
+					ps.setString(1, hotelWorkerInfo.getPassword());
+					ps.setString(3, hotelWorkerInfo.getUsername());
+					ps.setString(2, hotelWorkerInfo.getHotelname());
+					ps.execute();
+					return true;
+				}
+			}
 
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		}
+		
+		return false;
+	}
+	/**
+	 * @author xiamutian
+	 * 酒店工作人员登陆
+	 */
 	public boolean hotelWorkerLogin(String hotelWorkername, String password) {
-		/**
-		 * @author xiamutian
-		 * 酒店工作人员登陆
-		 */		return false;
+			
+		try {
+			String select="select * from `hotelworker`;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(hotelWorkername)&&rs.getString(2).equals(password)){
+					return true;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}	
+		return false;
 	}
-
+	/**
+	 * @author xiamutian
+	 * 增加一个网站营销人员
+	 */	
 	public boolean addMarket(MarketPO marketInfo) {
-		/**
-		 * @author xiamutian
-		 * 增加一个网站营销人员
-		 */		return false;
+		try {
+			String select="select * from `market`;";
+			String insert="insert into market (用户名,密码) values(?,?);";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(marketInfo.getUsername())){
+					rs.close();
+					return false;
+				}
+			}
+			rs.close();
+			ps=conn.prepareStatement(insert);
+			ps.setString(1, marketInfo.getUsername());
+			ps.setString(2, marketInfo.getPassword());
+			ps.execute();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 	}
-
+	/**
+	 * @author xiamutian
+	 * 网站管理人员登录
+	*/	
 	public boolean managerLogin(String managername, String password) {
-		/**
-		 * @author xiamutian
-		 * 网站管理人员登录
-		 */			return false;
+		try {
+			String select="select * from `manager`;";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(managername)&&rs.getString(2).equals(password)){
+					return true;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}	
+		return false;
 	}
 
 	public boolean addHotelWorker(HotelWorkerPO hotelworker) {
@@ -218,7 +429,32 @@ public class UserData /*implements UserDataService*/{
 		 * @author xiamutian
 		 * 增加一个酒店工作人员
 		 */
-		return false;
+		try {
+			String select="select * from `hotelworker`;";
+			String insert="insert into hotelworker (用户名,密码,酒店名) values(?,?,?);";
+			conn=builder.BuildConnection();
+			ps=conn.prepareStatement(select);
+			rs=ps.executeQuery();
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if(rs.getString(1).equals(hotelworker.getUsername())){
+					rs.close();
+					return false;
+				}
+			}
+			rs.close();
+			ps=conn.prepareStatement(insert);
+			ps.setString(1, hotelworker.getUsername());
+			ps.setString(2, hotelworker.getPassword());
+			ps.setString(3, hotelworker.getHotelname());
+			ps.execute();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+		return true;
+
 	}
 
 }
