@@ -14,7 +14,7 @@ import po.PersonPO;
 import data.jdbcConnector.Builder;
 import dataService.*;
 import dataService.userDataService.UserDataService;
-public class UserData implements UserDataService{
+public class UserData /*implements UserDataService*/{
 	Connection conn=null;
 	PreparedStatement ps=null;
 	Builder builder=new Builder();

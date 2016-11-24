@@ -4,16 +4,14 @@ import java.util.*;
 import dataService.promotionDataService.*;
 import po.*;
 
-public class PromotionDataMock extends PromotionData implements PromotionDataService {
+public class PromotionDataMock  implements PromotionDataService {
 
-	@Override
 	public boolean add(PromotionPO promotion) {
 		if(promotion.getDiscount()!=0)
 			return true;
 		return false;
 	}
 
-	@Override
 	public ArrayList<PromotionPO> find(String hotelnames) {
 		ArrayList<PromotionPO> test=new ArrayList<PromotionPO>();
 		PromotionPO pro=new PromotionPO();
@@ -25,14 +23,12 @@ public class PromotionDataMock extends PromotionData implements PromotionDataSer
 		return test;
 	}
 
-	@Override
 	public boolean modify(PromotionPO promotion) {
 		if(promotion.getDiscount()==0)
 			return false;
 		return true;
 	}
 
-	@Override
 	public boolean delete(PromotionPO promotion) {
 		if(promotion.getName().equals("打折"))
 			return true;
