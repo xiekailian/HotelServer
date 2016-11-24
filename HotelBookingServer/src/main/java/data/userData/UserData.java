@@ -1,12 +1,8 @@
 package data.userData;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import po.HotelWorkerPO;
 import po.MarketPO;
@@ -25,10 +21,11 @@ public class UserData implements UserDataService{
 	 * @return boolean
 	 */
 	public boolean addPerson(PersonPO personInfo) {
+		
 		int lastID=0;
 		try {
 			String select="select * from `Person`;";
-			String insert="insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日) values(?,?,?,?,?,?,?,?);";
+			String insert="insert into Person (id,用户名,密码,vip等级,vip信息,信用值) values(?,?,?,?,?,?);";
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
@@ -37,7 +34,6 @@ public class UserData implements UserDataService{
 					lastID=rs.getInt(1);
 				}
 				if(rs.getString(2).equals(personInfo.getuserName())){
-					rs.close();
 					return false;
 				}
 			}
@@ -46,18 +42,9 @@ public class UserData implements UserDataService{
 			ps.setInt(1, lastID+1);
 			ps.setString(2, personInfo.getuserName());
 			ps.setString(3, personInfo.getpassword());
-			ps.setString(4, personInfo.getVipType());
-			ps.setInt(5, 0);
-			ps.setString(6, personInfo.getEnterpriseName());
-			ps.setInt(7, 0);
-			int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
-			personInfo.getBirthday().set(Calendar.DATE, temp);
-			java.util.Date date=personInfo.getBirthday().getTime();
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-			String birth=sdf.format(date);
-			System.out.println(birth);
-			java.sql.Date bd=java.sql.Date.valueOf(birth);
-			ps.setDate(8, bd);
+			ps.setInt(4, 0);
+			ps.setString(5, "");
+			ps.setInt(6, 0);
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -65,8 +52,6 @@ public class UserData implements UserDataService{
 			// TODO Auto-generated catch block
 			return false;
 		}
-		System.out.println("good");
-
 		return true;
 	}
 	/**
@@ -75,6 +60,7 @@ public class UserData implements UserDataService{
 	 * @return PersonPO
 	 */		
 	public PersonPO findPerson(String personname) {
+		
 		PersonPO pp=new PersonPO();
 		try {
 			String select="select * from `Person`;";
@@ -86,14 +72,9 @@ public class UserData implements UserDataService{
 					pp.setPersonID(rs.getInt(1));
 					pp.setuserName(rs.getString(2));
 					pp.setpassword("");
-					pp.setVipType(rs.getString(4));
-					pp.setVIPlevel(rs.getInt(5));
-					pp.setEnterpriseName(rs.getString(6));
-					pp.setCredit(rs.getInt(7));
-					if(rs.getDate(8)!=null){
-						Calendar cal=Calendar.getInstance();  
-						cal.setTime(rs.getDate(8)); 
-						pp.setBirthday(cal);}
+					pp.setVIPlevel(rs.getInt(4));
+					pp.setVIPinfo(rs.getString(5));
+					pp.setCredit(rs.getInt(6));
 					return pp;
 				}
 			}
@@ -103,7 +84,7 @@ public class UserData implements UserDataService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		}
-
+		
 		return null;
 	}
 	/**
