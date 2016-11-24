@@ -1,10 +1,12 @@
 package data.orderData;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
-public class OrderDataMock extends OrderData {
+public class OrderDataMock /*extends OrderData*/implements OrderDataService {
 	OrderPO order1 = new OrderPO();
 	OrderPO order2 = new OrderPO();
 	OrderPO order3 = new OrderPO();
@@ -31,8 +33,7 @@ public class OrderDataMock extends OrderData {
 		list.add(order3);
 	}
 
-	@Override
-	public ArrayList<OrderPO> personFind(String personname) {
+	public ArrayList<OrderPO> personFind(String personname) throws RemoteException{
 		ArrayList<OrderPO> personList=new ArrayList<OrderPO>();
 		OrderPO temp=null;
 		for (int i = 0; i < list.size(); i++) {
@@ -44,7 +45,6 @@ public class OrderDataMock extends OrderData {
 		return personList;
 	}
 
-	@Override
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
 		ArrayList<OrderPO> hotelList=new ArrayList<OrderPO>();
 		OrderPO temp=null;
@@ -57,10 +57,19 @@ public class OrderDataMock extends OrderData {
 		return hotelList;
 	}
 
-	@Override
 	public ArrayList<OrderPO> exceptionFind() {
+		System.out.println("异常找到发现");
+		return null;
+	}
+
+	public void add(OrderPO order)  {
 		// TODO Auto-generated method stub
-		return list;
+		
+	}
+
+	public void modify(OrderPO order) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
