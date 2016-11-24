@@ -1,5 +1,6 @@
 package po;
 import java.io.Serializable;
+import java.util.Calendar;
 public class PersonPO implements Serializable{
 	private String username;
 	private String password;
@@ -7,6 +8,10 @@ public class PersonPO implements Serializable{
 	private int VIPlevel;
 	private String VIPinfo;
 	private int personID;
+	private String enterpriseName;//企业会员登记企业名称
+	private Calendar birthday;//客户生日，无论是否是会员都可以有此信息，格式如：20160212
+	private String vipType;	//0代表不是VIP，1代表是普通VIP，2代表是企业VIP
+
 
 	public PersonPO(String userName,String password,String userType,String hotel,int Credit,int VIP,int VIPlevel,String VIPinfo,int id){
 		super();
@@ -51,5 +56,23 @@ public class PersonPO implements Serializable{
 		this.VIPinfo=VIPinfo;}
 	public void setPersonID(int id){
 		this.personID=id;
+	}
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
+	}
+	public Calendar getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Calendar birthday) {
+		this.birthday = birthday;
+	}
+	public String getVipType() {
+		return vipType;
+	}
+	public void setVipType(String vipType) {
+		this.vipType = vipType;
 	}
 }

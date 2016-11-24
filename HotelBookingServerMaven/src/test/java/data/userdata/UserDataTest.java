@@ -1,6 +1,9 @@
 package data.userdata;
 
 import static org.junit.Assert.*;
+
+import java.util.Calendar;
+
 import data.userData.*;
 
 import org.junit.Test;
@@ -14,9 +17,14 @@ public class UserDataTest {
 	@Test
 	public void testAddPerson() {
 		//每次测试需修改用户名 不然同样用户名必然返回false
-		pp.setuserName("xie");
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, 1997);
+		calendar.set(Calendar.MONTH, 2);
+		calendar.set(Calendar.DATE, 6);
+		pp.setuserName("xmt");
 		pp.setpassword("123456");
 		pp.setVIPinfo("");
+		pp.setBirthday(calendar);
 		assertEquals(false,ud.addPerson(pp));
 	}
 
@@ -24,9 +32,8 @@ public class UserDataTest {
 	public void testFindPerson() {
 		ppFalse=ud.findPerson("不存在");
 		pp=ud.findPerson("xia");
-		assertEquals("xia",pp.getuserName());
 		assertEquals("",pp.getpassword());
-		assertEquals("南京大学",pp.getVIPinfo());
+		assertEquals("南京大学",pp.getEnterpriseName());
 		assertEquals(24,pp.getVIPlevel());
 		assertEquals(2,pp.getPersonID());
 		assertEquals(1000,pp.getCredit());
@@ -43,7 +50,7 @@ public class UserDataTest {
 		pp.setVIPlevel(23);
 		pp.setCredit(-900);
 		ppFalse.setuserName("不存在");
-		assertEquals(true,ud.modifyPerson(pp));
+		assertEquals(false,ud.modifyPerson(pp));
 		assertEquals(false,ud.modifyPerson(ppFalse));
 	}
 
