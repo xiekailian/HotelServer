@@ -1,10 +1,10 @@
 package data.userdata;
 
 import static org.junit.Assert.*;
-import data.userData.*;
 
 import org.junit.Test;
 
+import data.userData.UserData;
 import po.PersonPO;
 
 public class UserDataTest {
