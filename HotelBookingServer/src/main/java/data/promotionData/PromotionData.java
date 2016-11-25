@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dataService.promotionDataService.PromotionDataService;
 import po.PromotionPO;
 
-public class PromotionData implements PromotionDataService{
+public class PromotionData /*implements PromotionDataService*/{
 	private static PromotionData promotiondata;
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class PromotionData implements PromotionDataService{
 	 */
 	public static PromotionData getInstance(){
 		if(promotiondata==null)
-			promotiondata=new PromotionDataMock();
+			promotiondata=new PromotionData();
 		return promotiondata;
 	}
 	
@@ -34,7 +34,7 @@ public class PromotionData implements PromotionDataService{
 	}
 
 	public boolean delete(PromotionPO promotion) {
-		System.out.println("Promotiondata.delete is called.");
+		System.out.println("Promotiondata.delete is calle.");
 		return true;
 	}
 }

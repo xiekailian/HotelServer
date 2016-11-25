@@ -5,10 +5,15 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import data.hotelData.HotelData;
+import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
+import data.orderData.OrderDataMock;
 import data.promotionData.PromotionData;
+import data.promotionData.PromotionDataMock;
 import data.searchData.SearchData;
+import data.searchData.SearchDataMock;
 import data.userData.UserData;
+import data.userData.UserDataMock;
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
@@ -33,12 +38,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 	private SearchDataService searchdataservice;
 	private UserDataService userdataservice;
 	
-	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Service�ľ��巽��
-		hoteldataservice=new HotelData();
-		orderdataService=new OrderData();
-		promotiondataService=new PromotionData();
-		searchdataservice=new SearchData();
-		userdataservice=new UserData();
+	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Ser
+		hoteldataservice=new HotelDataMock();
+		orderdataService=new OrderDataMock();
+		promotiondataService=new PromotionDataMock();
+		searchdataservice=new SearchDataMock();
+		userdataservice=new UserDataMock();
 	}
 	public ArrayList<SearchPO> showSearchHistory(String username) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -72,8 +77,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.findMarket(marketname);
 	}
-	public boolean modifyMarket(MarketPO marketInfo) {
-		// TODO Auto-generated method stub
+	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
 		return userdataservice.modifyMarket(marketInfo);
 	}
 	public boolean marketLogin(String marketname, String password) throws RemoteException {
@@ -96,27 +100,27 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.addMarket(marketInfo);
 	}
-	public boolean managerLogin(String managername, String password) throws RemoteException {
+	public boolean managerLogin(String managername, String password) throws RemoteException  {
 		// TODO Auto-generated method stub
 		return userdataservice.managerLogin(managername, password);
 	}
-	public boolean add(PromotionPO promotion) {
+	public boolean add(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotiondataService.add(promotion);
 	}
-	public ArrayList<PromotionPO> find(String hotelnames) {
+	public ArrayList<PromotionPO> find(String hotelnames) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotiondataService.find(hotelnames);
 	}
-	public boolean modify(PromotionPO promotion) {
+	public boolean modify(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotiondataService.modify(promotion);
 	}
-	public boolean delete(PromotionPO promotion) {
+	public boolean delete(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotiondataService.delete(promotion);
 	}
-	public void add(OrderPO order) {
+	public void add(OrderPO order) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
@@ -124,7 +128,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return orderdataService.personFind(personname);
 	}
-	public void modify(OrderPO order) {
+	public void modify(OrderPO order) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}

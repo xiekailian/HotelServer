@@ -1,23 +1,23 @@
 package data.userData;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataService.userDataService.UserDataService;
 import po.HotelWorkerPO;
 import po.ManagerPO;
 import po.MarketPO;
 import po.PersonPO;
 
-public class UserDataMock extends UserData{
+public class UserDataMock implements UserDataService{
 
-	@Override
 	public boolean addPerson(PersonPO personInfo) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	@Override
 	public PersonPO findPerson(String personname) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method 
 		PersonPO pp=new PersonPO();
 		PersonPO pp1=new PersonPO();
 		pp1.setuserName("xiamutian");
@@ -37,7 +37,6 @@ public class UserDataMock extends UserData{
 		return null;
 	}
 
-	@Override
 	public boolean modifyPerson(PersonPO personInfo) {
 		PersonPO pp1=new PersonPO();
 		pp1.setuserName("xiamutian");
@@ -56,7 +55,6 @@ public class UserDataMock extends UserData{
 		return false;
 	}
 
-	@Override
 	public boolean personLogin(String personname, String password) {
 		boolean hasname=false;
 		PersonPO pp=new PersonPO();
@@ -90,7 +88,6 @@ public class UserDataMock extends UserData{
 		}
 		}
 
-	@Override
 	public MarketPO findMarket(String marketname) {
 		MarketPO pp1=new MarketPO();
 		pp1.setUsername("xiamutian");
@@ -103,6 +100,8 @@ public class UserDataMock extends UserData{
 		List.add(pp2);
 		for(int i=0;i<List.size();i++){
 			if(List.get(i).getUsername().equals(marketname)){
+				System.out.print("find");
+
 				return List.get(i);
 
 			}
@@ -110,7 +109,6 @@ public class UserDataMock extends UserData{
 		return null;		
 	}
 
-	@Override
 	public boolean modifyMarket(MarketPO marketInfo) {
 		MarketPO pp1=new MarketPO();
 		pp1.setUsername("xiamutian");
@@ -127,7 +125,6 @@ public class UserDataMock extends UserData{
 		return false;
 		}
 
-	@Override
 	public boolean marketLogin(String marketname, String password) {
 		boolean hasname=false;
 		MarketPO pp=new MarketPO();
@@ -159,7 +156,6 @@ public class UserDataMock extends UserData{
 		}
 		}		
 
-	@Override
 	public boolean changeCredit(String username, int credit) {
 		PersonPO pp1=new PersonPO();
 		pp1.setuserName("xiamutian");
@@ -176,7 +172,6 @@ public class UserDataMock extends UserData{
 		return false;		
 	}
 
-	@Override
 	public HotelWorkerPO findHotelWorker(String hotelWorkername) {
 		HotelWorkerPO pp1=new HotelWorkerPO();
 		pp1.setUsername("xiamutian");
@@ -195,7 +190,6 @@ public class UserDataMock extends UserData{
 		return null;			
 	}
 
-	@Override
 	public boolean modifyHotelWorker(HotelWorkerPO hotelWorkerInfo) {
 		HotelWorkerPO pp1=new HotelWorkerPO();
 		pp1.setUsername("xiamutian");
@@ -212,7 +206,6 @@ public class UserDataMock extends UserData{
 		return false;
 		}	
 
-	@Override
 	public boolean hotelWorkerLogin(String hotelWorkername, String password) {
 		boolean hasname=false;
 		HotelWorkerPO pp=new HotelWorkerPO();
@@ -244,13 +237,11 @@ public class UserDataMock extends UserData{
 			}
 	}
 
-	@Override
 	public boolean addMarket(MarketPO marketInfo) {
 		// TODO Auto-generated method stub
-		return super.addMarket(marketInfo);
+		return false;
 	}
 
-	@Override
 	public boolean managerLogin(String managername, String password) {
 		boolean hasname=false;
 		ManagerPO pp=new ManagerPO();
@@ -281,5 +272,10 @@ public class UserDataMock extends UserData{
 			return false;
 		}
 		}
+
+	public boolean addHotelWorker(HotelWorkerPO hotelworker)  {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
