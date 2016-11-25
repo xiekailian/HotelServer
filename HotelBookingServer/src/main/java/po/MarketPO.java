@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 
+
 public class MarketPO  implements Serializable{
 	private String username;
 	private String password;
@@ -26,5 +27,4 @@ public class MarketPO  implements Serializable{
 		this.username = username;
 		this.password = password;
 	}
-	
 }

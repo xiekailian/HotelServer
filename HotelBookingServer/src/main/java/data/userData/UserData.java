@@ -23,7 +23,8 @@ public class UserData implements UserDataService{
 	 * 增加一个客户
 	 * @author xiamutian
 	 * @return boolean
-	 */
+	 */			
+
 	public boolean addPerson(PersonPO personInfo) {
 		int lastID=0;
 		try {
@@ -36,7 +37,7 @@ public class UserData implements UserDataService{
 				if(rs.getInt(1)>lastID){
 					lastID=rs.getInt(1);
 				}
-				if(rs.getString(2).equals(personInfo.getuserName())){
+				if(rs.getString(2).equals(personInfo.getUsername())){
 					rs.close();
 					return false;
 				}
@@ -44,8 +45,8 @@ public class UserData implements UserDataService{
 			rs.close();
 			ps=conn.prepareStatement(insert);
 			ps.setInt(1, lastID+1);
-			ps.setString(2, personInfo.getuserName());
-			ps.setString(3, personInfo.getpassword());
+			ps.setString(2, personInfo.getUsername());
+			ps.setString(3, personInfo.getPassword());
 			ps.setString(4, personInfo.getVipType());
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
@@ -81,10 +82,10 @@ public class UserData implements UserDataService{
 			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
 				if(rs.getString(2).equals(personname)){
 					pp.setPersonID(rs.getInt(1));
-					pp.setuserName(rs.getString(2));
-					pp.setpassword(rs.getString(3));
+					pp.setUsername(rs.getString(2));
+					pp.setPassword(rs.getString(3));
 					pp.setVipType(rs.getString(4));
-					pp.setVIPlevel(rs.getInt(5));
+					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
 					pp.setCredit(rs.getInt(7));
 					if(rs.getDate(8)!=null){
@@ -116,12 +117,12 @@ public class UserData implements UserDataService{
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
 			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if(rs.getString(2).equals(personInfo.getuserName())){
+				if(rs.getString(2).equals(personInfo.getUsername())){
 					ps=conn.prepareStatement(update);
-					ps.setString(1, personInfo.getuserName());
-					ps.setString(2, personInfo.getpassword());
+					ps.setString(1, personInfo.getUsername());
+					ps.setString(2, personInfo.getPassword());
 					ps.setString(3,personInfo.getVipType());
-					ps.setInt(4, personInfo.getVIPlevel());
+					ps.setInt(4, personInfo.getVipLevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
 					if(personInfo.getBirthday()==null){

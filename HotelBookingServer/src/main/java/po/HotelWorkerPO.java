@@ -1,5 +1,6 @@
 package po;
 import java.io.Serializable;
+
 /**
  * 
  * @author xiamutian
@@ -46,6 +47,5 @@ import java.io.Serializable;
 		public void setHotelname(String hotelname) {
 			this.hotelname = hotelname;
 		}
-
 
 	}
