@@ -11,7 +11,7 @@ import org.junit.Test;
 import po.*;
 
 public class UserDataTest {
-	UserData ud=new UserData();
+	UserData ud=UserData.getInstance();
 	PersonPO pp=new PersonPO();
 	PersonPO ppFalse=new PersonPO();//用于得出false的对象
 	MarketPO mkp=new MarketPO();
@@ -28,8 +28,8 @@ public class UserDataTest {
 		calendar.set(Calendar.YEAR, 1997);
 		calendar.set(Calendar.MONTH, 2);
 		calendar.set(Calendar.DATE, 6);
-		pp.setuserName("xmt");
-		pp.setpassword("123456");
+		pp.setUsername("xmt");
+		pp.setPassword("123456");
 		pp.setBirthday(calendar);
 		assertEquals(false,ud.addPerson(pp));
 	}
@@ -38,9 +38,9 @@ public class UserDataTest {
 	public void testFindPerson() {
 		ppFalse=ud.findPerson("不存在");
 		pp=ud.findPerson("xia");
-		assertEquals("111111",pp.getpassword());
+		assertEquals("111111",pp.getPassword());
 		assertEquals("苏州大学",pp.getEnterpriseName());
-		assertEquals(0,pp.getVIPlevel());
+		assertEquals(0,pp.getVipLevel());
 		assertEquals(2,pp.getPersonID());
 		assertEquals(null,ppFalse);
 
@@ -49,12 +49,12 @@ public class UserDataTest {
 	@Test
 	public void testModifyPerson() {
 		//每次修改 不然看不出效果
-		pp.setuserName("xie");
-		pp.setpassword("123456789");
+		pp.setUsername("xie");
+		pp.setPassword("123456789");
 		pp.setEnterpriseName("苏州大学");
-		pp.setVIPlevel(25);
+		pp.setVipLevel(25);
 		pp.setCredit(-900);
-		ppFalse.setuserName("不存在");
+		ppFalse.setUsername("不存在");
 		assertEquals(true,ud.modifyPerson(pp));
 		assertEquals(false,ud.modifyPerson(ppFalse));
 	}

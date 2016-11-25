@@ -18,7 +18,7 @@ public class OrderData /*implements OrderDataService*/ {
 
 	private static OrderData orderData = null;
 
-	public static OrderData getOrderData() {
+	public static OrderData getInstance() {
 		if (orderData == null) {
 			orderData = new OrderData();
 			return orderData;
@@ -45,7 +45,7 @@ public class OrderData /*implements OrderDataService*/ {
 	}
 
 	public void modify(OrderPO order) {
-		System.out.println("good");
+		// TODO Auto-generated method stub
 
 	}
 
