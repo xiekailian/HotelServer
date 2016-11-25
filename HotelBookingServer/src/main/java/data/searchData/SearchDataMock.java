@@ -21,7 +21,7 @@ public class SearchDataMock implements SearchDataService{
 
 	
 	public ArrayList<SearchPO> showSearchHistory(String username) {
-		// TODO Auto-generated method st
+		// TODO Auto-generated method stub
 		ArrayList<SearchPO> result=new ArrayList<SearchPO>();
 		
 		for (int i = 0; i < allsearchhistory.size(); i++) {

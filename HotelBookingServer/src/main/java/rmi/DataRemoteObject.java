@@ -38,7 +38,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 	private SearchDataService searchdataservice;
 	private UserDataService userdataservice;
 	
-	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Ser
+	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Service�ľ��巽��
 		hoteldataservice=new HotelDataMock();
 		orderdataService=new OrderDataMock();
 		promotiondataService=new PromotionDataMock();
@@ -77,7 +77,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.findMarket(marketname);
 	}
-	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
+	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException{
+		// TODO Auto-generated method stub
 		return userdataservice.modifyMarket(marketInfo);
 	}
 	public boolean marketLogin(String marketname, String password) throws RemoteException {
@@ -100,23 +101,23 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.addMarket(marketInfo);
 	}
-	public boolean managerLogin(String managername, String password) throws RemoteException  {
+	public boolean managerLogin(String managername, String password) throws RemoteException {
 		// TODO Auto-generated method stub
 		return userdataservice.managerLogin(managername, password);
 	}
-	public boolean add(PromotionPO promotion) throws RemoteException {
+	public boolean add(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.add(promotion);
 	}
-	public ArrayList<PromotionPO> find(String hotelnames) throws RemoteException {
+	public ArrayList<PromotionPO> find(String hotelnames) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.find(hotelnames);
 	}
-	public boolean modify(PromotionPO promotion) throws RemoteException {
+	public boolean modify(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.modify(promotion);
 	}
-	public boolean delete(PromotionPO promotion) throws RemoteException {
+	public boolean delete(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.delete(promotion);
 	}
@@ -130,7 +131,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 	}
 	public void modify(OrderPO order) throws RemoteException{
 		// TODO Auto-generated method stub
-		
 	}
 	public ArrayList<OrderPO> hotelFind(String hotelname) throws RemoteException {
 		// TODO Auto-generated method stub

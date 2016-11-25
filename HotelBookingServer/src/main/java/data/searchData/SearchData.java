@@ -8,7 +8,7 @@ public class SearchData /*implements SearchDataService*/ {
 	
 
 	public ArrayList<SearchPO> showSearchHistory(String username) {
-		// TODO Auto-generated method 
+		// TODO Auto-generated method stub
 		return null;
 	}
 
