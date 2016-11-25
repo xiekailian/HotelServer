@@ -73,7 +73,7 @@ public class UserData /*implements UserDataService*/{
 					pp.setuserName(rs.getString(2));
 					pp.setpassword("");
 					pp.setVIPlevel(rs.getInt(4));
-					pp.setVIPinfo(rs.getString(5));
+					pp.setVipType(rs.getString(5));
 					pp.setCredit(rs.getInt(6));
 					return pp;
 				}
@@ -107,7 +107,7 @@ public class UserData /*implements UserDataService*/{
 					ps.setString(1, personInfo.getuserName());
 					ps.setString(2, personInfo.getpassword());
 					ps.setInt(3, personInfo.getVIPlevel());
-					ps.setString(4, personInfo.getVIPinfo());
+					ps.setString(4, personInfo.getVipType());
 					ps.setInt(5, personInfo.getCredit());
 					ps.setInt(6, rs.getInt(1));
 					ps.execute();
