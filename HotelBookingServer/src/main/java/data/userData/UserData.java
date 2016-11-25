@@ -82,7 +82,7 @@ public class UserData implements UserDataService{
 				if(rs.getString(2).equals(personname)){
 					pp.setPersonID(rs.getInt(1));
 					pp.setuserName(rs.getString(2));
-					pp.setpassword("");
+					pp.setpassword(rs.getString(3));
 					pp.setVipType(rs.getString(4));
 					pp.setVIPlevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
@@ -124,14 +124,18 @@ public class UserData implements UserDataService{
 					ps.setInt(4, personInfo.getVIPlevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
-					int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
-					personInfo.getBirthday().set(Calendar.DATE, temp);
-					java.util.Date date=personInfo.getBirthday().getTime();
-					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-					String birth=sdf.format(date);
-					java.sql.Date bd=java.sql.Date.valueOf(birth);
-					ps.setDate(7, bd);
-					System.out.println(rs.getInt(1));
+					if(personInfo.getBirthday()==null){
+						ps.setDate(7, null);
+					}
+					else{
+						int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
+						personInfo.getBirthday().set(Calendar.DATE, temp);
+						java.util.Date date=personInfo.getBirthday().getTime();
+						SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+						String birth=sdf.format(date);
+						java.sql.Date bd=java.sql.Date.valueOf(birth);
+						ps.setDate(7, bd);
+					}
 					ps.setInt(8, rs.getInt(1));
 					ps.execute();
 					return true;
