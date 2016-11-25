@@ -1,6 +1,5 @@
 package dataService.promotionDataService;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.*;
 
 import po.*;
@@ -10,23 +9,23 @@ public interface PromotionDataService extends Remote{
 	 * @param promotion
 	 * @return
 	 */
-	public boolean add(PromotionPO promotion)throws RemoteException;
+	public boolean add(PromotionPO promotion);
 	/**
 	 * 返回酒店的促销策略
 	 * @param hotelnames
 	 * @return
 	 */
-	public ArrayList <PromotionPO> find(String hotelnames)throws RemoteException;
+	public ArrayList <PromotionPO> find(String hotelnames);
 	/**
 	 * 修改酒店促销策略
 	 * @param promotion
 	 * @return
 	 */
-	public boolean modify(PromotionPO promotion)throws RemoteException;
+	public boolean modify(PromotionPO promotion);
 	/**
 	 * 删除酒店促销策略
 	 * @param promotion
 	 * @return
 	 */
-	public boolean delete(PromotionPO promotion)throws RemoteException;
+	public boolean delete(PromotionPO promotion);
 }
