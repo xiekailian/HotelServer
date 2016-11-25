@@ -77,7 +77,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.findMarket(marketname);
 	}
-	public boolean modifyMarket(MarketPO marketInfo) {
+	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException{
 		// TODO Auto-generated method stub
 		return userdataservice.modifyMarket(marketInfo);
 	}
@@ -105,23 +105,23 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return userdataservice.managerLogin(managername, password);
 	}
-	public boolean add(PromotionPO promotion) {
+	public boolean add(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.add(promotion);
 	}
-	public ArrayList<PromotionPO> find(String hotelnames) {
+	public ArrayList<PromotionPO> find(String hotelnames) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.find(hotelnames);
 	}
-	public boolean modify(PromotionPO promotion) {
+	public boolean modify(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.modify(promotion);
 	}
-	public boolean delete(PromotionPO promotion) {
+	public boolean delete(PromotionPO promotion) throws RemoteException{
 		// TODO Auto-generated method stub
 		return promotiondataService.delete(promotion);
 	}
-	public void add(OrderPO order) {
+	public void add(OrderPO order) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
@@ -129,9 +129,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return orderdataService.personFind(personname);
 	}
-	public void modify(OrderPO order) {
+	public void modify(OrderPO order) throws RemoteException{
 		// TODO Auto-generated method stub
-		
 	}
 	public ArrayList<OrderPO> hotelFind(String hotelname) throws RemoteException {
 		// TODO Auto-generated method stub
