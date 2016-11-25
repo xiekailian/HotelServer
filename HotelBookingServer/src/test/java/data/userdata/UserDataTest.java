@@ -11,7 +11,7 @@ import org.junit.Test;
 import po.*;
 
 public class UserDataTest {
-	UserData ud=new UserData();
+	UserData ud=UserData.getInstance();
 	PersonPO pp=new PersonPO();
 	PersonPO ppFalse=new PersonPO();//用于得出false的对象
 	MarketPO mkp=new MarketPO();

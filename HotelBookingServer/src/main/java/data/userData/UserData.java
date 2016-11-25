@@ -12,18 +12,25 @@ import po.HotelWorkerPO;
 import po.MarketPO;
 import po.PersonPO;
 import data.jdbcConnector.Builder;
+import data.promotionData.PromotionData;
 import dataService.*;
 import dataService.userDataService.UserDataService;
-public class UserData implements UserDataService{
+public class UserData /*implements UserDataService*/{
 	Connection conn=null;
 	PreparedStatement ps=null;
 	Builder builder=new Builder();
 	ResultSet rs=null;
+	private static UserData userdata=null;
 	/**
 	 * 增加一个客户
 	 * @author xiamutian
 	 * @return boolean
 	 */			
+	public static UserData getInstance(){
+		if(userdata==null)
+			userdata=new UserData();
+		return userdata;
+	}
 
 	public boolean addPerson(PersonPO personInfo) {
 		int lastID=0;

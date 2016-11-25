@@ -1,10 +1,12 @@
 package data.orderData;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
-public class OrderDataMock extends OrderData {
+public class OrderDataMock implements OrderDataService {
 	OrderPO order1 = new OrderPO();
 	OrderPO order2 = new OrderPO();
 	OrderPO order3 = new OrderPO();
@@ -13,7 +15,6 @@ public class OrderDataMock extends OrderData {
 	public OrderDataMock() {
 	}
 
-	@Override
 	public ArrayList<OrderPO> personFind(String personname) {
 		ArrayList<OrderPO> personList=new ArrayList<OrderPO>();
 		OrderPO temp=null;
@@ -26,7 +27,6 @@ public class OrderDataMock extends OrderData {
 		return personList;
 	}
 
-	@Override
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
 		ArrayList<OrderPO> hotelList=new ArrayList<OrderPO>();
 		OrderPO temp=null;
@@ -39,10 +39,19 @@ public class OrderDataMock extends OrderData {
 		return hotelList;
 	}
 
-	@Override
 	public ArrayList<OrderPO> exceptionFind() {
 		// TODO Auto-generated method stub
 		return list;
+	}
+
+	public void add(OrderPO order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void modify(OrderPO order) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
