@@ -45,7 +45,7 @@ public class OrderData /*implements OrderDataService*/ {
 	}
 
 	public void modify(OrderPO order) {
-		// TODO Auto-generated method stub
+		System.out.println("good");
 
 	}
 

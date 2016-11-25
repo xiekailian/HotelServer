@@ -31,7 +31,7 @@ public class HotelData /*implements HotelDataService*/{
 		
 	}
 	public ArrayList<HotelPO> findWithReq(HotelPO a) throws RemoteException{
-		System.out.println("findWithReq is called");
+		System.out.println("findWithReq is calle");
 		return null;
 	}
 	public boolean modify(HotelPO hotelinfo) throws RemoteException{

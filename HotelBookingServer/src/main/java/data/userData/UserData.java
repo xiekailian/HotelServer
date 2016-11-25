@@ -67,7 +67,7 @@ public class UserData /*implements UserDataService*/{
 			conn=builder.BuildConnection();
 			ps=conn.prepareStatement(select);
 			rs=ps.executeQuery();
-			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+			while(rs.next()){//next函数 第一次调用先指向第一条，返回bool提示是否有下一
 				if(rs.getString(2).equals(personname)){
 					pp.setPersonID(rs.getInt(1));
 					pp.setuserName(rs.getString(2));

@@ -30,7 +30,7 @@ public class PromotionDataMock  implements PromotionDataService {
 	}
 
 	public boolean delete(PromotionPO promotion) {
-		if(promotion.getName().equals("打折"))
+		if(promotion.getName().equals("打"))
 			return true;
 		return false;
 	}

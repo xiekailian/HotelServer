@@ -34,7 +34,7 @@ public class PromotionData /*implements PromotionDataService*/{
 	}
 
 	public boolean delete(PromotionPO promotion) {
-		System.out.println("Promotiondata.delete is called.");
+		System.out.println("Promotiondata.delete is calle.");
 		return true;
 	}
 }

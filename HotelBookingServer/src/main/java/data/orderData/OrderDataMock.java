@@ -63,7 +63,7 @@ public class OrderDataMock /*extends OrderData*/implements OrderDataService {
 	}
 
 	public void add(OrderPO order)  {
-		// TODO Auto-generated method stub
+		System.out.println();
 		
 	}
 

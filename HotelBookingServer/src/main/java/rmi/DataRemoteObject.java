@@ -38,7 +38,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 	private SearchDataService searchdataservice;
 	private UserDataService userdataservice;
 	
-	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Service�ľ��巽��
+	protected DataRemoteObject() throws RemoteException {//���췽������ʵ��Ser
 		hoteldataservice=new HotelDataMock();
 		orderdataService=new OrderDataMock();
 		promotiondataService=new PromotionDataMock();
@@ -78,7 +78,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		return userdataservice.findMarket(marketname);
 	}
 	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return userdataservice.modifyMarket(marketInfo);
 	}
 	public boolean marketLogin(String marketname, String password) throws RemoteException {
