@@ -103,8 +103,6 @@ public class UserDataMock extends UserData{
 		List.add(pp2);
 		for(int i=0;i<List.size();i++){
 			if(List.get(i).getUsername().equals(marketname)){
-				System.out.print("find");
-
 				return List.get(i);
 
 			}

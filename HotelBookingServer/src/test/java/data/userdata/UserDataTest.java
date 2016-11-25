@@ -8,12 +8,19 @@ import data.userData.*;
 
 import org.junit.Test;
 
-import po.PersonPO;
+import po.*;
 
 public class UserDataTest {
 	UserData ud=new UserData();
 	PersonPO pp=new PersonPO();
 	PersonPO ppFalse=new PersonPO();//用于得出false的对象
+	MarketPO mkp=new MarketPO();
+	MarketPO mkpFalse=new MarketPO();
+	ManagerPO magp=new ManagerPO();
+	ManagerPO magpFalse=new ManagerPO();
+	HotelWorkerPO hwp=new HotelWorkerPO();
+	HotelWorkerPO hwpFalse=new HotelWorkerPO();
+
 	@Test
 	public void testAddPerson() {
 		//每次测试需修改用户名 不然同样用户名必然返回false
@@ -31,11 +38,10 @@ public class UserDataTest {
 	public void testFindPerson() {
 		ppFalse=ud.findPerson("不存在");
 		pp=ud.findPerson("xia");
-		assertEquals("",pp.getpassword());
-		assertEquals("南京大学",pp.getEnterpriseName());
-		assertEquals(24,pp.getVIPlevel());
+		assertEquals("111111",pp.getpassword());
+		assertEquals("苏州大学",pp.getEnterpriseName());
+		assertEquals(0,pp.getVIPlevel());
 		assertEquals(2,pp.getPersonID());
-		assertEquals(1000,pp.getCredit());
 		assertEquals(null,ppFalse);
 
 	}
@@ -46,16 +52,16 @@ public class UserDataTest {
 		pp.setuserName("xie");
 		pp.setpassword("123456789");
 		pp.setEnterpriseName("苏州大学");
-		pp.setVIPlevel(23);
+		pp.setVIPlevel(25);
 		pp.setCredit(-900);
 		ppFalse.setuserName("不存在");
-		assertEquals(false,ud.modifyPerson(pp));
+		assertEquals(true,ud.modifyPerson(pp));
 		assertEquals(false,ud.modifyPerson(ppFalse));
 	}
 
 	@Test
 	public void testPersonLogin() {
-		assertEquals(true,ud.personLogin("xia", "123465"));
+		assertEquals(true,ud.personLogin("xia", "111111"));
 		assertEquals(false,ud.personLogin("xia", "123"));
 
 		
@@ -63,52 +69,83 @@ public class UserDataTest {
 
 	@Test
 	public void testFindMarket() {
-		fail("Not yet implemented");
+		mkp=ud.findMarket("wuxiufeng");
+		mkpFalse=ud.findMarket("不存在");
+		assertEquals("555666",mkp.getPassword());
+		assertEquals(null,mkpFalse);
 	}
 
 	@Test
 	public void testModifyMarket() {
-		fail("Not yet implemented");
+		mkp.setUsername("xiamutian");
+		mkp.setPassword("123456");
+		mkpFalse.setUsername("不存在");
+		assertEquals(true,ud.modifyMarket(mkp));
+		assertEquals(false,ud.modifyMarket(mkpFalse));
 	}
 
 	@Test
 	public void testMarketLogin() {
-		fail("Not yet implemented");
+		assertEquals(true,ud.marketLogin("wuxiufeng", "555666"));
+		assertEquals(false,ud.marketLogin("wuxiufeng", "456465"));
 	}
 
 	@Test
 	public void testChangeCredit() {
-		fail("Not yet implemented");
+		assertEquals(true,ud.changeCredit("xia", -8000));
+		assertEquals(false,ud.changeCredit("4545", 5500));
 	}
 
 	@Test
 	public void testFindHotelWorker() {
-		fail("Not yet implemented");
+		hwp=ud.findHotelWorker("xiamutian");
+		hwpFalse=ud.findHotelWorker("不存在");
+		assertEquals("123456",hwp.getPassword());
+		assertEquals("北京大酒店",hwp.getHotelname());
+		assertEquals(null,hwpFalse);
 	}
 
 	@Test
 	public void testModifyHotelWorker() {
-		fail("Not yet implemented");
+		hwp.setHotelname("北京大酒店");
+		hwp.setUsername("xiamutian");
+		hwp.setPassword("123456");
+		hwpFalse.setUsername("不存在");
+		assertEquals(true,ud.modifyHotelWorker(hwp));
+		assertEquals(false,ud.modifyHotelWorker(hwpFalse));
 	}
 
 	@Test
 	public void testHotelWorkerLogin() {
-		fail("Not yet implemented");
+		assertEquals(true,ud.hotelWorkerLogin("xiamutian", "123456"));
+		assertEquals(false,ud.hotelWorkerLogin("不存在", "123456"));
+		assertEquals(false,ud.hotelWorkerLogin("xiamutian", "错误密码"));
 	}
 
 	@Test
 	public void testAddMarket() {
-		fail("Not yet implemented");
+		mkp.setUsername("新增");
+		mkp.setPassword("123456");
+		mkpFalse.setUsername("wuxiufeng");
+		assertEquals(false,ud.addMarket(mkp));
+		assertEquals(false,ud.addMarket(mkpFalse));
 	}
 
 	@Test
 	public void testManagerLogin() {
-		fail("Not yet implemented");
+		assertEquals(true,ud.hotelWorkerLogin("xiamutian", "123456"));
+		assertEquals(false,ud.hotelWorkerLogin("不存在", "123456"));
+		assertEquals(false,ud.hotelWorkerLogin("xiamutian", "错误密码"));
 	}
 
 	@Test
-	public void testHotelWorkerAdd() {
-		fail("Not yet implemented");
+	public void testAddHotelWorker() {
+		hwp.setHotelname("南大招待所");
+		hwp.setPassword("123456");
+		hwp.setUsername("新增");
+		hwpFalse.setUsername("xiamutian");
+		assertEquals(false,ud.addHotelWorker(hwp));
+		assertEquals(false,ud.addHotelWorker(hwpFalse));
 	}
 
 }
