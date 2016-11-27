@@ -7,24 +7,19 @@ import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import po.SearchPO;
 
-public class HotelData implements HotelDataService{
-	private static HotelData hoteldata;
+public class HotelData /*implements HotelDataService*/{
+	private static HotelData hoteldata=null;
 	/**
 	 * 
 	 * @return 唯一的HotelData对象
 	 */
 	public static HotelData getInstance(){
 		if(hoteldata==null)
-			hoteldata=new HotelDataMock();
+			hoteldata=new HotelData();
 		return hoteldata;
 	}
 	public HotelPO showHotelinfo(String Hotelname) {
-		HotelPO test;
-		if(Hotelname.equals("南京大酒店"))
-			test=new HotelPO("南京大酒店", 5, "高级酒店", null, "仙林168号", "仙林大学城", null, null, null, null, Hotelname);
-		else
-			test=null;
-		return test;
+		return null;
 	}
 	public boolean addComment (String comment,String username,String hotelname){
 		boolean result=true;

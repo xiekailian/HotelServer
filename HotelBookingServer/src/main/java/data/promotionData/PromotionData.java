@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import dataService.promotionDataService.PromotionDataService;
 import po.PromotionPO;
 
-public class PromotionData implements PromotionDataService{
-	private static PromotionData promotiondata;
+public class PromotionData/*implements PromotionDataService*/{
+	private static PromotionData promotiondata=null;
 	/**
 	 * 
 	 * @return 唯一的PromotionData对象
 	 */
+	private PromotionData(){	
+	}
 	public static PromotionData getInstance(){
 		if(promotiondata==null)
-			promotiondata=new PromotionDataMock();
+			promotiondata=new PromotionData();
 		return promotiondata;
 	}
 	
