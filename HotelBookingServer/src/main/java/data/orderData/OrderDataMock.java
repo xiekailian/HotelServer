@@ -7,19 +7,19 @@ import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
 public class OrderDataMock implements OrderDataService {
-	OrderPO order1 = new OrderPO();
-	OrderPO order2 = new OrderPO();
-	OrderPO order3 = new OrderPO();
-	private ArrayList<OrderPO> list = new ArrayList<OrderPO>();
-
 	public OrderDataMock() {
 	}
 
 	public ArrayList<OrderPO> personFind(String personname) {
+		OrderPO order1 = new OrderPO();
+		OrderPO order2 = new OrderPO();
+		OrderPO order3 = new OrderPO();
+		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
 		ArrayList<OrderPO> result = new ArrayList<OrderPO>();
 		order1.setPersonname("小夏");
 		order2.setPersonname("大夏");
 		order3.setPersonname("小夏");
+		order1.setHotelname("南京大酒店");
 		list.add(order1);
 		list.add(order2);
 		list.add(order3);
@@ -32,22 +32,19 @@ public class OrderDataMock implements OrderDataService {
 	}
 
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
-		ArrayList<OrderPO> hotelList=new ArrayList<OrderPO>();
-		OrderPO temp=new OrderPO();
-		temp.setOrderprice(1234);
-		temp.setPeoplenum(5);
-		temp.setHotelname("南京大酒店");
-		hotelList.add(temp);
-		for (int i = 0; i < list.size(); i++) {
-			temp=list.get(i);
-			if (temp.getHotelname().equals(hotelname)) {
-				hotelList.add(temp);
-			}
-		}
-		return hotelList;
+		OrderPO order1 = new OrderPO();
+		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
+		order1.setHotelname("nju");
+		if(order1.getHotelname().equals(hotelname));
+		list.add(order1);
+		return list;
 	}
 
 	public ArrayList<OrderPO> exceptionFind() {
+		OrderPO order1 = new OrderPO();
+		OrderPO order2 = new OrderPO();
+		OrderPO order3 = new OrderPO();
+		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
 		ArrayList<OrderPO> hotelList=new ArrayList<OrderPO>();
 		order1.setOrderstate("未执行");
 		order1.setOrderprice(3600);
@@ -61,13 +58,17 @@ public class OrderDataMock implements OrderDataService {
 		return hotelList;
 	}
 
-	public void add(OrderPO order) {
-		if(order.getHotelname().equals("南京大酒店"));
+	public boolean add(OrderPO order) {
+		if(order.getPersonname().equals("xiamutain"))
+			return true;
+		return false;
 		
 	}
 
-	public void modify(OrderPO order) throws RemoteException {
-		// TODO Auto-generated method stub
+	public boolean modify(OrderPO order) throws RemoteException {
+		if(order.getPersonname().equals("xiamutain"))
+			return true;
+		return false;
 		
 	}
 

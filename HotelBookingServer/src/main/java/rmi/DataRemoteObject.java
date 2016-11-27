@@ -121,7 +121,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return promotiondataService.delete(promotion);
 	}
-	public void add(OrderPO order) throws RemoteException{
+	public boolean add(OrderPO order) throws RemoteException{
+		return orderdataService.add(order);
 		// TODO Auto-generated method stub
 		
 	}
@@ -129,7 +130,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return orderdataService.personFind(personname);
 	}
-	public void modify(OrderPO order) throws RemoteException{
+	public boolean modify(OrderPO order) throws RemoteException{
+		return orderdataService.modify(order);
 		// TODO Auto-generated method stub
 	}
 	public ArrayList<OrderPO> hotelFind(String hotelname) throws RemoteException {
@@ -148,9 +150,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDataSe
 		// TODO Auto-generated method stub
 		return hoteldataservice.addComment(comment, username, hotelname);
 	}
-	public ArrayList<HotelPO> findWithReq(HotelPO condition) throws RemoteException {
+	public ArrayList<HotelPO> findWithReq(HotelPO worstcondition,HotelPO bestcondition) throws RemoteException {
 		// TODO Auto-generated method stub
-		return hoteldataservice.findWithReq(condition);
+		return hoteldataservice.findWithReq(worstcondition, bestcondition);
 	}
 	public boolean roomModify(String roomtype, int number) throws RemoteException {
 		// TODO Auto-generated method stub

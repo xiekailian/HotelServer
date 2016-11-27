@@ -16,7 +16,6 @@ public class PromotionDataMock implements PromotionDataService {
 		ArrayList<PromotionPO> list=new ArrayList<PromotionPO>();
 		PromotionPO po1=new PromotionPO();
 		po1.setName("双十一折扣");
-		po1.get
 		po1.setType("111");
 		PromotionPO po2=new PromotionPO();
 		po2.setName("双十二折扣");

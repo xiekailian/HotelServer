@@ -16,7 +16,7 @@ public interface OrderDataService extends Remote{
 	 * @param order
 	 * @throws RemoteException 
 	 */
-	public void add(OrderPO order) throws RemoteException;
+	public boolean add(OrderPO order) throws RemoteException;
 	
 	/**
 	 * 根据客户名返回客户个人订单列表
@@ -29,7 +29,7 @@ public interface OrderDataService extends Remote{
 	 * 改变一个订单的状态
 	 * @param order
 	 */
-	public void modify(OrderPO order)throws RemoteException;
+	public boolean modify(OrderPO order)throws RemoteException;
 	
 	/**
 	 * 返回酒店订单列表

@@ -50,9 +50,10 @@ public class HotelDataMock implements HotelDataService{
 		return false;
 	}
 
-	public ArrayList<HotelPO> findWithReq(HotelPO condition) throws RemoteException {
+	public ArrayList<HotelPO> findWithReq(HotelPO worstcondition,HotelPO bestcondition) throws RemoteException {
 		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
 		ArrayList<Boolean> service=new ArrayList<Boolean>();
+		if(worstcondition.getHotelname()!=null){
 		service.add(true);
 		service.add(true);
 		service.add(false);
@@ -81,6 +82,7 @@ public class HotelDataMock implements HotelDataService{
 		HotelPO po2=new HotelPO("仙林大酒店",3,"快捷方便",service,"仙林小道190号","仙林大学城",4.5,roomType,roomNum,roomPrice,comment,"大夏");
 		list.add(po);
 		list.add(po2);
+		}
 		return list;
 	}
 
