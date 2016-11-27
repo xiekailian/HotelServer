@@ -72,19 +72,9 @@ public class UserDataMock implements UserDataService{
 		}		
 
 	public boolean changeCredit(String username, int credit) {
-		PersonPO pp1=new PersonPO();
-		pp1.setUsername("xiamutian");
-		PersonPO pp2=new PersonPO();
-		pp2.setUsername("xiekailian");
-		ArrayList<PersonPO> List = new ArrayList<PersonPO>(); 
-		List.add(pp1);
-		List.add(pp2);
-		for(int i=0;i<List.size();i++){
-			if(List.get(i).getUsername().equals(username)){
-				return true;
-			}
-		}
-		return false;		
+//		if(username.equals("xiamutian"))
+//			return true;
+		return true;		
 	}
 
 	public HotelWorkerPO findHotelWorker(String hotelWorkername) {

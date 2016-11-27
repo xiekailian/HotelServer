@@ -11,6 +11,7 @@ import java.util.Calendar;
  */
 public class OrderPO implements Serializable{
 	//订单的基本信息
+	private static final long serialVersionUID = 8851690781547116746L;
 	private String orderID;
 	private int orderprice;
 	private String ordernum;
