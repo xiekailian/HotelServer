@@ -8,6 +8,9 @@ import java.util.*;
  * @author xiamutian
  */
 public class PromotionPO implements Serializable {
+	
+	private static final long serialVersionUID = 6720346062857240995L;
+	
 	private String name;
 	private String type;
 	private ArrayList <String> hotel;
