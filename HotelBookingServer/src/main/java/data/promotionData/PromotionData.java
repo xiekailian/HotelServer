@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dataService.promotionDataService.PromotionDataService;
 import po.PromotionPO;
 
-public class PromotionData/*implements PromotionDataService*/{
+public class PromotionData /*implements PromotionDataService*/{
 	private static PromotionData promotiondata=null;
 	/**
 	 * 

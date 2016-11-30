@@ -14,7 +14,6 @@ public interface OrderDataService extends Remote{
 	/**
 	 * 新增一个订单信息
 	 * @param order
-	 * @throws RemoteException 
 	 */
 	public boolean add(OrderPO order) throws RemoteException;
 	
