@@ -62,14 +62,14 @@ public class OrderDataMock implements OrderDataService {
 	}
 
 	public boolean add(OrderPO order) {
-		if(order.getPersonname().equals("xiamutain"))
+		if(order.getPersonname().equals("xiamutian"))
 			return true;
 		return false;
 		
 	}
 
 	public boolean modify(OrderPO order) throws RemoteException {
-		if(order.getPersonname().equals("xiamutain"))
+		if(order.getPersonname().equals("xiamutian"))
 			return true;
 		return false;
 		
