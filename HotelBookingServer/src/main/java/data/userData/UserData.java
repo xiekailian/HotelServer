@@ -136,7 +136,7 @@ public class UserData /*implements UserDataService*/{
 						ps.setDate(7, null);
 					}
 					else{
-						int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日期
+						int temp=personInfo.getBirthday().get(Calendar.DATE)+1;//用于修正日
 						personInfo.getBirthday().set(Calendar.DATE, temp);
 						java.util.Date date=personInfo.getBirthday().getTime();
 						SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
