@@ -43,6 +43,7 @@ public class UserDataTest {
 		assertEquals(0,pp.getVipLevel());
 		assertEquals(2,pp.getPersonID());
 		assertEquals(null,ppFalse);
+		assertEquals(6,pp.getBirthday().get(Calendar.MONTH));
 
 	}
 
