@@ -20,6 +20,9 @@ public class OrderDataMock implements OrderDataService {
 		order2.setPersonname("大夏");
 		order3.setPersonname("小夏");
 		order1.setHotelname("南京大酒店");
+		order1.setOrderstate("nonExecute");
+		order2.setOrderstate("alreadyExecute");
+		order3.setOrderstate("nonExecute");
 		list.add(order1);
 		list.add(order2);
 		list.add(order3);
