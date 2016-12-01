@@ -10,7 +10,7 @@ import java.io.Serializable;
 		private String username;
 		private String password;
 		private String hotelname;
-		private static final long serialVersionUID =-4572738918334368497L;
+	
 
 	public HotelWorkerPO(String username, String password, String hotelname) {
 			super();

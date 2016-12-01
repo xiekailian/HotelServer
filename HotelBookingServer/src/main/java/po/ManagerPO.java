@@ -32,5 +32,4 @@ public class ManagerPO  implements Serializable {
 		this.password=null;
 	}
 	
-	
 }

@@ -19,11 +19,11 @@ import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
-import po.HotelPO;
+import po.hotelpo.HotelPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;
-import po.PersonPO;
+import po.personpo.PersonPO;
 import po.PromotionPO;
 import po.SearchPO;
 

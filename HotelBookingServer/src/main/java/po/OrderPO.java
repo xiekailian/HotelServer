@@ -7,12 +7,12 @@ import java.util.Calendar;
 /**
  * 
  * @author xiamutian
+ * @author 武秀峰
  *
  */
 public class OrderPO implements Serializable{
 	//订单的基本信息
-	private static final long serialVersionUID = 8851690781547116746L;
-	private String orderID;
+	private String orderID;//时间201602020512（4年2月2日2时2分）+酒店ID（5位）+客户ID(5位)
 	private int orderprice;
 	private String ordernum;
 	private String orderstate;
@@ -44,7 +44,7 @@ public class OrderPO implements Serializable{
 		
 	}
 	
-	
+	//vo转po
 	//有所有参数的构造函数
 	public OrderPO(String orderID, int orderprice, String ordernum, String orderstate, String hotelname,
 			ArrayList<String> roomtype, ArrayList<Integer> roomnum, ArrayList<String> theNumOfRoom, String personname,

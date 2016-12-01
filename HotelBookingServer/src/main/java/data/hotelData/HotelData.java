@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataService.hotelDataService.HotelDataService;
-import po.HotelPO;
 import po.SearchPO;
+import po.hotelpo.HotelPO;
 
 public class HotelData /*implements HotelDataService*/{
 	private static HotelData hoteldata=null;

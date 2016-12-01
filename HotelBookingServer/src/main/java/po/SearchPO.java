@@ -3,10 +3,19 @@ package po;
 import java.io.Serializable;
 import java.util.Calendar;
 
+/**
+ * 
+ * @author 武秀峰
+ *
+ */
 public class SearchPO implements Serializable{
 	private String personname;
 	private Calendar time;
 	private String hotelname;
+	
+	public SearchPO() {
+		super();
+	}
 	public SearchPO(String personname, Calendar time, String hotelname) {
 		super();
 		this.personname = personname;

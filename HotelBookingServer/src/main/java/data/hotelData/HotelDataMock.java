@@ -5,6 +5,7 @@ import java.util.List;
 
 import dataService.hotelDataService.*;
 import po.*;
+import po.hotelpo.HotelPO;
 
 public class HotelDataMock implements HotelDataService{
 
@@ -34,8 +35,7 @@ public class HotelDataMock implements HotelDataService{
 		comment.add("不好，不棒");
 		comment.add("还好，一般");
 		
-		HotelPO po=new HotelPO("南京大酒店",5,"物美价廉",service,"仙林大道168号","仙林大学城",9.3, roomType,roomNum,roomPrice,comment,"小夏");
-		return po;
+		return null;
 	}
 
 	public boolean modify(HotelPO hotelinfo) throws RemoteException {
@@ -78,8 +78,8 @@ public class HotelDataMock implements HotelDataService{
 		comment.add("不好，不棒");
 		comment.add("还好，一般");
 		
-		HotelPO po=new HotelPO("南京大酒店",5,"物美价廉",service,"仙林大道168号","仙林大学城",9.3, roomType,roomNum,roomPrice,comment,"小夏");
-		HotelPO po2=new HotelPO("仙林大酒店",3,"快捷方便",service,"仙林小道190号","仙林大学城",4.5,roomType,roomNum,roomPrice,comment,"大夏");
+		HotelPO po=new HotelPO();
+		HotelPO po2=new HotelPO();
 		list.add(po);
 		list.add(po2);
 		}

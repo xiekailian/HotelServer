@@ -1,7 +1,13 @@
-package po;
+package po.personpo;
 import java.io.Serializable;
 import java.util.Calendar;
 
+
+/**
+ * 
+ * @author 武秀峰
+ *
+ */
 public class PersonPO implements Serializable{
 	private String username;
 	private String password;
@@ -12,7 +18,7 @@ public class PersonPO implements Serializable{
 	private int vipLevel;
 	private String enterpriseName;//企业会员登记企业名称
 	private String phoneNumber;//由11位数字组成的电话号码
-	private static final long serialVersionUID = -2114366013371143718L;
+
 	//构造函数
 	public PersonPO() {
 		super();
