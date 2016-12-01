@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import dataService.searchDataService.*;
 import po.SearchPO;
-public class SearchData /*implements SearchDataService*/ {
-	
+
+public class SearchData /* implements SearchDataService */{
 
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		// TODO Auto-generated method stub
@@ -20,5 +20,4 @@ public class SearchData /*implements SearchDataService*/ {
 		return true;
 	}
 
-	
 }

@@ -5,20 +5,22 @@ import java.util.ArrayList;
 import dataService.promotionDataService.PromotionDataService;
 import po.PromotionPO;
 
-public class PromotionData /*implements PromotionDataService*/{
-	private static PromotionData promotiondata=null;
+public class PromotionData /* implements PromotionDataService */{
+	private static PromotionData promotiondata = null;
+
 	/**
 	 * 
 	 * @return 唯一的PromotionData对象
 	 */
-	private PromotionData(){	
+	private PromotionData() {
 	}
-	public static PromotionData getInstance(){
-		if(promotiondata==null)
-			promotiondata=new PromotionData();
+
+	public static PromotionData getInstance() {
+		if (promotiondata == null)
+			promotiondata = new PromotionData();
 		return promotiondata;
 	}
-	
+
 	public boolean add(PromotionPO promotion) {
 		System.out.println("Promotiondata.add is called.");
 		return true;
@@ -26,7 +28,7 @@ public class PromotionData /*implements PromotionDataService*/{
 
 	public ArrayList<PromotionPO> find(String hotelnames) {
 		System.out.println("Promotiondata.find is called.");
-		ArrayList<PromotionPO> test=new ArrayList<PromotionPO>();
+		ArrayList<PromotionPO> test = new ArrayList<PromotionPO>();
 		return test;
 	}
 

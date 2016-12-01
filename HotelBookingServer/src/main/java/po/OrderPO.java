@@ -8,48 +8,51 @@ import java.util.Calendar;
  * 
  * @author xiamutian
  * @author 武秀峰
- *
+ * 
  */
-public class OrderPO implements Serializable{
-	//订单的基本信息
-	private String orderID;//时间201602020512（4年2月2日2时2分）+酒店ID（5位）+客户ID(5位)
+public class OrderPO implements Serializable {
+	// 订单的基本信息
+	private String orderID;// 时间201602020512（4年2月2日2时2分）+酒店ID（5位）+客户ID(5位)
 	private int orderprice;
 	private String ordernum;
 	private String orderstate;
-	//订单状态,"nonExecute"代表未执行订单、"alreadyExecute"代表已执行订单、
-	//"cancel"代表已撤销订单、"abnormal"代表异常订单、"delay"代表延期订单
-	
-	//酒店信息
+	// 订单状态,"nonExecute"代表未执行订单、"alreadyExecute"代表已执行订单、
+	// "cancel"代表已撤销订单、"abnormal"代表异常订单、"delay"代表延期订单
+
+	// 酒店信息
 	private String hotelname;
 	private ArrayList<String> roomtype;
-	private ArrayList<Integer> roomnum;//房间数量
-	private ArrayList<String> theNumOfRoom;//房间号
-	
-	//入住者信息
+	private ArrayList<Integer> roomnum;// 房间数量
+	private ArrayList<String> theNumOfRoom;// 房间号
+
+	// 入住者信息
 	private String personname;
-	private String realname;//客户真实姓名
-	private int peoplenum;//包括child的人数
-	private int childnum;//儿童的人数。默认为0
-	
-	//一系列时间
-	private Calendar producttime;//订单生成时间
-	private Calendar executetime;//订单执行时间
-	private Calendar canceltime;//订单取消时间
-	private Calendar latestExecutetime;//订单最晚执行时间
-	private Calendar predictLeaveTime;//预计退房时间
-	private Calendar actualLeaveTime;//实际退房时间
-	
-	//空构造函数
+	private String realname;// 客户真实姓名
+	private int peoplenum;// 包括child的人数
+	private int childnum;// 儿童的人数。默认为0
+
+	// 一系列时间
+	private Calendar producttime;// 订单生成时间
+	private Calendar executetime;// 订单执行时间
+	private Calendar canceltime;// 订单取消时间
+	private Calendar latestExecutetime;// 订单最晚执行时间
+	private Calendar predictLeaveTime;// 预计退房时间
+	private Calendar actualLeaveTime;// 实际退房时间
+
+	// 空构造函数
 	public OrderPO() {
-		
+
 	}
-	
-	//vo转po
-	//有所有参数的构造函数
-	public OrderPO(String orderID, int orderprice, String ordernum, String orderstate, String hotelname,
-			ArrayList<String> roomtype, ArrayList<Integer> roomnum, ArrayList<String> theNumOfRoom, String personname,
-			String realname, int peoplenum, int childnum, Calendar producttime, Calendar executetime,
-			Calendar canceltime, Calendar latestExecutetime, Calendar predictLeaveTime, Calendar actualLeaveTime) {
+
+	// vo转po
+	// 有所有参数的构造函数
+	public OrderPO(String orderID, int orderprice, String ordernum,
+			String orderstate, String hotelname, ArrayList<String> roomtype,
+			ArrayList<Integer> roomnum, ArrayList<String> theNumOfRoom,
+			String personname, String realname, int peoplenum, int childnum,
+			Calendar producttime, Calendar executetime, Calendar canceltime,
+			Calendar latestExecutetime, Calendar predictLeaveTime,
+			Calendar actualLeaveTime) {
 		super();
 		this.orderID = orderID;
 		this.orderprice = orderprice;
@@ -71,7 +74,7 @@ public class OrderPO implements Serializable{
 		this.actualLeaveTime = actualLeaveTime;
 	}
 
-	//get and set
+	// get and set
 	public String getOrderID() {
 		return orderID;
 	}
@@ -215,5 +218,5 @@ public class OrderPO implements Serializable{
 	public void setActualLeaveTime(Calendar actualLeaveTime) {
 		this.actualLeaveTime = actualLeaveTime;
 	}
-	
+
 }

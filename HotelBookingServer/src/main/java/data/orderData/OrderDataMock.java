@@ -23,19 +23,20 @@ public class OrderDataMock implements OrderDataService {
 		list.add(order1);
 		list.add(order2);
 		list.add(order3);
-		for(int i=0;i<list.size();i++){
-			if(list.get(i).getPersonname().equals(personname))
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getPersonname().equals(personname))
 				result.add(list.get(i));
 		}
 		return result;
-		
+
 	}
 
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
 		OrderPO order1 = new OrderPO();
 		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
 		order1.setHotelname("nju");
-		if(order1.getHotelname().equals(hotelname));
+		if (order1.getHotelname().equals(hotelname))
+			;
 		list.add(order1);
 		return list;
 	}
@@ -45,7 +46,7 @@ public class OrderDataMock implements OrderDataService {
 		OrderPO order2 = new OrderPO();
 		OrderPO order3 = new OrderPO();
 		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
-		ArrayList<OrderPO> hotelList=new ArrayList<OrderPO>();
+		ArrayList<OrderPO> hotelList = new ArrayList<OrderPO>();
 		order1.setOrderstate("未执行");
 		order1.setOrderprice(3600);
 		order2.setOrderstate("异常");
@@ -59,17 +60,17 @@ public class OrderDataMock implements OrderDataService {
 	}
 
 	public boolean add(OrderPO order) {
-		if(order.getPersonname().equals("xiamutain"))
+		if (order.getPersonname().equals("xiamutain"))
 			return true;
 		return false;
-		
+
 	}
 
 	public boolean modify(OrderPO order) throws RemoteException {
-		if(order.getPersonname().equals("xiamutain"))
+		if (order.getPersonname().equals("xiamutain"))
 			return true;
 		return false;
-		
+
 	}
 
 }

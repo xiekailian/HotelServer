@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import dataService.searchDataService.SearchDataService;
 import po.SearchPO;
 
-public class SearchDataMock implements SearchDataService{
-	ArrayList<SearchPO> allsearchhistory=new ArrayList<SearchPO>();
-	public SearchDataMock(){
-		SearchPO sp1=new SearchPO("wuxiufeng", null, "酒店1");
-		SearchPO sp2=new SearchPO("wuxiufeng", null, "酒店2");
-		SearchPO sp3=new SearchPO("xiekaihang", null, "酒店3");
-		SearchPO sp4=new SearchPO("xiekailian", null, "酒店4");
-		
+public class SearchDataMock implements SearchDataService {
+	ArrayList<SearchPO> allsearchhistory = new ArrayList<SearchPO>();
+
+	public SearchDataMock() {
+		SearchPO sp1 = new SearchPO("wuxiufeng", null, "酒店1");
+		SearchPO sp2 = new SearchPO("wuxiufeng", null, "酒店2");
+		SearchPO sp3 = new SearchPO("xiekaihang", null, "酒店3");
+		SearchPO sp4 = new SearchPO("xiekailian", null, "酒店4");
+
 		allsearchhistory.add(sp1);
 		allsearchhistory.add(sp2);
 		allsearchhistory.add(sp3);
 		allsearchhistory.add(sp4);
 	}
 
-	
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		// TODO Auto-generated method stub
-		ArrayList<SearchPO> result=new ArrayList<SearchPO>();
-		
+		ArrayList<SearchPO> result = new ArrayList<SearchPO>();
+
 		for (int i = 0; i < allsearchhistory.size(); i++) {
-			if(allsearchhistory.get(i).getPersonname().equals(username)){
+			if (allsearchhistory.get(i).getPersonname().equals(username)) {
 				result.add(allsearchhistory.get(i));
 			}
 		}
@@ -42,5 +42,4 @@ public class SearchDataMock implements SearchDataService{
 		return true;
 	}
 
-	
 }

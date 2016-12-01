@@ -1,13 +1,13 @@
 package po.hotelpo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-
-public class RoomPO {
+public class RoomPO implements Serializable {
 	private String roomType;
 	private int roomnum;
 	private int roomPrice;
-	
+
 	public RoomPO() {
 		super();
 	}
@@ -18,7 +18,6 @@ public class RoomPO {
 		this.roomnum = roomnum;
 		this.roomPrice = roomPrice;
 	}
-	
 
 	public String getRoomType() {
 		return roomType;
@@ -43,6 +42,5 @@ public class RoomPO {
 	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
 	}
-	
 
 }

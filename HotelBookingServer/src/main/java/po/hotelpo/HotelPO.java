@@ -3,25 +3,26 @@ package po.hotelpo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-public class HotelPO implements Serializable{
+public class HotelPO implements Serializable {
 	private String hotelname;
-	private int star;//酒店星级
-	private String feature;//酒店简介
-	private ArrayList <Boolean> service;//设施服务，需要初始化list，所有的都要设为false
+	private int star;// 酒店星级
+	private String feature;// 酒店简介
+	private ArrayList<Boolean> service;// 设施服务，需要初始化list，所有的都要设为false
 	private String address;
 	private String circle;
-	private double score;//酒店平均评分
+	private double score;// 酒店平均评分
 	private ArrayList<RoomPO> room;
 	private ArrayList<CommentPO> comment;
 	private String hotelworker;
-	
+
 	public HotelPO() {
 		super();
 	}
 
-	public HotelPO(String hotelname, int star, String feature, ArrayList<Boolean> service, String address,
-			String circle, double score, ArrayList<RoomPO> room, ArrayList<CommentPO> comment, String hotelworker) {
+	public HotelPO(String hotelname, int star, String feature,
+			ArrayList<Boolean> service, String address, String circle,
+			double score, ArrayList<RoomPO> room, ArrayList<CommentPO> comment,
+			String hotelworker) {
 		super();
 		this.hotelname = hotelname;
 		this.star = star;
@@ -34,9 +35,6 @@ public class HotelPO implements Serializable{
 		this.comment = comment;
 		this.hotelworker = hotelworker;
 	}
-
-
-
 
 	public String getHotelname() {
 		return hotelname;
@@ -117,7 +115,5 @@ public class HotelPO implements Serializable{
 	public void setHotelworker(String hotelworker) {
 		this.hotelworker = hotelworker;
 	}
-	
 
 }
-

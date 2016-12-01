@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
-public class OrderData /*implements OrderDataService*/ {
+public class OrderData /* implements OrderDataService */{
 
 	private ArrayList<OrderPO> list = null;
-
 
 	private static OrderData orderData = null;
 
@@ -25,7 +24,7 @@ public class OrderData /*implements OrderDataService*/ {
 
 	public void add(OrderPO order) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public ArrayList<OrderPO> personFind(String personname) {
