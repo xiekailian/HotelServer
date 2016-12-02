@@ -1,4 +1,4 @@
-package po.hotelpo;
+package po.hotelPO;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import po.personpo.RecordPO;
+import po.personPO.RecordPO;
 
 public class test {
 	public static void main(String args[]) throws IOException {
