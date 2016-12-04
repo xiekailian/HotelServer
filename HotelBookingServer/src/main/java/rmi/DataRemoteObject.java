@@ -19,12 +19,12 @@ import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
-import po.hotelPOd.HotelPO;
+import po.hotelPO.HotelPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;
-import po.personPOd.PersonPO;
-import po.personPOd.RecordPO;
+import po.personPO.PersonPO;
+import po.personPO.RecordPO;
 import po.PromotionPO;
 import po.SearchPO;
 
@@ -193,26 +193,26 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	}
 
 
-	public boolean modifyPerson(po.personPOd.PersonPO personInfo)
+	public boolean modifyPerson(po.personPO.PersonPO personInfo)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean writeRecord(String personname, po.personPOd.RecordPO record)
+	public boolean writeRecord(String personname, po.personPO.RecordPO record)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean modify(po.hotelPOd.HotelPO hotelinfo) throws RemoteException {
+	public boolean modify(po.hotelPO.HotelPO hotelinfo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public ArrayList<po.hotelPOd.HotelPO> findWithReq(
-			po.hotelPOd.HotelPO worstCondition,
-			po.hotelPOd.HotelPO bestCondition) throws RemoteException {
+	public ArrayList<po.hotelPO.HotelPO> findWithReq(
+			po.hotelPO.HotelPO worstCondition,
+			po.hotelPO.HotelPO bestCondition) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

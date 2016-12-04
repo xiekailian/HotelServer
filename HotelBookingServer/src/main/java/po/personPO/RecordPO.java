@@ -1,4 +1,4 @@
-package po.personPOd;
+package po.personPO;
 
 import java.io.Serializable;
 import java.util.ArrayList;

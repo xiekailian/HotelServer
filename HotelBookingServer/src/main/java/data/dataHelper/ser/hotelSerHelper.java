@@ -9,8 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import po.hotelPOd.CommentPO;
-import po.hotelPOd.RoomPO;
+import po.hotelPO.CommentPO;
+import po.hotelPO.RoomPO;
 
 public class hotelSerHelper {
 	String path = "src/main/resources/hotel/";

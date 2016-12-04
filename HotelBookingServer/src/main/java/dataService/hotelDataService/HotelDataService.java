@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 import po.*;
-import po.hotelPOd.HotelPO;
+import po.hotelPO.HotelPO;
 
 public interface HotelDataService extends Remote {
 	/**
