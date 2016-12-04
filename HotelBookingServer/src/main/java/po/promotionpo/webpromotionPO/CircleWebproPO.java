@@ -1,4 +1,4 @@
-package po.promotionpo.webpromotionPOL;
+package po.promotionpo.webpromotionPO;
 
 import java.util.ArrayList;
 
