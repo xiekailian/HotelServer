@@ -9,10 +9,10 @@ import java.util.Calendar;
  * 
  */
 public class SearchPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String personname;
 	private Calendar time;
 	private String hotelname;
-
 	public SearchPO() {
 		super();
 	}

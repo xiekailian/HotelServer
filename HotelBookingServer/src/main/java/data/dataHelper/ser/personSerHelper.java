@@ -15,7 +15,7 @@ public class personSerHelper {
 	String path = "src/main/resources/person/";
 
 	/**
-	 * 写入ser文件
+	 * 写入record ser文件
 	 * 
 	 * @param personname
 	 * @param object
@@ -56,7 +56,7 @@ public class personSerHelper {
 	}
 
 	/**
-	 * 读取ser文件
+	 * 读取record ser文件
 	 * 
 	 * @param personname
 	 * @throws IOException
@@ -72,6 +72,81 @@ public class personSerHelper {
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
 				result = (ArrayList<RecordPO>) ois.readObject();
+				ois.close();
+				return result;
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+
+		}
+	}
+	/**
+	 * 写入record ser文件
+	 * 
+	 * @param personname
+	 * @param object
+	 * @throws IOException
+	 */
+	public boolean writeOrderedHotelSer(String personname, String hotelname)
+			throws IOException {
+		String path = "src/main/resources/person/";
+		path = path + personname + "/" + "orderedHotel.txt";
+		ArrayList<String> origin = new ArrayList<String>();
+		File orderedHotel = new File(path);
+		boolean exists = orderedHotel.exists();
+		if (exists == false) {
+			orderedHotel.createNewFile();
+		}
+		try {
+			if (exists) {
+				origin = this.readOrderedHotelSer(personname);
+				if(origin.contains(hotelname)==false){
+					origin.add(hotelname);}
+				else{
+					return true;
+				}
+				FileOutputStream fos = new FileOutputStream(orderedHotel);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(origin);
+			} else {
+				FileOutputStream fos = new FileOutputStream(orderedHotel);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				origin.add(hotelname);
+				oos.writeObject(origin);
+				oos.flush();
+				oos.close();
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 读取record ser文件
+	 * 
+	 * @param personname
+	 * @throws IOException
+	 */
+	@SuppressWarnings("unchecked")
+	public ArrayList<String> readOrderedHotelSer(String personname)
+			throws IOException {
+		ArrayList<String> result = new ArrayList<String>();
+		String path = "src/main/resources/person/";
+		path = path + personname + "/" + "orderedHotel.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+				result = (ArrayList<String>) ois.readObject();
 				ois.close();
 				return result;
 

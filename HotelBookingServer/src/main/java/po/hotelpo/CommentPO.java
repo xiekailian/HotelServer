@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CommentPO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String hotelname;
 	private String personname;// 评价者
 	private Calendar time;

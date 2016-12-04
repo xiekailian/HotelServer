@@ -35,6 +35,13 @@ public class datetime转化测试 {
 			if (rs.getString(2) != null) {
 				cal.setTime(rs.getTimestamp(2));
 			}
+			int temp=cal.get(Calendar.DAY_OF_MONTH);
+			cal.set(Calendar.DAY_OF_MONTH, temp);
+			System.out.println(cal.get(Calendar.YEAR));
+			System.out.println(cal.get(Calendar.MONTH)+1);
+			System.out.println(cal.get(Calendar.DATE));
+			System.out.println(cal.get(Calendar.HOUR));
+			System.out.println(cal.get(Calendar.MINUTE));
 			System.out.println(cal.get(Calendar.SECOND));
 		}
 

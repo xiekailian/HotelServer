@@ -28,7 +28,7 @@ public class UserDataTest {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, 1997);
 		calendar.set(Calendar.MONTH, 2);
-		calendar.set(Calendar.DATE, 6);
+		calendar.set(Calendar.DATE, 31);
 		pp.setUsername("xmt");
 		pp.setPassword("123456");
 		pp.setBirthday(calendar);

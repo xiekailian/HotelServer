@@ -69,8 +69,6 @@ public class UserData /* implements UserDataService */{
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
 			ps.setInt(7, 0);
-			int temp = personInfo.getBirthday().get(Calendar.DATE) + 1;// 用于修正日期
-			personInfo.getBirthday().set(Calendar.DATE, temp);
 			java.util.Date date = personInfo.getBirthday().getTime();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String birth = sdf.format(date);
@@ -100,7 +98,7 @@ public class UserData /* implements UserDataService */{
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(2).equals(personname)) {
+				if (rs.getString(2).equals(personname)) { 
 					pp.setPersonID(rs.getInt(1));
 					pp.setUsername(rs.getString(2));
 					pp.setPassword(rs.getString(3));
@@ -151,10 +149,7 @@ public class UserData /* implements UserDataService */{
 					if (personInfo.getBirthday() == null) {
 						ps.setDate(7, null);
 					} else {
-						int temp = personInfo.getBirthday().get(Calendar.DATE) + 1;// 用于修正日
-						personInfo.getBirthday().set(Calendar.DATE, temp);
-						java.util.Date date = personInfo.getBirthday()
-								.getTime();
+						java.util.Date date = personInfo.getBirthday().getTime();
 						SimpleDateFormat sdf = new SimpleDateFormat(
 								"yyyy-MM-dd");
 						String birth = sdf.format(date);
