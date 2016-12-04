@@ -11,7 +11,7 @@ import java.util.Calendar;
 import data.dataHelper.jdbc.Builder;
 import dataService.searchDataService.*;
 import po.SearchPO;
-import po.personPOL.PersonPO;
+import po.personPO.PersonPO;
 
 public class SearchData /* implements SearchDataService */{
 	Connection conn = null;

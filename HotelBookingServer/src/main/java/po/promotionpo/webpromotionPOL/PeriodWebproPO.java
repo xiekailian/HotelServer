@@ -1,4 +1,4 @@
-package po.promotionpo.webpromotionPO;
+package po.promotionpo.webpromotionPOL;
 
 import java.util.Calendar;
 

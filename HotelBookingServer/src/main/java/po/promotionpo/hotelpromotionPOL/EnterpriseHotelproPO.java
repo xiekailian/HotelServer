@@ -1,4 +1,4 @@
-package po.promotionpo.hotelpromotionPO;
+package po.promotionpo.hotelpromotionPOL;
 
 import java.util.ArrayList;
 
