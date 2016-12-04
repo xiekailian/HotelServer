@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import po.personPO.RecordPO;
+import po.personPOd.RecordPO;
 
 public class personSerHelper {
 	String path = "src/main/resources/person/";

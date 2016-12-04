@@ -19,12 +19,12 @@ import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
-import po.hotelPO.HotelPO;
+import po.hotelPOd.HotelPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;
-import po.personPO.PersonPO;
-import po.personPO.RecordPO;
+import po.personPOd.PersonPO;
+import po.personPOd.RecordPO;
 import po.PromotionPO;
 import po.SearchPO;
 
@@ -65,20 +65,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return searchdataservice.deleteSearchHistory(s);
 	}
 
-	public boolean addPerson(PersonPO personInfo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return userdataservice.addPerson(personInfo);
-	}
 
 	public PersonPO findPerson(String personname) throws RemoteException {
 		// TODO Auto-generated method stub
 		return userdataservice.findPerson(personname);
 	}
 
-	public boolean modifyPerson(PersonPO personInfo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return userdataservice.modifyPerson(personInfo);
-	}
 
 	public boolean personLogin(String personname, String password)
 			throws RemoteException {
@@ -159,11 +151,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return hoteldataservice.addComment(comment, username, hotelname);
 	}
 
-	public ArrayList<HotelPO> findWithReq(HotelPO worstcondition,
-			HotelPO bestcondition) throws RemoteException {
-		// TODO Auto-generated method stub
-		return hoteldataservice.findWithReq(worstcondition, bestcondition);
-	}
 
 	public boolean roomModify(String roomtype, int number)
 			throws RemoteException {
@@ -183,20 +170,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return userdataservice.addHotelWorker(hotelworker);
 	}
 
-	public boolean modify(HotelPO hotelinfo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return hoteldataservice.modify(hotelinfo);
-	}
-
-	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean add(PromotionPO promotion) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	public ArrayList<PromotionPO> find(String hotelnames)
 			throws RemoteException {
@@ -219,8 +192,42 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return false;
 	}
 
-	public boolean writeRecord(String personname, RecordPO record)
+
+	public boolean modifyPerson(po.personPOd.PersonPO personInfo)
 			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean writeRecord(String personname, po.personPOd.RecordPO record)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean modify(po.hotelPOd.HotelPO hotelinfo) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList<po.hotelPOd.HotelPO> findWithReq(
+			po.hotelPOd.HotelPO worstCondition,
+			po.hotelPOd.HotelPO bestCondition) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addPerson(PersonPO personInfo) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean add(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}

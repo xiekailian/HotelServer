@@ -9,7 +9,7 @@ import data.userData.*;
 import org.junit.Test;
 
 import po.*;
-import po.personPO.PersonPO;
+import po.personPOd.PersonPO;
 
 public class UserDataTest {
 	UserData ud = UserData.getInstance();

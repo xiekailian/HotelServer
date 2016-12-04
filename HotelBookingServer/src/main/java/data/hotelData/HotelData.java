@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataService.hotelDataService.HotelDataService;
 import po.SearchPO;
-import po.hotelPO.HotelPO;
+import po.hotelPOd.HotelPO;
 
 public class HotelData /* implements HotelDataService */{
 	private static HotelData hoteldata = null;

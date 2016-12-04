@@ -8,8 +8,8 @@ import dataService.userDataService.UserDataService;
 import po.HotelWorkerPO;
 import po.ManagerPO;
 import po.MarketPO;
-import po.personPO.PersonPO;
-import po.personPO.RecordPO;
+import po.personPOd.PersonPO;
+import po.personPOd.RecordPO;
 
 public class UserDataMock implements UserDataService {
 

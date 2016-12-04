@@ -6,7 +6,7 @@ import java.util.List;
 
 import dataService.hotelDataService.*;
 import po.*;
-import po.hotelPO.HotelPO;
+import po.hotelPOd.HotelPO;
 
 public class HotelDataMock implements HotelDataService {
 
