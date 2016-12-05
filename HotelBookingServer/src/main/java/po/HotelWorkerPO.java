@@ -11,6 +11,7 @@ public class HotelWorkerPO implements Serializable {
 	private String username;
 	private String password;
 	private String hotelname;
+	private static final long serialVersionUID = 1L;
 
 	public HotelWorkerPO(String username, String password, String hotelname) {
 		super();

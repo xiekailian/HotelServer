@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class ManagerPO implements Serializable {
 	private String username;
 	private String password;
+	private static final long serialVersionUID = 1L;
 
 	public String getUsername() {
 		return username;
