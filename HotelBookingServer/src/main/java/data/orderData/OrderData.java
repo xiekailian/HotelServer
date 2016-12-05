@@ -1,15 +1,29 @@
 package data.orderData;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import data.dataHelper.jdbc.*;
+import data.dataHelper.folder.orderFolderHelper;
+import data.dataHelper.ser.orderSerHelper;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
+import po.personPO.PersonPO;
 
 public class OrderData /* implements OrderDataService */{
 
-	private ArrayList<OrderPO> list = null;
-
+	private Connection conn = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 	private static OrderData orderData = null;
+	private Builder builder = new Builder();
+	private orderFolderHelper ofh = new orderFolderHelper();
+	private orderSerHelper osh = new orderSerHelper();
 
 	public static OrderData getInstance() {
 		if (orderData == null) {
@@ -19,32 +33,215 @@ public class OrderData /* implements OrderDataService */{
 		return orderData;
 	}
 
-	public OrderData() {
-	}
-
-	public void add(OrderPO order) {
-		// TODO Auto-generated method stub
+	public boolean add(OrderPO order) {
+		ofh.mkdirs(order.getOrderID());
+		try {
+			ofh.mkdirs(order.getOrderID());
+			String insert = "insert into order (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			conn = builder.BuildConnection();
+			rs.close();
+			ps = conn.prepareStatement(insert);
+			ps.setString(1, order.getOrderID());
+			ps.setInt(2, order.getOrderprice());
+			ps.setString(3, order.getOrderstate());
+			ps.setString(4, order.getHotelname());
+			ps.setString(5, order.getPersonname());
+			ps.setString(6, order.getRealname());
+			ps.setInt(7, order.getPeoplenum());
+			ps.setInt(8, order.getChildnum());
+			ps.setTimestamp(9,
+					ChangerHelper.changeToTimestamp(order.getProducttime()));
+			ps.setTimestamp(10,
+					ChangerHelper.changeToTimestamp(order.getExecutetime()));
+			ps.setTimestamp(11,
+					ChangerHelper.changeToTimestamp(order.getCanceltime()));
+			ps.setTimestamp(12, ChangerHelper.changeToTimestamp(order
+					.getLatestExecutetime()));
+			ps.setTimestamp(13, ChangerHelper.changeToTimestamp(order
+					.getPredictLeaveTime()));
+			ps.setTimestamp(14,
+					ChangerHelper.changeToTimestamp(order.getActualLeaveTime()));
+			ps.execute();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+		return true;
 
 	}
 
 	public ArrayList<OrderPO> personFind(String personname) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderPO op = new OrderPO();
+		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
+		try {
+			String select = "select * from `order`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(4).equals(personname)) {
+					op.setOrderID(rs.getString(1));
+					op.setOrderprice(rs.getInt(2));
+					op.setOrderstate(rs.getString(3));
+					op.setHotelname(rs.getString(4));
+					op.setPersonname(rs.getString(5));
+					op.setRealname(rs.getString(6));
+					op.setPeoplenum(rs.getInt(7));
+					op.setChildnum(rs.getInt(8));
+					op.setProducttime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(9)));
+					op.setExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(10)));
+					op.setCanceltime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(11)));
+					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(12)));
+					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(13)));
+					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(14)));
+					aop.add(op);
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return aop;
+		} catch (SQLException e) {
+			return null;
+		}
 	}
 
 	public void modify(OrderPO order) {
-		// TODO Auto-generated method stub
-
+		try {
+			String update="update order set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
+			String select = "select * from `order`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(1).equals(order.getOrderID())) {
+					ps = conn.prepareStatement(update);
+					ps.setInt(1, order.getOrderprice());
+					ps.setString(2, order.getOrderstate());
+					ps.setString(3, order.getHotelname());
+					ps.setString(4, order.getPersonname());
+					ps.setString(5, order.getRealname());
+					ps.setInt(6, order.getPeoplenum());
+					ps.setInt(7, order.getChildnum());
+					ps.setTimestamp(8,
+							ChangerHelper.changeToTimestamp(order.getProducttime()));
+					ps.setTimestamp(9,
+							ChangerHelper.changeToTimestamp(order.getExecutetime()));
+					ps.setTimestamp(10,
+							ChangerHelper.changeToTimestamp(order.getCanceltime()));
+					ps.setTimestamp(11, ChangerHelper.changeToTimestamp(order
+							.getLatestExecutetime()));
+					ps.setTimestamp(12, ChangerHelper.changeToTimestamp(order
+							.getPredictLeaveTime()));
+					ps.setTimestamp(13,
+							ChangerHelper.changeToTimestamp(order.getActualLeaveTime()));
+					ps.setString(14, order.getOrderID());
+					ps.execute();
+					ps.close();
+					conn.close();	
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			
+		}
 	}
+	
 
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderPO op = new OrderPO();
+		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
+		try {
+			String select = "select * from `order`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(4).equals(hotelname)) {
+					op.setOrderID(rs.getString(1));
+					op.setOrderprice(rs.getInt(2));
+					op.setOrderstate(rs.getString(3));
+					op.setHotelname(rs.getString(4));
+					op.setPersonname(rs.getString(5));
+					op.setRealname(rs.getString(6));
+					op.setPeoplenum(rs.getInt(7));
+					op.setChildnum(rs.getInt(8));
+					op.setProducttime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(9)));
+					op.setExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(10)));
+					op.setCanceltime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(11)));
+					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(12)));
+					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(13)));
+					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(14)));
+					aop.add(op);
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return aop;
+		} catch (SQLException e) {
+			return null;
+		}
 	}
 
+
 	public ArrayList<OrderPO> exceptionFind() {
-		// TODO Auto-generated method stub
-		return null;
+		OrderPO op = new OrderPO();
+		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
+		try {
+			String select = "select * from `order`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(3).equals("nonExecute")
+						|| rs.getString(3).equals("abnormal")) {
+					op.setOrderID(rs.getString(1));
+					op.setOrderprice(rs.getInt(2));
+					op.setOrderstate(rs.getString(3));
+					op.setHotelname(rs.getString(4));
+					op.setPersonname(rs.getString(5));
+					op.setRealname(rs.getString(6));
+					op.setPeoplenum(rs.getInt(7));
+					op.setChildnum(rs.getInt(8));
+					op.setProducttime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(9)));
+					op.setExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(10)));
+					op.setCanceltime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(11)));
+					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(12)));
+					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(13)));
+					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(14)));
+					aop.add(op);
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return aop;
+		} catch (SQLException e) {
+			return null;
+		}
 	}
 
 }

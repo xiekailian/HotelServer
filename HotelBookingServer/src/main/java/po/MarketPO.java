@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class MarketPO implements Serializable {
 	private String username;
 	private String password;
+	private static final long serialVersionUID = 1L;
 
 	public MarketPO() {
 		this.username = null;

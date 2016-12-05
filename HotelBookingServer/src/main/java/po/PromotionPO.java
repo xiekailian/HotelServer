@@ -13,6 +13,7 @@ public class PromotionPO implements Serializable {
 	private String promotionName;// promotion的名称，客户可见
 	private String promotionType;
 	private String hotelnameOrWeb;// 若是酒店促销策略，则为酒店名称;若是网站促销策略，则为“WebPromotion”
+	private static final long serialVersionUID = 1L;
 
 	public PromotionPO() {
 		super();
