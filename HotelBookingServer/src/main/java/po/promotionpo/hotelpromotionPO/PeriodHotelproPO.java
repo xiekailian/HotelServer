@@ -13,7 +13,8 @@ public class PeriodHotelproPO extends PromotionPO {
 	private Calendar startTime;
 	private Calendar endTime;
 	private int discount;//如打九五折时，discount=95
-	
+	private static final long serialVersionUID = 1L;
+
 
 	public PeriodHotelproPO() {
 		super();
