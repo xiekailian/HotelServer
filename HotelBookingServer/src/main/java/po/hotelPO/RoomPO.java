@@ -9,14 +9,14 @@ public class RoomPO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String roomType;
-	private int roomnum;
+	private String roomnum;
 	private int roomPrice;
 
 	public RoomPO() {
 		super();
 	}
 
-	public RoomPO(String roomType, int roomnum, int roomPrice) {
+	public RoomPO(String roomType, String roomnum, int roomPrice) {
 		super();
 		this.roomType = roomType;
 		this.roomnum = roomnum;
@@ -31,11 +31,11 @@ public class RoomPO implements Serializable {
 		this.roomType = roomType;
 	}
 
-	public int getRoomnum() {
+	public String getRoomnum() {
 		return roomnum;
 	}
 
-	public void setRoomnum(int roomnum) {
+	public void setRoomnum(String roomnum) {
 		this.roomnum = roomnum;
 	}
 

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import po.hotelPO.RoomPO;
+
 /**
  * 
  * @author xiamutian
@@ -21,9 +23,7 @@ public class OrderPO implements Serializable {
 
 	// 酒店信息
 	private String hotelname;
-	private ArrayList<String> roomtype;
-	private ArrayList<Integer> roomnum;// 房间数量
-	private ArrayList<String> theNumOfRoom;// 房间号
+	private ArrayList<RoomPO> room;//包括房间类型、房间号、房间价格
 
 	// 入住者信息
 	private String personname;
@@ -47,8 +47,7 @@ public class OrderPO implements Serializable {
 	// vo转po
 	// 有所有参数的构造函数
 	public OrderPO(String orderID, int orderprice, String ordernum,
-			String orderstate, String hotelname, ArrayList<String> roomtype,
-			ArrayList<Integer> roomnum, ArrayList<String> theNumOfRoom,
+			String orderstate, String hotelname, ArrayList<RoomPO> room,
 			String personname, String realname, int peoplenum, int childnum,
 			Calendar producttime, Calendar executetime, Calendar canceltime,
 			Calendar latestExecutetime, Calendar predictLeaveTime,
@@ -59,9 +58,7 @@ public class OrderPO implements Serializable {
 		this.ordernum = ordernum;
 		this.orderstate = orderstate;
 		this.hotelname = hotelname;
-		this.roomtype = roomtype;
-		this.roomnum = roomnum;
-		this.theNumOfRoom = theNumOfRoom;
+		this.room=room;
 		this.personname = personname;
 		this.realname = realname;
 		this.peoplenum = peoplenum;
@@ -82,7 +79,6 @@ public class OrderPO implements Serializable {
 	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
-
 	public int getOrderprice() {
 		return orderprice;
 	}
@@ -110,34 +106,17 @@ public class OrderPO implements Serializable {
 	public String getHotelname() {
 		return hotelname;
 	}
-
+	public void setRoom(ArrayList<RoomPO> room) {
+		this.room = room;
+	}
+	public ArrayList<RoomPO> getRoom() {
+		return room;
+	}
+	
 	public void setHotelname(String hotelname) {
 		this.hotelname = hotelname;
 	}
 
-	public ArrayList<String> getRoomtype() {
-		return roomtype;
-	}
-
-	public void setRoomtype(ArrayList<String> roomtype) {
-		this.roomtype = roomtype;
-	}
-
-	public ArrayList<Integer> getRoomnum() {
-		return roomnum;
-	}
-
-	public void setRoomnum(ArrayList<Integer> roomnum) {
-		this.roomnum = roomnum;
-	}
-
-	public ArrayList<String> getTheNumOfRoom() {
-		return theNumOfRoom;
-	}
-
-	public void setTheNumOfRoom(ArrayList<String> theNumOfRoom) {
-		this.theNumOfRoom = theNumOfRoom;
-	}
 
 	public String getPersonname() {
 		return personname;
