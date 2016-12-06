@@ -42,9 +42,8 @@ public class OrderData /* implements OrderDataService */{
 				e.printStackTrace();
 				return false;
 			}
-			String insert = "insert into order (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			String insert = "insert into `order` (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
-			rs.close();
 			ps = conn.prepareStatement(insert);
 			ps.setString(1, order.getOrderID());
 			ps.setInt(2, order.getOrderprice());
@@ -86,7 +85,7 @@ public class OrderData /* implements OrderDataService */{
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(4).equals(personname)) {
+				if (rs.getString(5).equals(personname)) {
 					op.setOrderID(rs.getString(1));
 					op.setOrderprice(rs.getInt(2));
 					op.setOrderstate(rs.getString(3));
@@ -132,7 +131,7 @@ public class OrderData /* implements OrderDataService */{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String update="update order set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
+			String update="update `order` set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
 			String select = "select * from `order`;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
