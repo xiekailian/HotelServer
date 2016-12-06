@@ -21,14 +21,13 @@ import dataService.*;
 import dataService.userDataService.UserDataService;
 
 public class UserData /* implements UserDataService */{
-	Connection conn = null;
-	PreparedStatement ps = null;
-	Builder builder = new Builder();
-	ResultSet rs = null;
-	personFolderHelper personhelper = new personFolderHelper();
-	personSerHelper personserhelper = new personSerHelper();
+	private Connection conn = null;
+	private PreparedStatement ps = null;
+	private Builder builder = new Builder();
+	private ResultSet rs = null;
+	private personFolderHelper personhelper = new personFolderHelper();
+	private personSerHelper personserhelper = new personSerHelper();
 	static UserData userdata = null;
-	String personpath = "src/main/resources/person/";
 
 	/**
 	 * 增加一个客户

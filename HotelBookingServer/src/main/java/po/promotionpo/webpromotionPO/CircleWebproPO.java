@@ -13,7 +13,8 @@ public class CircleWebproPO extends PromotionPO {
 	private ArrayList<Integer> vipLevel;
 	private ArrayList<String> circle;//商圈
 	private ArrayList<Integer> discount;//如打九五折时，discount=95
-	
+	private static final long serialVersionUID = 1L;
+
 	public CircleWebproPO() {
 		super();
 	}
