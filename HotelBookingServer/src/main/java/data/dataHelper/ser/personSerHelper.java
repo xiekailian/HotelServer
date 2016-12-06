@@ -25,7 +25,7 @@ public class personSerHelper {
 			throws IOException {
 		String path = "src/main/resources/person/";
 		path = path + personname + "/" + "record.txt";
-		ArrayList<RecordPO> origin = new ArrayList<RecordPO>();
+		ArrayList<RecordPO> origin=new ArrayList<RecordPO>();
 		File record = new File(path);
 		boolean exists = record.exists();
 		if (exists == false) {
@@ -41,12 +41,11 @@ public class personSerHelper {
 			} else {
 				FileOutputStream fos = new FileOutputStream(record);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin.add(object);
-				oos.writeObject(origin);
+				oos.writeObject(object);
 				oos.flush();
 				oos.close();
 			}
-
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

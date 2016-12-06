@@ -127,31 +127,22 @@ public class hotelSerHelper {
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean writeRoomSer(String hotelname, RoomPO object)
+	public boolean writeRoomSer(String hotelname, ArrayList<RoomPO> object)
 			throws IOException {
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "room.txt";
-		ArrayList<RoomPO> origin = new ArrayList<RoomPO>();
-		File comment = new File(path);
-		boolean exists = comment.exists();
+		File room = new File(path);
+		boolean exists = room.exists();
 		if (exists == false) {
-			comment.createNewFile();
+			room.createNewFile();
 		}
 		try {
-			if (exists) {
-				origin = this.readRoomSer(hotelname);
-				origin.add(object);
-				FileOutputStream fos = new FileOutputStream(comment);
+				FileOutputStream fos = new FileOutputStream(room);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(origin);
-			} else {
-				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin.add(object);
-				oos.writeObject(origin);
+				oos.writeObject(object);
 				oos.flush();
 				oos.close();
-			}
+			
 	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

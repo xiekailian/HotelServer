@@ -1,5 +1,6 @@
 package data.orderData;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,8 +35,13 @@ public class OrderData /* implements OrderDataService */{
 	public boolean add(OrderPO order) {
 		ofh.mkdirs(order.getOrderID());
 		try {
-			ofh.mkdirs(order.getOrderID());
-			osh.writeRoomSer(order.getOrderID(), order.getRoom());
+			try {
+				osh.writeRoomSer(order.getOrderID(), order.getRoom());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 			String insert = "insert into order (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			rs.close();
@@ -101,6 +107,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}
@@ -115,6 +126,12 @@ public class OrderData /* implements OrderDataService */{
 
 	public void modify(OrderPO order) {
 		try {
+			try {
+				osh.writeRoomSer(order.getOrderID(), order.getRoom());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String update="update order set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
 			String select = "select * from `order`;";
 			conn = builder.BuildConnection();
@@ -187,6 +204,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}
@@ -231,6 +253,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}

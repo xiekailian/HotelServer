@@ -54,31 +54,22 @@ public class orderSerHelper {
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean writeRoomSer(String orderID, RoomPO object)
+	public boolean writeRoomSer(String orderID, ArrayList<RoomPO> object)
 			throws IOException {
 		String path = "src/main/resources/order/";
 		path = path + orderID + "/" + "room.txt";
-		ArrayList<RoomPO> origin = new ArrayList<RoomPO>();
 		File comment = new File(path);
 		boolean exists = comment.exists();
 		if (exists == false) {
 			comment.createNewFile();
 		}
 		try {
-			if (exists) {
-				origin = this.readRoomSer(orderID);
-				origin.add(object);
-				FileOutputStream fos = new FileOutputStream(comment);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(origin);
-			} else {
 				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin.add(object);
-				oos.writeObject(origin);
+				oos.writeObject(object);
 				oos.flush();
 				oos.close();
-			}
+
 	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
