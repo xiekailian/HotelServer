@@ -1,4 +1,3 @@
-
 package data.dataHelper.ser;
 
 import java.io.File;
@@ -11,72 +10,31 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import po.hotelPO.CommentPO;
+import po.hotelPO.RoomPO;
 
 public class orderSerHelper {
 	String path = "src/main/resources/order/";
 
 	/**
-	 * 写入commentpo ser文件
+	 * 读取room ser文件
 	 * 
-	 * @param hotelname
-	 * @param object
-	 * @return
-	 * @throws IOException
-	 */
-	public boolean writeCommentSer(String orderID, CommentPO object)
-			throws IOException {
-		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "comment.txt";
-		ArrayList<CommentPO> origin = new ArrayList<CommentPO>();
-		File comment = new File(path);
-		boolean exists = comment.exists();
-		if (exists == false) {
-			comment.createNewFile();
-		}
-		try {
-			if (exists) {
-				origin = this.readCommentSer(orderID);
-				origin.add(object);
-				FileOutputStream fos = new FileOutputStream(comment);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(origin);
-			} else {
-				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin.add(object);
-				oos.writeObject(origin);
-				oos.flush();
-				oos.close();
-			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 读取comment ser文件
-	 * 
-	 * @param hotelname
+	 * @param orderID
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<CommentPO> readCommentSer(String orderID)
+	public ArrayList<RoomPO> readRoomSer(String orderID)
 			throws IOException {
-		ArrayList<CommentPO> result = new ArrayList<CommentPO>();
+		ArrayList<RoomPO> result = new ArrayList<RoomPO>();
 		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "comment.txt";
+		path = path + orderID + "/" + "room.txt";
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
-				result = (ArrayList<CommentPO>) ois.readObject();
+				result = (ArrayList<RoomPO>) ois.readObject();
 				ois.close();
 				return result;
-
+	
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				return null;
@@ -84,7 +42,41 @@ public class orderSerHelper {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
-
+	
 		}
 	}
+
+	/**
+	 * 写入room ser文件
+	 * 
+	 * @param orderID
+	 * @param object
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean writeRoomSer(String orderID, ArrayList<RoomPO> object)
+			throws IOException {
+		String path = "src/main/resources/order/";
+		path = path + orderID + "/" + "room.txt";
+		File comment = new File(path);
+		boolean exists = comment.exists();
+		if (exists == false) {
+			comment.createNewFile();
+		}
+		try {
+				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(object);
+				oos.flush();
+				oos.close();
+
+	
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 }

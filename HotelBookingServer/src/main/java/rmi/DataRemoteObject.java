@@ -20,11 +20,11 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
 import po.hotelPO.HotelPO;
+import po.personPO.PersonPO;
+import po.personPO.RecordPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;
-import po.personPO.PersonPO;
-import po.personPO.RecordPO;
 import po.PromotionPO;
 import po.SearchPO;
 
@@ -174,62 +174,62 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	public ArrayList<PromotionPO> find(String hotelnames)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return promotiondataService.find(hotelnames);
 	}
 
 	public boolean modify(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return promotiondataService.modify(promotion);
 	}
 
 	public boolean delete(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return promotiondataService.delete(promotion);
 	}
 
 	public boolean add(OrderPO order) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return orderdataService.add(order);
 	}
 
 
-	public boolean modifyPerson(po.personPO.PersonPO personInfo)
+	public boolean modifyPerson(PersonPO personInfo)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return userdataservice.modifyPerson(personInfo);
 	}
 
 	public boolean writeRecord(String personname, po.personPO.RecordPO record)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return userdataservice.writeRecord(personname, record);
 	}
 
 	public boolean modify(po.hotelPO.HotelPO hotelinfo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return hoteldataservice.modify(hotelinfo);
 	}
 
 	public ArrayList<po.hotelPO.HotelPO> findWithReq(
 			po.hotelPO.HotelPO worstCondition,
 			po.hotelPO.HotelPO bestCondition) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return hoteldataservice.findWithReq(worstCondition, bestCondition);
 	}
 
 	public boolean addPerson(PersonPO personInfo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return userdataservice.addPerson(personInfo);
 	}
 
 	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return userdataservice.modifyMarket(marketInfo);
 	}
 
 	public boolean add(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return promotiondataService.add(promotion);
 	}
 
 }
