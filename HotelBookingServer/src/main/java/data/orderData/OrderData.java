@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 import data.dataHelper.jdbc.*;
 import data.dataHelper.folder.orderFolderHelper;
-import data.dataHelper.ser.orderSerHelper;
+import data.dataHelper.ser.hotelSerHelper;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 import po.personPO.PersonPO;
@@ -23,7 +23,7 @@ public class OrderData /* implements OrderDataService */{
 	private static OrderData orderData = null;
 	private Builder builder = new Builder();
 	private orderFolderHelper ofh = new orderFolderHelper();
-	private orderSerHelper osh = new orderSerHelper();
+	private hotelSerHelper osh = new hotelSerHelper();
 
 	public static OrderData getInstance() {
 		if (orderData == null) {

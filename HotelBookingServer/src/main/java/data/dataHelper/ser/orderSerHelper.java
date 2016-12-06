@@ -1,4 +1,3 @@
-
 package data.dataHelper.ser;
 
 import java.io.File;
@@ -11,23 +10,55 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import po.hotelPO.CommentPO;
+import po.hotelPO.RoomPO;
 
 public class orderSerHelper {
 	String path = "src/main/resources/order/";
 
 	/**
-	 * 写入commentpo ser文件
+	 * 读取room ser文件
 	 * 
-	 * @param hotelname
+	 * @param orderID
+	 * @throws IOException
+	 */
+	@SuppressWarnings("unchecked")
+	public ArrayList<RoomPO> readRoomSer(String orderID)
+			throws IOException {
+		ArrayList<RoomPO> result = new ArrayList<RoomPO>();
+		String path = "src/main/resources/order/";
+		path = path + orderID + "/" + "room.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+				result = (ArrayList<RoomPO>) ois.readObject();
+				ois.close();
+				return result;
+	
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+	
+		}
+	}
+
+	/**
+	 * 写入room ser文件
+	 * 
+	 * @param orderID
 	 * @param object
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean writeCommentSer(String orderID, CommentPO object)
+	public boolean writeRoomSer(String orderID, RoomPO object)
 			throws IOException {
 		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "comment.txt";
-		ArrayList<CommentPO> origin = new ArrayList<CommentPO>();
+		path = path + orderID + "/" + "room.txt";
+		ArrayList<RoomPO> origin = new ArrayList<RoomPO>();
 		File comment = new File(path);
 		boolean exists = comment.exists();
 		if (exists == false) {
@@ -35,7 +66,7 @@ public class orderSerHelper {
 		}
 		try {
 			if (exists) {
-				origin = this.readCommentSer(orderID);
+				origin = this.readRoomSer(orderID);
 				origin.add(object);
 				FileOutputStream fos = new FileOutputStream(comment);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -48,7 +79,7 @@ public class orderSerHelper {
 				oos.flush();
 				oos.close();
 			}
-
+	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,35 +87,5 @@ public class orderSerHelper {
 		}
 		return true;
 	}
-
-	/**
-	 * 读取comment ser文件
-	 * 
-	 * @param hotelname
-	 * @throws IOException
-	 */
-	@SuppressWarnings("unchecked")
-	public ArrayList<CommentPO> readCommentSer(String orderID)
-			throws IOException {
-		ArrayList<CommentPO> result = new ArrayList<CommentPO>();
-		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "comment.txt";
-		try {
-			FileInputStream fis = new FileInputStream(path);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			try {
-				result = (ArrayList<CommentPO>) ois.readObject();
-				ois.close();
-				return result;
-
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				return null;
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return null;
-
-		}
-	}
+	
 }
