@@ -1,3 +1,4 @@
+
 package data.dataHelper.ser;
 
 import java.io.File;
@@ -16,90 +17,39 @@ public class hotelSerHelper {
 	String path = "src/main/resources/order/";
 
 	/**
-	 * 写入roomtype ser文件
+	 * 写入commentpo ser文件
 	 * 
 	 * @param hotelname
 	 * @param object
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean writeRoomTypeSer(String orderID, ArrayList<String> object)
+	public boolean writeCommentSer(String hotelname, CommentPO object)
 			throws IOException {
 		String path = "src/main/resources/hotel/";
-		path = path + orderID + "/" + "roomtype.txt";
-		File RoomType = new File(path);
-		boolean exists = RoomType.exists();
+		path = path + hotelname + "/" + "comment.txt";
+		ArrayList<CommentPO> origin = new ArrayList<CommentPO>();
+		File comment = new File(path);
+		boolean exists = comment.exists();
 		if (exists == false) {
-			RoomType.createNewFile();
+			comment.createNewFile();
 		}
 		try {
-				FileOutputStream fos = new FileOutputStream(RoomType);// out和in不能同时被实例化
+			if (exists) {
+				origin = this.readCommentSer(hotelname);
+				origin.add(object);
+				FileOutputStream fos = new FileOutputStream(comment);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(object);
+				oos.writeObject(origin);
+			} else {
+				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				origin.add(object);
+				oos.writeObject(origin);
 				oos.flush();
 				oos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 读取roomtype ser文件
-	 * 
-	 * @param hotelname
-	 * @throws IOException
-	 */
-	@SuppressWarnings("unchecked")
-	public ArrayList<String> readRoomtypeSer(String orderID)
-			throws IOException {
-		ArrayList<String> result = new ArrayList<String>();
-		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "roomtype.txt";
-		try {
-			FileInputStream fis = new FileInputStream(path);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			try {
-				result = (ArrayList<String>) ois.readObject();
-				ois.close();
-				return result;
-
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				return null;
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return null;
 
-		}
-	}
-
-	/**
-	 * 写入roomnum ser文件
-	 * 
-	 * @param orderID
-	 * @param object
-	 * @return
-	 * @throws IOException
-	 */
-	public boolean writeRoomNumSer(String orderID, ArrayList<Integer> object)
-			throws IOException {
-		String path = "src/main/resources/hotel/";
-		path = path + orderID + "/" + "roomnum.txt";
-		File RoomNum = new File(path);
-		boolean exists = RoomNum.exists();
-		if (exists == false) {
-			RoomNum.createNewFile();
-		}
-		try {
-				FileOutputStream fos = new FileOutputStream(RoomNum);// out和in不能同时被实例化
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(object);
-				oos.flush();
-				oos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,22 +59,22 @@ public class hotelSerHelper {
 	}
 
 	/**
-	 * 读取roomnum ser文件
+	 * 读取comment ser文件
 	 * 
-	 * @param orderID
+	 * @param hotelname
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<Integer> readRoomNumSer(String orderID)
+	public ArrayList<CommentPO> readCommentSer(String hotelname)
 			throws IOException {
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "roomnum.txt";
+		ArrayList<CommentPO> result = new ArrayList<CommentPO>();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" + "comment.txt";
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
-				result = (ArrayList<Integer>) ois.readObject();
+				result = (ArrayList<CommentPO>) ois.readObject();
 				ois.close();
 				return result;
 
@@ -139,56 +89,25 @@ public class hotelSerHelper {
 		}
 	}
 	/**
-	 * 写入theNumOfRoom ser文件
-	 * 
-	 * @param hotelname
-	 * @param object
-	 * @return
-	 * @throws IOException
-	 */
-	public boolean writetheNumOfRoomSer(String orderID, ArrayList<String> object)
-			throws IOException {
-		String path = "src/main/resources/hotel/";
-		path = path + orderID + "/" + "NumOfRoom.txt";
-		File theNumOfRoom = new File(path);
-		boolean exists = theNumOfRoom.exists();
-		if (exists == false) {
-			theNumOfRoom.createNewFile();
-		}
-		try {
-				FileOutputStream fos = new FileOutputStream(theNumOfRoom);// out和in不能同时被实例化
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(object);
-				oos.flush();
-				oos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 读取roomtype ser文件
+	 * 读取room ser文件
 	 * 
 	 * @param hotelname
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> readtheNumOfRoomSer(String orderID)
+	public ArrayList<RoomPO> readRoomSer(String hotelname)
 			throws IOException {
-		ArrayList<String> result = new ArrayList<String>();
-		String path = "src/main/resources/order/";
-		path = path + orderID + "/" + "theNumOfRoom.txt";
+		ArrayList<RoomPO> result = new ArrayList<RoomPO>();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" + "room.txt";
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
-				result = (ArrayList<String>) ois.readObject();
+				result = (ArrayList<RoomPO>) ois.readObject();
 				ois.close();
 				return result;
-
+	
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				return null;
@@ -196,7 +115,40 @@ public class hotelSerHelper {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
-
+	
 		}
+	}
+
+	/**
+	 * 写入room ser文件
+	 * 
+	 * @param hotelname
+	 * @param object
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean writeRoomSer(String hotelname, ArrayList<RoomPO> object)
+			throws IOException {
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" + "room.txt";
+		File room = new File(path);
+		boolean exists = room.exists();
+		if (exists == false) {
+			room.createNewFile();
+		}
+		try {
+				FileOutputStream fos = new FileOutputStream(room);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(object);
+				oos.flush();
+				oos.close();
+			
+	
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

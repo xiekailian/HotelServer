@@ -1,19 +1,18 @@
 package data.orderData;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import data.dataHelper.jdbc.*;
 import data.dataHelper.folder.orderFolderHelper;
+import data.dataHelper.ser.hotelSerHelper;
 import data.dataHelper.ser.orderSerHelper;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
-import po.personPO.PersonPO;
 
 public class OrderData /* implements OrderDataService */{
 
@@ -36,10 +35,15 @@ public class OrderData /* implements OrderDataService */{
 	public boolean add(OrderPO order) {
 		ofh.mkdirs(order.getOrderID());
 		try {
-			ofh.mkdirs(order.getOrderID());
-			String insert = "insert into order (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			try {
+				osh.writeRoomSer(order.getOrderID(), order.getRoom());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			String insert = "insert into `order` (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
-			rs.close();
 			ps = conn.prepareStatement(insert);
 			ps.setString(1, order.getOrderID());
 			ps.setInt(2, order.getOrderprice());
@@ -81,7 +85,7 @@ public class OrderData /* implements OrderDataService */{
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(4).equals(personname)) {
+				if (rs.getString(5).equals(personname)) {
 					op.setOrderID(rs.getString(1));
 					op.setOrderprice(rs.getInt(2));
 					op.setOrderstate(rs.getString(3));
@@ -102,6 +106,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}
@@ -116,7 +125,13 @@ public class OrderData /* implements OrderDataService */{
 
 	public void modify(OrderPO order) {
 		try {
-			String update="update order set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
+			try {
+				osh.writeRoomSer(order.getOrderID(), order.getRoom());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String update="update `order` set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=? where 订单号=?;";
 			String select = "select * from `order`;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
@@ -188,6 +203,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}
@@ -232,6 +252,11 @@ public class OrderData /* implements OrderDataService */{
 							.getTimestamp(13)));
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					aop.add(op);
 				}
 			}
