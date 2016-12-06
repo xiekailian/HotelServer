@@ -4,16 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import data.dataHelper.jdbc.*;
 import data.dataHelper.folder.orderFolderHelper;
 import data.dataHelper.ser.hotelSerHelper;
+import data.dataHelper.ser.orderSerHelper;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
-import po.personPO.PersonPO;
 
 public class OrderData /* implements OrderDataService */{
 
@@ -23,7 +21,7 @@ public class OrderData /* implements OrderDataService */{
 	private static OrderData orderData = null;
 	private Builder builder = new Builder();
 	private orderFolderHelper ofh = new orderFolderHelper();
-	private hotelSerHelper osh = new hotelSerHelper();
+	private orderSerHelper osh = new orderSerHelper();
 
 	public static OrderData getInstance() {
 		if (orderData == null) {
@@ -37,6 +35,7 @@ public class OrderData /* implements OrderDataService */{
 		ofh.mkdirs(order.getOrderID());
 		try {
 			ofh.mkdirs(order.getOrderID());
+			osh.writeRoomSer(order.getOrderID(), order.getRoom());
 			String insert = "insert into order (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			rs.close();
