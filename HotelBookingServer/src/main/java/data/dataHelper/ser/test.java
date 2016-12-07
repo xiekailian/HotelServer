@@ -22,13 +22,13 @@ public class test {
 		// time.set(Calendar.MINUTE, 48);
 		// time.set(Calendar.SECOND, 0);
 		// rp.setTime(time);
-		personSerHelper psh = new personSerHelper();
+//		personSerHelper psh = new personSerHelper();
 		// psh.writeRecordSer(personname, rp);
-		ArrayList<RecordPO> result = new ArrayList<RecordPO>();
-		result = psh.readRecordSer(personname);
-		for (int i = 0; i < result.size(); i++) {
-			System.out.println(result.get(i).getOrderId());
-		}
-
+//		ArrayList<RecordPO> result = new ArrayList<RecordPO>();
+//		result = psh.readRecordSer(personname);
+//		for (int i = 0; i < result.size(); i++) {
+//			System.out.println(result.get(i).getOrderId());
+//		}
+//
 	}
 }

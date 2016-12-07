@@ -8,10 +8,11 @@ public class HotelPO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int hotelID;
 	private String hotelname;
 	private int star;// 酒店星级
 	private String feature;// 酒店简介
-	private ArrayList<Boolean> service;// 设施服务，需要初始化list，所有的都要设为false
+	private ArrayList<Boolean> service;// 设施服务，需要初始化list，所有的都要设为false, 
 	private String address;
 	private String circle;
 	private double score;// 酒店平均评分
@@ -118,6 +119,14 @@ public class HotelPO implements Serializable {
 
 	public void setHotelworker(String hotelworker) {
 		this.hotelworker = hotelworker;
+	}
+
+	public int getHotelID() {
+		return hotelID;
+	}
+
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
 	}
 
 }

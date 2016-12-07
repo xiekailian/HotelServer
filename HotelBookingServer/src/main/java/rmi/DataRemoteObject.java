@@ -19,7 +19,9 @@ import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
+import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
+import po.hotelPO.RoomPO;
 import po.personPO.PersonPO;
 import po.personPO.RecordPO;
 import po.HotelWorkerPO;
@@ -145,17 +147,19 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return hoteldataservice.showHotelinfo(Hotelname);
 	}
 
-	public boolean addComment(String comment, String username, String hotelname)
+	public boolean addComment(CommentPO comment)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return hoteldataservice.addComment(comment, username, hotelname);
+		return hoteldataservice.addComment(comment);
 	}
 
-
-	public boolean roomModify(String roomtype, int number)
+	public boolean addHotel(HotelPO hotel) throws RemoteException{
+		return hoteldataservice.addHotel(hotel);
+	}
+	public boolean roomModify(String hotelname, ArrayList<RoomPO> rooms)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return hoteldataservice.roomModify(roomtype, number);
+		return hoteldataservice.roomModify(hotelname, rooms);
 	}
 
 	public boolean changeCredit(String username, int credit)

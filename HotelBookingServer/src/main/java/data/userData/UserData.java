@@ -68,11 +68,7 @@ public class UserData /* implements UserDataService */{
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
 			ps.setInt(7, 0);
-			java.util.Date date = personInfo.getBirthday().getTime();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String birth = sdf.format(date);
-			java.sql.Date bd = java.sql.Date.valueOf(birth);
-			ps.setDate(8, bd);
+			ps.setDate(8, ChangerHelper.changeToSqlDate(personInfo.getBirthday()));
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -145,16 +141,7 @@ public class UserData /* implements UserDataService */{
 					ps.setInt(4, personInfo.getVipLevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
-					if (personInfo.getBirthday() == null) {
-						ps.setDate(7, null);
-					} else {
-						java.util.Date date = personInfo.getBirthday().getTime();
-						SimpleDateFormat sdf = new SimpleDateFormat(
-								"yyyy-MM-dd");
-						String birth = sdf.format(date);
-						java.sql.Date bd = java.sql.Date.valueOf(birth);
-						ps.setDate(7, bd);
-					}
+					ps.setDate(7, ChangerHelper.changeToSqlDate(personInfo.getBirthday()));
 					ps.setInt(8, rs.getInt(1));
 					ps.execute();
 					return true;

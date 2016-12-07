@@ -6,7 +6,9 @@ import java.util.List;
 
 import dataService.hotelDataService.*;
 import po.*;
+import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
+import po.hotelPO.RoomPO;
 
 public class HotelDataMock implements HotelDataService {
 
@@ -45,10 +47,9 @@ public class HotelDataMock implements HotelDataService {
 		return false;
 	}
 
-	public boolean addComment(String comment, String username, String hotelname)
-			throws RemoteException {
-		if (hotelname != null)
-			return true;
+	public boolean addComment(CommentPO comment)
+			throws RemoteException{
+		
 		return false;
 	}
 
@@ -89,7 +90,12 @@ public class HotelDataMock implements HotelDataService {
 		return list;
 	}
 
-	public boolean roomModify(String roomtype, int number)
+	public boolean addHotel(HotelPO hotel) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean roomModify(String hotelname, ArrayList<RoomPO> rooms)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
