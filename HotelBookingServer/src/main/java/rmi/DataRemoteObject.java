@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import data.hotelData.HotelData;
-import data.hotelData.HotelDataMock;
+//import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
 import data.orderData.OrderDataMock;
 import data.promotionData.PromotionData;
@@ -42,7 +42,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	private UserDataService userdataservice;
 
 	protected DataRemoteObject() throws RemoteException {// ���췽������ʵ��Service�ľ��巽��
-		hoteldataservice = new HotelDataMock();
+//		hoteldataservice = new HotelDataMock();
 		orderdataService = new OrderDataMock();
 		promotiondataService = new PromotionDataMock();
 		searchdataservice = new SearchDataMock();

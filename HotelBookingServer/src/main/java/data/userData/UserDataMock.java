@@ -22,7 +22,7 @@ public class UserDataMock implements UserDataService {
 	public PersonPO findPerson(String personname) {
 		Calendar c = Calendar.getInstance();
 		PersonPO pp = new PersonPO("xiamutian", "123", 123456789, 5000, c,
-				"企业会员", 5, "南京大学", "13128830102");
+				"enterprise", 5, "南京大学", "13128830102");
 		if (personname.equals(pp.getUsername()))
 			return pp;
 		return null;
