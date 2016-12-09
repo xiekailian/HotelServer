@@ -236,4 +236,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return promotiondataService.add(promotion);
 	}
 
+	public PersonPO findPerson(int personID) throws RemoteException {
+	
+		return userdataservice.findPerson(personID);
+	}
+
 }

@@ -135,4 +135,9 @@ public class UserDataMock implements UserDataService {
 		return false;
 	}
 
+	public PersonPO findPerson(int personID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

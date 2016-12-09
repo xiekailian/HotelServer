@@ -18,7 +18,9 @@ public interface UserDataService extends Remote {
 			throws RemoteException;
 
 	public MarketPO findMarket(String marketname) throws RemoteException;
-
+	
+	public PersonPO findPerson (int personID)throws RemoteException;
+	
 	public boolean modifyMarket(MarketPO marketInfo) throws RemoteException;
 
 	public boolean marketLogin(String marketname, String password)
