@@ -21,9 +21,9 @@ public class PromotionDataMock implements PromotionDataService {
 		enterprise.add("企业3");
 		/*public EnterpriseHotelproPO(String promotionID, String promotionName, String promotionType,
 			String hotelnameOrWeb, ArrayList<String> enterprise, int discount)*/
-		PromotionPO hotelPro1=new EnterpriseHotelproPO("123", "hotelPro1", "EnterpriseHotelPromotion",
+		PromotionPO hotelPro1=new EnterpriseHotelproPO(123, "hotelPro1", "EnterpriseHotelPromotion",
 				"酒店1", enterprise, 80);
-		PromotionPO hotelPro2=new EnterpriseHotelproPO("124", "hotelPro2", "EnterpriseHotelPromotion",
+		PromotionPO hotelPro2=new EnterpriseHotelproPO(124, "hotelPro2", "EnterpriseHotelPromotion",
 				"酒店2", enterprise, 90);
 		
 		//以下是网站促销策略
@@ -37,7 +37,7 @@ public class PromotionDataMock implements PromotionDataService {
 		discount.add(70);
 		/*	public VipLevelWebproPO(String promotionID, String promotionName, String promotionType,
 		String hotelnameOrWeb,ArrayList<Integer> vipLevel, ArrayList<Integer> discount)*/
-		PromotionPO webPro=new VipLevelWebproPO("456", "webPro", "VipLevelWebPromotion", 
+		PromotionPO webPro=new VipLevelWebproPO(456, "webPro", "VipLevelWebPromotion", 
 				"WebPromtion", vipLevel, discount);
 		
 		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();

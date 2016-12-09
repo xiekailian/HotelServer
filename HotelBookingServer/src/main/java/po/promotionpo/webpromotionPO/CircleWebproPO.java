@@ -19,7 +19,7 @@ public class CircleWebproPO extends PromotionPO {
 		super();
 	}
 	
-	public CircleWebproPO(String promotionID, String promotionName, String promotionType,
+	public CircleWebproPO(int promotionID, String promotionName, String promotionType,
 			String hotelnameOrWeb,ArrayList<Integer> vipLevel, ArrayList<String> circle, ArrayList<Integer> discount) {
 		super.setPromotionID(promotionID);
 		super.setPromotionName(promotionName);

@@ -19,7 +19,7 @@ public class PeriodWebproPO extends PromotionPO {
 		super();
 	}
 
-	public PeriodWebproPO(String promotionID, String promotionName, String promotionType,
+	public PeriodWebproPO(int promotionID, String promotionName, String promotionType,
 			String hotelnameOrWeb,Calendar startTime, Calendar endTime, int discount) {
 		super.setPromotionID(promotionID);
 		super.setPromotionName(promotionName);
