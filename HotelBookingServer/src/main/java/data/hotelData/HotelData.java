@@ -199,7 +199,47 @@ public class HotelData /* implements HotelDataService */{
 
 	public ArrayList<HotelPO> findWithReq(HotelPO worstCondition,
 			HotelPO bestCondition)  {
-		// TODO Auto-generated method stub
+		HotelPO hp = new HotelPO();
+		try {
+			String select = "select * from `hotel`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if ((rs.getString(2).contains(worstCondition.getHotelname())||worstCondition.getHotelname().equals(null))&&
+					(rs.getString(10).equals(worstCondition.getCircle()))&&
+					(rs.getDouble(11)>=worstCondition.getScore()&&rs.getDouble(11)<=bestCondition.getScore())&&
+					(rs.getInt(3)>=worstCondition.getStar()&&rs.getInt(3)<=bestCondition.getStar())
+						
+						
+
+						) { 
+//					hp.setHotelID(rs.getInt(1));
+//					hp.setHotelname(rs.getString(2));
+//					hp.setStar(rs.getInt(3));
+//					hp.setFeature(rs.getString(4));
+//					ArrayList<Boolean> ServiceList=new ArrayList<Boolean>();
+//					ServiceList.add(rs.getBoolean(5));
+//					ServiceList.add(rs.getBoolean(6));
+//					ServiceList.add(rs.getBoolean(7));
+//					ServiceList.add(rs.getBoolean(8));
+//					hp.setService(ServiceList);
+//					hp.setAddress(rs.getString(9));
+//					hp.setCircle(rs.getString(10));
+//					hp.setScore(rs.getDouble(11));
+//					hp.setHotelworker(rs.getString(12));
+//					hp.setRoom(hsh.readRoomSer(Hotelname));
+//					hp.setComment(hsh.readCommentSer(Hotelname));
+//					return hp;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 		return null;
 	}
 
