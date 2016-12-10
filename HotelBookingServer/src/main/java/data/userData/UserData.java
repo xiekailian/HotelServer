@@ -494,7 +494,6 @@ public class UserData /* implements UserDataService */{
 	 */
 	public boolean writeRecord(String personname, RecordPO record)
 			throws IOException {
-		personserhelper.writeRecordSer(personname, record);
 		return false;
 	}
 }
