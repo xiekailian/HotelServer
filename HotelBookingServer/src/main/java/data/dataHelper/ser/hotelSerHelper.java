@@ -10,8 +10,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import po.PromotionPO;
 import po.hotelPO.CommentPO;
 import po.hotelPO.RoomPO;
+import po.promotionpo.hotelpromotionPO.BirthdayHotelproPO;
+import po.promotionpo.hotelpromotionPO.EnterpriseHotelproPO;
+import po.promotionpo.hotelpromotionPO.LargeAmountHotelproPO;
+import po.promotionpo.hotelpromotionPO.PeriodHotelproPO;
 
 public class hotelSerHelper {
 	String path = "src/main/resources/order/";
@@ -57,6 +62,40 @@ public class hotelSerHelper {
 		}
 		return true;
 	}
+	public boolean writePeriodHotelSer(String hotelname, PeriodHotelproPO object)
+			throws IOException {
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" + "PeriodHotelPromotion.txt";
+		ArrayList<PeriodHotelproPO> origin = new ArrayList<PeriodHotelproPO>();
+		File comment = new File(path);
+		boolean exists = comment.exists();
+		if (exists == false) {
+			comment.createNewFile();
+		}
+		try {
+			if (exists) {
+				origin = this.readPeriodPromotionSer(hotelname);
+				origin.add(object);
+				FileOutputStream fos = new FileOutputStream(comment);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(origin);
+			} else {
+				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				origin.add(object);
+				oos.writeObject(origin);
+				oos.flush();
+				oos.close();
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 
 	/**
 	 * 读取comment ser文件
@@ -118,6 +157,96 @@ public class hotelSerHelper {
 	
 		}
 	}
+	public ArrayList<EnterpriseHotelproPO> readEnterprisePromotionSer(String hotelname)
+			throws IOException {
+		ArrayList<EnterpriseHotelproPO> result = new ArrayList<EnterpriseHotelproPO>();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"EnterpriseHotelPromotion.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+					result = (ArrayList<EnterpriseHotelproPO>) ois.readObject();
+					ois.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+	
+		}
+		return null;
+	}
+	public BirthdayHotelproPO readBirthdayPromotionSer(String hotelname)
+			throws IOException {
+		BirthdayHotelproPO result = new BirthdayHotelproPO();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"BirthdayHotelPromotion.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+					result =(BirthdayHotelproPO)ois.readObject();
+					ois.close();
+					return result;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+			return null;
+	
+		}
+
+	}
+	public ArrayList<LargeAmountHotelproPO> readLargeAmountPromotionSer(String hotelname)
+			throws IOException {
+		ArrayList<LargeAmountHotelproPO> result = new ArrayList<LargeAmountHotelproPO>();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"LargeAmountHotelPromotion.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+					result = (ArrayList<LargeAmountHotelproPO>) ois.readObject();
+					ois.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+	
+		}
+		return null;
+	}
+	public ArrayList<PeriodHotelproPO> readPeriodPromotionSer(String hotelname)
+			throws IOException {
+		ArrayList<PeriodHotelproPO> result = new ArrayList<PeriodHotelproPO>();
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"PeriodHotelPromotion.txt";
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			try {
+					result = (ArrayList<PeriodHotelproPO>) ois.readObject();
+					ois.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+	
+		}
+		return null;
+	}
 
 	/**
 	 * 写入room ser文件
@@ -151,4 +280,77 @@ public class hotelSerHelper {
 		}
 		return true;
 	}
+	public boolean writeBirthdayPromotionSer(String hotelname, BirthdayHotelproPO object)
+			throws IOException {
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"BirthdayHotelPromotion.txt";
+		File room = new File(path);
+		boolean exists = room.exists();
+		if (exists == false) {
+			room.createNewFile();
+		}
+		try {
+				FileOutputStream fos = new FileOutputStream(room);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(object);
+				oos.flush();
+				oos.close();
+			
+	
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public boolean writeEnterprisePromotionSer(String hotelname, EnterpriseHotelproPO object)
+			throws IOException {
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"EnterpriseHotelPromotion.txt";
+		File room = new File(path);
+		boolean exists = room.exists();
+		if (exists == false) {
+			room.createNewFile();
+		}
+		try {
+				FileOutputStream fos = new FileOutputStream(room);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(object);
+				oos.flush();
+				oos.close();
+			
+	
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public boolean writeLargeAmountPromotionSer(String hotelname, LargeAmountHotelproPO object)
+			throws IOException {
+		String path = "src/main/resources/hotel/";
+		path = path + hotelname + "/" +"LargeAmountHotelPromotion.txt";
+		File room = new File(path);
+		boolean exists = room.exists();
+		if (exists == false) {
+			room.createNewFile();
+		}
+		try {
+				FileOutputStream fos = new FileOutputStream(room);// out和in不能同时被实例化
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(object);
+				oos.flush();
+				oos.close();
+			
+	
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 }

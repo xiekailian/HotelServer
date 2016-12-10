@@ -143,7 +143,7 @@ public class HotelData /* implements HotelDataService */{
 
 	public boolean addHotel(HotelPO hotel)  {
 		int lastID = 0;
-
+		
 		try {
 			String select = "select * from `hotel`;";
 			conn = builder.BuildConnection();
@@ -200,6 +200,7 @@ public class HotelData /* implements HotelDataService */{
 	public ArrayList<HotelPO> findWithReq(HotelPO worstCondition,
 			HotelPO bestCondition)  {
 		HotelPO hp = new HotelPO();
+		ArrayList<HotelPO> hpList=new ArrayList<HotelPO>();
 		try {
 			String select = "select * from `hotel`;";
 			conn = builder.BuildConnection();
@@ -214,23 +215,23 @@ public class HotelData /* implements HotelDataService */{
 						
 
 						) { 
-//					hp.setHotelID(rs.getInt(1));
-//					hp.setHotelname(rs.getString(2));
-//					hp.setStar(rs.getInt(3));
-//					hp.setFeature(rs.getString(4));
-//					ArrayList<Boolean> ServiceList=new ArrayList<Boolean>();
-//					ServiceList.add(rs.getBoolean(5));
-//					ServiceList.add(rs.getBoolean(6));
-//					ServiceList.add(rs.getBoolean(7));
-//					ServiceList.add(rs.getBoolean(8));
-//					hp.setService(ServiceList);
-//					hp.setAddress(rs.getString(9));
-//					hp.setCircle(rs.getString(10));
-//					hp.setScore(rs.getDouble(11));
-//					hp.setHotelworker(rs.getString(12));
-//					hp.setRoom(hsh.readRoomSer(Hotelname));
-//					hp.setComment(hsh.readCommentSer(Hotelname));
-//					return hp;
+					hp.setHotelID(rs.getInt(1));
+					hp.setHotelname(rs.getString(2));
+					hp.setStar(rs.getInt(3));
+					hp.setFeature(rs.getString(4));
+					ArrayList<Boolean> ServiceList=new ArrayList<Boolean>();
+					ServiceList.add(rs.getBoolean(5));
+					ServiceList.add(rs.getBoolean(6));
+					ServiceList.add(rs.getBoolean(7));
+					ServiceList.add(rs.getBoolean(8));
+					hp.setService(ServiceList);
+					hp.setAddress(rs.getString(9));
+					hp.setCircle(rs.getString(10));
+					hp.setScore(rs.getDouble(11));
+					hp.setHotelworker(rs.getString(12));
+					hp.setRoom(hsh.readRoomSer(worstCondition.getHotelname()));
+					hp.setComment(hsh.readCommentSer(worstCondition.getHotelname()));
+					hpList.add(hp);
 				}
 			}
 			rs.close();
@@ -239,6 +240,9 @@ public class HotelData /* implements HotelDataService */{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

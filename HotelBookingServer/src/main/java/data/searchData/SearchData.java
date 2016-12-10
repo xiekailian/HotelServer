@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import data.dataHelper.jdbc.Builder;
+import data.orderData.OrderData;
 import dataService.searchDataService.*;
 import po.SearchPO;
 import po.personPO.PersonPO;
@@ -18,6 +19,14 @@ public class SearchData /* implements SearchDataService */{
 	PreparedStatement ps = null;
 	Builder builder = new Builder();
 	ResultSet rs = null;
+	public static SearchData getInstance() {
+		if (searchData == null) {
+			searchData = new SearchData();
+			return searchData;
+		}
+		return searchData;
+	}
+	private static SearchData searchData = null;
 
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		ArrayList<SearchPO> spList = new ArrayList<SearchPO>();
