@@ -1,6 +1,5 @@
 package po.promotionpo.hotelpromotionPO;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import po.PromotionPO;
@@ -9,12 +8,12 @@ import po.PromotionPO;
  *  @author 武秀峰
  *  酒店促销策略：双11活动折扣（在特定的期间住宿有折扣）*/
 public class PeriodHotelproPO extends PromotionPO {
-//	private String promotionType="PeriodHotelPromtion";
+//	private String promotionType="PeriodHotelPromotion";
+	private static final long serialVersionUID = 1L;
 	private Calendar startTime;
 	private Calendar endTime;
 	private int discount;//如打九五折时，discount=95
-	private static final long serialVersionUID = 1L;
-
+	
 
 	public PeriodHotelproPO() {
 		super();
