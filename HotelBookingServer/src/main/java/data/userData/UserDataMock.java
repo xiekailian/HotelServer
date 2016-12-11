@@ -140,4 +140,11 @@ public class UserDataMock implements UserDataService {
 		return null;
 	}
 
+	@Override
+	public boolean isExist(String username, String usertype)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

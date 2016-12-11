@@ -12,7 +12,9 @@ public class test {
 		HotelData hd=new HotelData();
 		HotelPO hpw=new HotelPO();
 		HotelPO hpb=new HotelPO();
-		RoomPO rp=new RoomPO();
+		RoomPO rpw=new RoomPO();
+		RoomPO rpb=new RoomPO();
+
 //		HotelPO hp=new HotelPO();
 //		ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
 //		rp.setRoomnum("513");
@@ -54,34 +56,30 @@ public class test {
 //		System.out.println(hd.showHotelinfo("南京大酒店1").getAddress());
 //		System.out.println(hd.showHotelinfo("南京大酒店1").getRoom().get(0).getRoomType());
 //		System.out.println(hd.showHotelinfo("南京大酒店1").getComment().get(0).getContent());
+		ArrayList<RoomPO> best=new ArrayList<RoomPO>();
+		rpb.setRoomPrice(-1);
+		best.add(rpb);
+		
+		ArrayList<RoomPO> worst=new ArrayList<RoomPO>();
+		rpw.setRoomPrice(2000);
+		worst.add(rpw);
 
 		hpw.setCircle("新街口");
 		hpw.setHotelname("大酒店");
 		hpw.setScore(0);
 		hpw.setStar(0);
+		hpw.setRoom(worst);
 		hpb.setCircle("新街口");
 		hpb.setHotelname("大酒店");
 		hpb.setScore(5);
 		hpb.setStar(5);
+		hpb.setRoom(best);	
+		System.out.println(best.get(0).getRoomPrice());
+		System.out.println(hpb.getRoom().get(0).getRoomPrice());
+
+
 		ArrayList<HotelPO> hpList=new ArrayList<HotelPO>();
 		hpList=hd.findWithReq(hpw, hpb);
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.println(hpList.get(0).getHotelname());		
 	}
 }

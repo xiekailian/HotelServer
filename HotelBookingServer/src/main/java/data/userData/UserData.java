@@ -1,6 +1,7 @@
 package data.userData;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -477,6 +478,10 @@ public class UserData /* implements UserDataService */{
 	 */
 	public boolean writeRecord(String personname, RecordPO record)
 			throws IOException {
+		return personserhelper.writeRecordSer(personname, record);
+	}
+	public boolean isExist(String username, String usertype)
+			throws RemoteException {
 		return false;
 	}
 }
