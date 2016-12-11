@@ -1,6 +1,7 @@
 package data.userData;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -68,11 +69,7 @@ public class UserData /* implements UserDataService */{
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
 			ps.setInt(7, 0);
-			java.util.Date date = personInfo.getBirthday().getTime();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String birth = sdf.format(date);
-			java.sql.Date bd = java.sql.Date.valueOf(birth);
-			ps.setDate(8, bd);
+			ps.setTimestamp(8, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -105,11 +102,7 @@ public class UserData /* implements UserDataService */{
 					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
 					pp.setCredit(rs.getInt(7));
-					if (rs.getDate(8) != null) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(rs.getDate(8));
-						pp.setBirthday(cal);
-					}
+					pp.setBirthday(ChangerHelper.changeToCalendar(rs.getTimestamp(8)));
 					return pp;
 				}
 			}
@@ -145,16 +138,7 @@ public class UserData /* implements UserDataService */{
 					ps.setInt(4, personInfo.getVipLevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
-					if (personInfo.getBirthday() == null) {
-						ps.setDate(7, null);
-					} else {
-						java.util.Date date = personInfo.getBirthday().getTime();
-						SimpleDateFormat sdf = new SimpleDateFormat(
-								"yyyy-MM-dd");
-						String birth = sdf.format(date);
-						java.sql.Date bd = java.sql.Date.valueOf(birth);
-						ps.setDate(7, bd);
-					}
+					ps.setTimestamp(7, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
 					ps.setInt(8, rs.getInt(1));
 					ps.execute();
 					return true;
@@ -494,6 +478,10 @@ public class UserData /* implements UserDataService */{
 	 */
 	public boolean writeRecord(String personname, RecordPO record)
 			throws IOException {
+		return personserhelper.writeRecordSer(personname, record);
+	}
+	public boolean isExist(String username, String usertype)
+			throws RemoteException {
 		return false;
 	}
 }

@@ -10,8 +10,7 @@ import po.*;
 import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
-import vo.OrderVO;
-import vo.hotelVO.hotelblVO.RoomVO;
+
 
 public class HotelDataMock implements HotelDataService {
 
@@ -47,7 +46,7 @@ public class HotelDataMock implements HotelDataService {
 		commentList.add(comment1);
 		commentList.add(comment2);
 		
-		HotelPO hotelpo=new HoyelPO("南京大酒店", 5, "good", 
+		HotelPO hotelpo=new HotelPO("南京大酒店", 5, "good", 
 				service, "仙林大道", "仙林大学城",
 				4.8, roomList, commentList, "xiamutian");
 		
@@ -62,9 +61,11 @@ public class HotelDataMock implements HotelDataService {
 	}
 
 	public boolean addComment(CommentPO comment)
+
 			throws RemoteException {
 		if (comment.getHotelname().equals("南京大酒店"))
 			return true;
+
 		return false;
 	}
 
@@ -87,10 +88,10 @@ public class HotelDataMock implements HotelDataService {
 		commentList.add(comment1);
 		commentList.add(comment2);
 		
-		HotelPO hotelpo1=new HoyelPO("酒店1", 5, "very good", 
+		HotelPO hotelpo1=new HotelPO("酒店1", 5, "very good", 
 				service, "仙林大道", "仙林大学城",
 				4.8, roomList, commentList, "xiamutian");
-		HotelPO hotelpo2=new HoyelPO("酒店2", 4, "good", 
+		HotelPO hotelpo2=new HotelPO("酒店2", 4, "good", 
 				service, "新街口道路1", "新街口",
 				4.3, roomList, commentList, "tiantian");
 		
@@ -103,10 +104,12 @@ public class HotelDataMock implements HotelDataService {
 	}
 
 
+
 	public boolean roomModify(String hotelname, ArrayList<RoomPO> roompoList) throws RemoteException {
 		if(hotelname.equals("南京大酒店")){
 			return true;
 		}
+
 		return false;
 	}
 
