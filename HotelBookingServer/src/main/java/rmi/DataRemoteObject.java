@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import data.hotelData.HotelData;
 //import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
-import data.orderData.OrderDataMock;
+
 import data.promotionData.PromotionData;
-import data.promotionData.PromotionDataMock;
+
 import data.searchData.SearchData;
-import data.searchData.SearchDataMock;
+
 import data.userData.UserData;
-import data.userData.UserDataMock;
+
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
@@ -44,11 +44,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	private UserDataService userdataservice;
 
 	protected DataRemoteObject() throws RemoteException {// ���췽������ʵ��Service�ľ��巽��
-//		hoteldataservice = new HotelDataMock();
-		orderdataService = new OrderDataMock();
-		promotiondataService = new PromotionDataMock();
-		searchdataservice = new SearchDataMock();
-		userdataservice = new UserDataMock();
+		hoteldataservice = new HotelData();
+		orderdataService = new OrderData();
+		promotiondataService = new PromotionData();
+		searchdataservice = new SearchData();
+		userdataservice = new UserData();
 	}
 
 	public ArrayList<SearchPO> showSearchHistory(String username)
@@ -241,7 +241,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return userdataservice.findPerson(personID);
 	}
 
-	@Override
 	public boolean isExist(String username, String usertype)
 			throws RemoteException {
 		return userdataservice.isExist(username, usertype);

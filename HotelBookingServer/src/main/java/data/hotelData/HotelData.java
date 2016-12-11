@@ -23,7 +23,7 @@ import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
 import po.personPO.PersonPO;
 
-public class HotelData /* implements HotelDataService */{
+public class HotelData  implements HotelDataService {
 	private static HotelData hoteldata = null;
 	private hotelSerHelper hsh = new hotelSerHelper();
 	private hotelFolderHelper hfh = new hotelFolderHelper();

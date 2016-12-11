@@ -14,7 +14,7 @@ import dataService.searchDataService.*;
 import po.SearchPO;
 import po.personPO.PersonPO;
 
-public class SearchData /* implements SearchDataService */{
+public class SearchData implements SearchDataService {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	Builder builder = new Builder();

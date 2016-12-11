@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import data.dataHelper.jdbc.Builder;
 import data.dataHelper.jdbc.ChangerHelper;
 import data.dataHelper.ser.hotelSerHelper;
+import dataService.promotionDataService.PromotionDataService;
 import po.PromotionPO;
 import po.promotionpo.hotelpromotionPO.BirthdayHotelproPO;
 import po.promotionpo.hotelpromotionPO.EnterpriseHotelproPO;
@@ -19,7 +20,7 @@ import po.promotionpo.webpromotionPO.CircleWebproPO;
 import po.promotionpo.webpromotionPO.PeriodWebproPO;
 import po.promotionpo.webpromotionPO.VipLevelWebproPO;
 
-public class PromotionData /* implements PromotionDataService */{
+public class PromotionData implements PromotionDataService {
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private Builder builder = new Builder();
