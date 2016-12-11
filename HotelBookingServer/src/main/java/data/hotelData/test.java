@@ -9,49 +9,79 @@ import po.hotelPO.RoomPO;
 
 public class test {
 	public static void main(String args[]){
-		HotelPO hp=new HotelPO();
-		RoomPO rp=new RoomPO();
-		ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
-		rp.setRoomnum("513");
-		rp.setRoomPrice(1000);
-		rp.setRoomType("大床房");
-		rpList.add(rp);
-		
-		CommentPO cp=new CommentPO();
-		ArrayList<CommentPO> cpList=new ArrayList<CommentPO>();
-		cp.setContent("很好");
-		cp.setHotelname("南京大酒店2");
-		cp.setPersonname("夏沐天");
-		cp.setScore(5);
-		cpList.add(cp);
-		Calendar cal=Calendar.getInstance();
-		cp.setTime(cal);
-		
-		ArrayList<Boolean> ServiceList=new ArrayList<Boolean>();
-		
-		ServiceList.add(true);
-		ServiceList.add(true);
-		ServiceList.add(true);
-		ServiceList.add(true);
-
-		hp.setHotelname("南京大酒店2");
-		hp.setAddress("南京");
-		hp.setCircle("新街口");
-		hp.setFeature("特色");
-		hp.setHotelworker("xiamutian");
-		hp.setScore(5.0);
-		hp.setStar(5);
-		hp.setService(ServiceList);
-		hp.setComment(cpList);
-		hp.setRoom(rpList);
-		
 		HotelData hd=new HotelData();
+		HotelPO hpw=new HotelPO();
+		HotelPO hpb=new HotelPO();
+		RoomPO rp=new RoomPO();
+//		HotelPO hp=new HotelPO();
+//		ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
+//		rp.setRoomnum("513");
+//		rp.setRoomPrice(500);
+//		rp.setRoomType("大床房");
+//		rpList.add(rp);
+//		
+//		CommentPO cp=new CommentPO();
+//		ArrayList<CommentPO> cpList=new ArrayList<CommentPO>();
+//		cp.setContent("很好");
+//		cp.setHotelname("南京大酒店1");
+//		cp.setPersonname("夏沐天");
+//		cp.setScore(5);
+//		cpList.add(cp);
+//		Calendar cal=Calendar.getInstance();
+//		cp.setTime(cal);
+//		
+//		ArrayList<Boolean> ServiceList=new ArrayList<Boolean>();
+//		
+//		ServiceList.add(true);
+//		ServiceList.add(true);
+//		ServiceList.add(true);
+//		ServiceList.add(true);
+//
+//		hp.setHotelname("南京大酒店1");
+//		hp.setAddress("南京");
+//		hp.setCircle("新街口");
+//		hp.setFeature("特色");
+//		hp.setHotelworker("xiamutian");
+//		hp.setScore(5.0);
+//		hp.setStar(5);
+//		hp.setService(ServiceList);
+//		hp.setComment(cpList);
+//		hp.setRoom(rpList);
+//		
+//
 //		hd.addHotel(hp);
-		hd.addComment(cp);
-		System.out.println(hd.showHotelinfo("南京大酒店2").getAddress());
-		System.out.println(hd.showHotelinfo("南京大酒店2").getRoom().get(0).getRoomType());
-		System.out.println(hd.showHotelinfo("南京大酒店2").getComment().get(0).getContent());
+//		hd.addComment(cp);
+//		System.out.println(hd.showHotelinfo("南京大酒店1").getAddress());
+//		System.out.println(hd.showHotelinfo("南京大酒店1").getRoom().get(0).getRoomType());
+//		System.out.println(hd.showHotelinfo("南京大酒店1").getComment().get(0).getContent());
 
+		hpw.setCircle("新街口");
+		hpw.setHotelname("大酒店");
+		hpw.setScore(0);
+		hpw.setStar(0);
+		hpb.setCircle("新街口");
+		hpb.setHotelname("大酒店");
+		hpb.setScore(5);
+		hpb.setStar(5);
+		ArrayList<HotelPO> hpList=new ArrayList<HotelPO>();
+		hpList=hd.findWithReq(hpw, hpb);
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 
+
 import data.dataHelper.folder.hotelFolderHelper;
 import data.dataHelper.jdbc.Builder;
 import data.dataHelper.ser.hotelSerHelper;
@@ -143,7 +144,7 @@ public class HotelData /* implements HotelDataService */{
 
 	public boolean addHotel(HotelPO hotel)  {
 		int lastID = 0;
-		
+		hfh.mkdirs(hotel.getHotelname());
 		try {
 			String select = "select * from `hotel`;";
 			conn = builder.BuildConnection();
@@ -199,22 +200,20 @@ public class HotelData /* implements HotelDataService */{
 
 	public ArrayList<HotelPO> findWithReq(HotelPO worstCondition,
 			HotelPO bestCondition)  {
-		HotelPO hp = new HotelPO();
 		ArrayList<HotelPO> hpList=new ArrayList<HotelPO>();
 		try {
 			String select = "select * from `hotel`;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
-			rs = ps.executeQuery();
+			rs = ps.executeQuery();		
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if ((rs.getString(2).contains(worstCondition.getHotelname())||worstCondition.getHotelname().equals(null))&&
-					(rs.getString(10).equals(worstCondition.getCircle()))&&
-					(rs.getDouble(11)>=worstCondition.getScore()&&rs.getDouble(11)<=bestCondition.getScore())&&
-					(rs.getInt(3)>=worstCondition.getStar()&&rs.getInt(3)<=bestCondition.getStar())
-						
-						
-
-						) { 
+				boolean A=rs.getString(2).contains(worstCondition.getHotelname())||worstCondition.getHotelname().equals(null);
+				boolean B=rs.getString(10).equals(worstCondition.getCircle());
+				boolean C=rs.getDouble(11)>=worstCondition.getScore()&&rs.getDouble(11)<=bestCondition.getScore();
+				boolean D=rs.getInt(3)>=worstCondition.getStar()&&rs.getInt(3)<=bestCondition.getStar();
+				System.out.println("now is"+rs.getString(2));
+				if (A&&B&&C&&D) { 
+					HotelPO hp = new HotelPO();
 					hp.setHotelID(rs.getInt(1));
 					hp.setHotelname(rs.getString(2));
 					hp.setStar(rs.getInt(3));
@@ -237,14 +236,29 @@ public class HotelData /* implements HotelDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
+			if(hpList.size()==0){
+				return null;	
+			}else{
+				int expensivest=0;
+				int cheapest=0;
+				for(int i=0;i<hpList.size();i++){
+					HotelPO hp = new HotelPO();
+					ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
+					hp=hpList.get(i);
+					rpList=hsh.readRoomSer(hp.getHotelname());
+					for(int t=0;t<rpList.size();t++){
+						
+					}
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 }

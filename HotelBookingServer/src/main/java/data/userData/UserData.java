@@ -68,7 +68,7 @@ public class UserData /* implements UserDataService */{
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
 			ps.setInt(7, 0);
-			ps.setDate(8, ChangerHelper.changeToSqlDate(personInfo.getBirthday()));
+			ps.setTimestamp(8, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -101,11 +101,7 @@ public class UserData /* implements UserDataService */{
 					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
 					pp.setCredit(rs.getInt(7));
-					if (rs.getDate(8) != null) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(rs.getDate(8));
-						pp.setBirthday(cal);
-					}
+					pp.setBirthday(ChangerHelper.changeToCalendar(rs.getTimestamp(8)));
 					return pp;
 				}
 			}
@@ -141,7 +137,7 @@ public class UserData /* implements UserDataService */{
 					ps.setInt(4, personInfo.getVipLevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
-					ps.setDate(7, ChangerHelper.changeToSqlDate(personInfo.getBirthday()));
+					ps.setTimestamp(7, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
 					ps.setInt(8, rs.getInt(1));
 					ps.execute();
 					return true;

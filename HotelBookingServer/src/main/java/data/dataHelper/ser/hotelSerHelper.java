@@ -109,6 +109,10 @@ public class hotelSerHelper {
 		ArrayList<CommentPO> result = new ArrayList<CommentPO>();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "comment.txt";
+		File comment=new File(path);
+		if(comment.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -139,6 +143,10 @@ public class hotelSerHelper {
 		ArrayList<RoomPO> result = new ArrayList<RoomPO>();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "room.txt";
+		File comment=new File(path);
+		if(comment.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -157,17 +165,22 @@ public class hotelSerHelper {
 	
 		}
 	}
-	public ArrayList<EnterpriseHotelproPO> readEnterprisePromotionSer(String hotelname)
+	public EnterpriseHotelproPO readEnterprisePromotionSer(String hotelname)
 			throws IOException {
-		ArrayList<EnterpriseHotelproPO> result = new ArrayList<EnterpriseHotelproPO>();
+		EnterpriseHotelproPO result = new EnterpriseHotelproPO();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" +"EnterpriseHotelPromotion.txt";
+		File comment=new File(path);
+		if(comment.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
-					result = (ArrayList<EnterpriseHotelproPO>) ois.readObject();
+					result = (EnterpriseHotelproPO) ois.readObject();
 					ois.close();
+					return result;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				return null;
@@ -177,13 +190,16 @@ public class hotelSerHelper {
 			return null;
 	
 		}
-		return null;
 	}
 	public BirthdayHotelproPO readBirthdayPromotionSer(String hotelname)
 			throws IOException {
 		BirthdayHotelproPO result = new BirthdayHotelproPO();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" +"BirthdayHotelPromotion.txt";
+		File comment=new File(path);
+		if(comment.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -203,17 +219,22 @@ public class hotelSerHelper {
 		}
 
 	}
-	public ArrayList<LargeAmountHotelproPO> readLargeAmountPromotionSer(String hotelname)
+	public LargeAmountHotelproPO readLargeAmountPromotionSer(String hotelname)
 			throws IOException {
-		ArrayList<LargeAmountHotelproPO> result = new ArrayList<LargeAmountHotelproPO>();
+		LargeAmountHotelproPO result = new LargeAmountHotelproPO();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" +"LargeAmountHotelPromotion.txt";
+		File promotion=new File(path);
+		if(promotion.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
-					result = (ArrayList<LargeAmountHotelproPO>) ois.readObject();
+					result = (LargeAmountHotelproPO) ois.readObject();
 					ois.close();
+					return result;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				return null;
@@ -223,19 +244,23 @@ public class hotelSerHelper {
 			return null;
 	
 		}
-		return null;
 	}
 	public ArrayList<PeriodHotelproPO> readPeriodPromotionSer(String hotelname)
 			throws IOException {
 		ArrayList<PeriodHotelproPO> result = new ArrayList<PeriodHotelproPO>();
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" +"PeriodHotelPromotion.txt";
+		File comment=new File(path);
+		if(comment.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			try {
 					result = (ArrayList<PeriodHotelproPO>) ois.readObject();
 					ois.close();
+					return result;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				return null;
@@ -245,7 +270,6 @@ public class hotelSerHelper {
 			return null;
 	
 		}
-		return null;
 	}
 
 	/**
