@@ -37,7 +37,11 @@ public class PromotionDataMock implements PromotionDataService {
 		discount.add(70);
 		/*	public VipLevelWebproPO(String promotionID, String promotionName, String promotionType,
 		String hotelnameOrWeb,ArrayList<Integer> vipLevel, ArrayList<Integer> discount)*/
+<<<<<<< HEAD
 		PromotionPO webPro=new VipLevelWebproPO(456, "webPro", "VipLevelWebPromotion", 
+=======
+		PromotionPO webPro=new VipLevelWebproPO("456", "webPro", "VipLevelWebPromotion", 
+>>>>>>> master
 				"WebPromtion", vipLevel, discount);
 		
 		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
