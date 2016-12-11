@@ -49,7 +49,11 @@ public class SearchData /* implements SearchDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return spList;
+			if(spList.size()!=0){
+			return spList;}
+			else{
+				return null;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		}

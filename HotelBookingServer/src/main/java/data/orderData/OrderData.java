@@ -117,7 +117,12 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return aop;
+			if(aop.size()!=0){
+				return aop;
+				}
+				else{
+				return null;
+				}
 		} catch (SQLException e) {
 			return null;
 		}
@@ -214,7 +219,12 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
+			if(aop.size()!=0){
 			return aop;
+			}
+			else{
+				return null;
+			}
 		} catch (SQLException e) {
 			return null;
 		}
@@ -263,7 +273,12 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return aop;
+			if(aop.size()!=0){
+				return aop;
+				}
+			else{
+				return null;
+				}
 		} catch (SQLException e) {
 			return null;
 		}

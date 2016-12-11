@@ -64,8 +64,10 @@ public class PromotionData /* implements PromotionDataService */{
 					return true;}
 			if(promotion.getPromotionType().equals("PeriodHotelPromtion")){
 				if(hsh.readPeriodPromotionSer(promotion.getHotelnameOrWeb())!=null){
-					promotion.setPromotionID(hsh.readPeriodPromotionSer(promotion.getHotelnameOrWeb()).size()+1);}
-				else{
+					ArrayList<PeriodHotelproPO> list=hsh.readPeriodPromotionSer(promotion.getHotelnameOrWeb());
+					promotion.setPromotionID(list.get(list.size()-1).getPromotionID()+1);
+					}
+					else{
 					promotion.setPromotionID(1);
 				}
 					hsh.writePeriodHotelSer(promotion.getHotelnameOrWeb(), (PeriodHotelproPO)promotion);
@@ -243,12 +245,117 @@ public class PromotionData /* implements PromotionDataService */{
 	}
 
 	public boolean modify(PromotionPO promotion) {
-		System.out.println("Promotiondata.modify is called.");
-		return true;
+		try {
+			int lastID = 0;
+			String Cricleselect = "select * from `CircleWebpromotion`;";
+			String Periodselect = "select * from `PeriodWebpromotion`;";
+			String VipLevelselect = "select * from `VipLevelWebpromotion`;";
+			String Circleupdate="update circlewebpromotion set `策略名`=?,`折扣`=?,`策略类型`=?,`酒店名或网站`=?,`商圈`=?,`vip等级`=? where 策略ID=?;";
+			String Periodupdate="update periodwebpromotion set `策略名`=?,`折扣`=?,`策略类型`=?,`酒店名或网站`=?,`开始时间`=?,`结束时间`=? where 策略ID=?;";
+			String VipLevelupdate = "update vipLevelwebpromotion set `策略名`=?,`策略类型`=?,`酒店名或网站`=?,`等级1折扣`=?,`等级2折扣`=?,`等级4折扣`=?,`等级5折扣`=?,`等级3折扣`=? where 策略ID=?;";
+			
+			if(promotion.getPromotionType().equals("BirthdayHotelPromtion")){
+				promotion.setPromotionID(1);
+					hsh.writeBirthdayPromotionSer(promotion.getHotelnameOrWeb(), (BirthdayHotelproPO)promotion);
+					return true;}
+			if(promotion.getPromotionType().equals("EnterpriseHotelPromtion")){
+				promotion.setPromotionID(1);
+					hsh.writeEnterprisePromotionSer(promotion.getHotelnameOrWeb(), (EnterpriseHotelproPO)promotion);
+					return true;}
+			if(promotion.getPromotionType().equals("LargeAmountHotelPromotion")){
+				promotion.setPromotionID(1);
+					hsh.writeLargeAmountPromotionSer(promotion.getHotelnameOrWeb(), (LargeAmountHotelproPO)promotion);
+					return true;}
+			
+			
+			if(promotion.getPromotionType().equals("PeriodHotelPromtion")){
+				ArrayList<PeriodWebproPO> periodList=new ArrayList<PeriodWebproPO> ();
+					hsh.writePeriodHotelSer(promotion.getHotelnameOrWeb(), (PeriodHotelproPO)promotion);
+					return true;}
+			
+			
+			if(promotion.getPromotionType().equals("CircleWebPromotion")){
+				conn = builder.BuildConnection();
+				ps = conn.prepareStatement(Cricleselect);
+				rs = ps.executeQuery();
+				while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+					if (rs.getInt(2) > lastID) {
+						lastID = rs.getInt(2);
+					}
+				}
+				rs.close();
+				ps = conn.prepareStatement(Cricleinsert);
+				ps.setString(1, ((CircleWebproPO)promotion).getPromotionName());
+				ps.setInt(2, lastID+1);
+				ps.setInt(3, ((CircleWebproPO)promotion).getDiscount());
+				ps.setString(4, ((CircleWebproPO)promotion).getPromotionType());
+				ps.setString(5, ((CircleWebproPO)promotion).getHotelnameOrWeb());
+				ps.setString(6, ((CircleWebproPO)promotion).getCircle());
+				ps.setInt(7, ((CircleWebproPO)promotion).getVipLevel());
+				ps.execute();
+				ps.close();
+				conn.close();
+				return true;}
+			if(promotion.getPromotionType().equals("PeriodWebPromtion")){
+				conn = builder.BuildConnection();
+				ps = conn.prepareStatement(Periodselect);
+				rs = ps.executeQuery();
+				while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+					if (rs.getInt(2) > lastID) {
+						lastID = rs.getInt(2);
+					}
+				}
+				rs.close();
+				ps = conn.prepareStatement(Periodinsert);
+				ps.setString(1, ((PeriodWebproPO)promotion).getPromotionName());
+				ps.setInt(2, lastID+1);
+				ps.setInt(3, ((PeriodWebproPO)promotion).getDiscount());
+				ps.setString(4, ((PeriodWebproPO)promotion).getPromotionType());
+				ps.setString(5, ((PeriodWebproPO)promotion).getHotelnameOrWeb());
+				ps.setTimestamp(6, ChangerHelper.changeToTimestamp(((PeriodWebproPO)promotion).getStartTime()));
+				ps.setTimestamp(7, ChangerHelper.changeToTimestamp(((PeriodWebproPO)promotion).getEndTime()));
+				ps.execute();
+				ps.close();
+				conn.close();	
+				return true;}
+			if(promotion.getPromotionType().equals("VipLevelWebPromtion")){
+				conn = builder.BuildConnection();
+				ps = conn.prepareStatement(VipLevelselect);
+				rs = ps.executeQuery();
+				while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+					if (rs.getInt(2) > lastID) {
+						lastID = rs.getInt(2);
+					}
+				}
+				rs.close();
+				ps = conn.prepareStatement(VipLevelinsert);
+				ps.setString(1, ((VipLevelWebproPO)promotion).getPromotionName());
+				ps.setInt(2, lastID+1);
+				ps.setString(3, ((VipLevelWebproPO)promotion).getPromotionType());
+				ps.setString(4, ((VipLevelWebproPO)promotion).getHotelnameOrWeb());
+				ps.setInt(5, ((VipLevelWebproPO)promotion).getDiscount().get(0));
+				ps.setInt(6, ((VipLevelWebproPO)promotion).getDiscount().get(1));
+				ps.setInt(7, ((VipLevelWebproPO)promotion).getDiscount().get(2));
+				ps.setInt(8, ((VipLevelWebproPO)promotion).getDiscount().get(3));
+				ps.setInt(9, ((VipLevelWebproPO)promotion).getDiscount().get(4));
+				ps.execute();
+				ps.close();
+				conn.close();	
+				return true;
+		}
+			}  catch (SQLException e) {
+				e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+				
+			}
+		return false;
 	}
 
 	public boolean delete(PromotionPO promotion) {
-		System.out.println("Promotiondata.delete is called.");
+		
 		return true;
 	}
 }

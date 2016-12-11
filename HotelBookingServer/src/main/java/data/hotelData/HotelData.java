@@ -235,7 +235,7 @@ public class HotelData /* implements HotelDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-				if(hpList!=null){
+				if(hpList.size()!=0){
 				int expensivest=bestCondition.getRoom().get(0).getRoomPrice();
 				System.out.println("best is "+expensivest);
 				int cheapest=worstCondition.getRoom().get(0).getRoomPrice();
