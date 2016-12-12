@@ -9,15 +9,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import data.dataHelper.jdbc.Builder;
+import data.orderData.OrderData;
 import dataService.searchDataService.*;
 import po.SearchPO;
 import po.personPO.PersonPO;
 
-public class SearchData /* implements SearchDataService */{
+public class SearchData implements SearchDataService {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	Builder builder = new Builder();
 	ResultSet rs = null;
+	public static SearchData getInstance() {
+		if (searchData == null) {
+			searchData = new SearchData();
+			return searchData;
+		}
+		return searchData;
+	}
+	private static SearchData searchData = null;
 
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		ArrayList<SearchPO> spList = new ArrayList<SearchPO>();
@@ -40,7 +49,11 @@ public class SearchData /* implements SearchDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return spList;
+			if(spList.size()!=0){
+			return spList;}
+			else{
+				return null;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		}

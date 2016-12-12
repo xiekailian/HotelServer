@@ -14,7 +14,7 @@ import data.dataHelper.ser.orderSerHelper;
 import dataService.orderDataService.OrderDataService;
 import po.OrderPO;
 
-public class OrderData /* implements OrderDataService */{
+public class OrderData implements OrderDataService {
 
 	private Connection conn = null;
 	private PreparedStatement ps = null;
@@ -117,13 +117,18 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return aop;
+			if(aop.size()!=0){
+				return aop;
+				}
+				else{
+				return null;
+				}
 		} catch (SQLException e) {
 			return null;
 		}
 	}
 
-	public void modify(OrderPO order) {
+	public boolean modify(OrderPO order) {
 		try {
 			try {
 				osh.writeRoomSer(order.getOrderID(), order.getRoom());
@@ -160,15 +165,14 @@ public class OrderData /* implements OrderDataService */{
 							ChangerHelper.changeToTimestamp(order.getActualLeaveTime()));
 					ps.setString(14, order.getOrderID());
 					ps.execute();
-					ps.close();
-					conn.close();	
 				}
 			}
 			rs.close();
 			ps.close();
 			conn.close();
+			return true;
 		} catch (SQLException e) {
-			
+			return false;
 		}
 	}
 	
@@ -214,7 +218,12 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
+			if(aop.size()!=0){
 			return aop;
+			}
+			else{
+				return null;
+			}
 		} catch (SQLException e) {
 			return null;
 		}
@@ -263,7 +272,12 @@ public class OrderData /* implements OrderDataService */{
 			rs.close();
 			ps.close();
 			conn.close();
-			return aop;
+			if(aop.size()!=0){
+				return aop;
+				}
+			else{
+				return null;
+				}
 		} catch (SQLException e) {
 			return null;
 		}

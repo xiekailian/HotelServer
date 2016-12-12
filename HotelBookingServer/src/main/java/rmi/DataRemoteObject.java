@@ -7,19 +7,21 @@ import java.util.ArrayList;
 import data.hotelData.HotelData;
 //import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
-import data.orderData.OrderDataMock;
+
 import data.promotionData.PromotionData;
-import data.promotionData.PromotionDataMock;
+
 import data.searchData.SearchData;
-import data.searchData.SearchDataMock;
+
 import data.userData.UserData;
-import data.userData.UserDataMock;
+
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
+import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
+import po.hotelPO.RoomPO;
 import po.personPO.PersonPO;
 import po.personPO.RecordPO;
 import po.HotelWorkerPO;
@@ -42,11 +44,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	private UserDataService userdataservice;
 
 	protected DataRemoteObject() throws RemoteException {// ���췽������ʵ��Service�ľ��巽��
-//		hoteldataservice = new HotelDataMock();
-		orderdataService = new OrderDataMock();
-		promotiondataService = new PromotionDataMock();
-		searchdataservice = new SearchDataMock();
-		userdataservice = new UserDataMock();
+		hoteldataservice = new HotelData();
+		orderdataService = new OrderData();
+		promotiondataService = new PromotionData();
+		searchdataservice = new SearchData();
+		userdataservice = new UserData();
 	}
 
 	public ArrayList<SearchPO> showSearchHistory(String username)
@@ -145,17 +147,19 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return hoteldataservice.showHotelinfo(Hotelname);
 	}
 
-	public boolean addComment(String comment, String username, String hotelname)
+	public boolean addComment(CommentPO comment)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return hoteldataservice.addComment(comment, username, hotelname);
+		return hoteldataservice.addComment(comment);
 	}
 
-
-	public boolean roomModify(String roomtype, int number)
+	public boolean addHotel(HotelPO hotel) throws RemoteException{
+		return hoteldataservice.addHotel(hotel);
+	}
+	public boolean roomModify(String hotelname, ArrayList<RoomPO> rooms)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return hoteldataservice.roomModify(roomtype, number);
+		return hoteldataservice.roomModify(hotelname, rooms);
 	}
 
 	public boolean changeCredit(String username, int credit)
@@ -230,6 +234,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	public boolean add(PromotionPO promotion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotiondataService.add(promotion);
+	}
+
+	public PersonPO findPerson(int personID) throws RemoteException {
+	
+		return userdataservice.findPerson(personID);
+	}
+
+	public boolean isExist(String username, String usertype)
+			throws RemoteException {
+		return userdataservice.isExist(username, usertype);
 	}
 
 }

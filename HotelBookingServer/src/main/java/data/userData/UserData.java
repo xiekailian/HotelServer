@@ -1,6 +1,7 @@
 package data.userData;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import data.promotionData.PromotionData;
 import dataService.*;
 import dataService.userDataService.UserDataService;
 
-public class UserData /* implements UserDataService */{
+public class UserData  implements UserDataService {
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private Builder builder = new Builder();
@@ -46,7 +47,7 @@ public class UserData /* implements UserDataService */{
 		try {
 			personhelper.mkdirs(personInfo.getUsername());
 			String select = "select * from `Person`;";
-			String insert = "insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日) values(?,?,?,?,?,?,?,?);";
+			String insert = "insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日,手机号) values(?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -68,16 +69,13 @@ public class UserData /* implements UserDataService */{
 			ps.setInt(5, 0);
 			ps.setString(6, personInfo.getEnterpriseName());
 			ps.setInt(7, 0);
-			java.util.Date date = personInfo.getBirthday().getTime();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String birth = sdf.format(date);
-			java.sql.Date bd = java.sql.Date.valueOf(birth);
-			ps.setDate(8, bd);
+			ps.setTimestamp(8, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
+			ps.setString(9, personInfo.getPhoneNumber());
 			ps.execute();
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -105,11 +103,8 @@ public class UserData /* implements UserDataService */{
 					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
 					pp.setCredit(rs.getInt(7));
-					if (rs.getDate(8) != null) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(rs.getDate(8));
-						pp.setBirthday(cal);
-					}
+					pp.setBirthday(ChangerHelper.changeToCalendar(rs.getTimestamp(8)));
+					pp.setPhoneNumber(rs.getString(9));
 					return pp;
 				}
 			}
@@ -132,7 +127,7 @@ public class UserData /* implements UserDataService */{
 	public boolean modifyPerson(PersonPO personInfo) {
 		try {
 			String select = "select * from `person`;";
-			String update = "update person set `用户名`=?,`密码`=?,`vip类型`=?,`vip等级`=?,`企业会员名`=?,`信用值`=?,`生日`=? where id=?;";
+			String update = "update person set `用户名`=?,`密码`=?,`vip类型`=?,`vip等级`=?,`企业会员名`=?,`信用值`=?,`生日`=?,`手机号`=? where id=?;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -145,17 +140,9 @@ public class UserData /* implements UserDataService */{
 					ps.setInt(4, personInfo.getVipLevel());
 					ps.setString(5, personInfo.getEnterpriseName());
 					ps.setInt(6, personInfo.getCredit());
-					if (personInfo.getBirthday() == null) {
-						ps.setDate(7, null);
-					} else {
-						java.util.Date date = personInfo.getBirthday().getTime();
-						SimpleDateFormat sdf = new SimpleDateFormat(
-								"yyyy-MM-dd");
-						String birth = sdf.format(date);
-						java.sql.Date bd = java.sql.Date.valueOf(birth);
-						ps.setDate(7, bd);
-					}
-					ps.setInt(8, rs.getInt(1));
+					ps.setTimestamp(7, ChangerHelper.changeToTimestamp(personInfo.getBirthday()));
+					ps.setString(8, personInfo.getPhoneNumber());
+					ps.setInt(9, rs.getInt(1));
 					ps.execute();
 					return true;
 				}
@@ -490,10 +477,49 @@ public class UserData /* implements UserDataService */{
 	 * @param personname
 	 * @param record
 	 * @return
-	 * @throws IOException
 	 */
-	public boolean writeRecord(String personname, RecordPO record)
-			throws IOException {
+	public boolean writeRecord(String personname, RecordPO record) {
+		try {
+			return personserhelper.writeRecordSer(personname, record);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+			
+		}
+	}
+	public boolean isExist(String username, String usertype)
+			throws RemoteException {
 		return false;
+	}
+
+	public PersonPO findPerson(int personID) throws RemoteException {
+		PersonPO pp = new PersonPO();
+		try {
+			String select = "select * from `person`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(1).equals(personID)) { 
+					pp.setPersonID(rs.getInt(1));
+					pp.setUsername(rs.getString(2));
+					pp.setPassword(rs.getString(3));
+					pp.setVipType(rs.getString(4));
+					pp.setVipLevel(rs.getInt(5));
+					pp.setEnterpriseName(rs.getString(6));
+					pp.setCredit(rs.getInt(7));
+					pp.setBirthday(ChangerHelper.changeToCalendar(rs.getTimestamp(8)));
+					pp.setPhoneNumber(rs.getString(9));
+					return pp;
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		}
+
+		return null;
 	}
 }
