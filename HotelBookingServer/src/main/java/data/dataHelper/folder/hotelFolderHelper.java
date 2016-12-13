@@ -3,7 +3,6 @@ package data.dataHelper.folder;
 import java.io.File;
 
 public class hotelFolderHelper {
-	private  String path = "src/main/resources/hotel/";
 
 	/**
 	 * 用于新建酒店文件夹

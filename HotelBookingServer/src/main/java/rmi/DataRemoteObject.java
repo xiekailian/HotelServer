@@ -23,7 +23,6 @@ import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
 import po.personPO.PersonPO;
-import po.personPO.RecordPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;

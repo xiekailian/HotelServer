@@ -1,12 +1,10 @@
 package data.hotelData;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -17,11 +15,9 @@ import data.dataHelper.folder.hotelFolderHelper;
 import data.dataHelper.jdbc.Builder;
 import data.dataHelper.ser.hotelSerHelper;
 import dataService.hotelDataService.HotelDataService;
-import po.SearchPO;
 import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
-import po.personPO.PersonPO;
 
 public class HotelData  implements HotelDataService {
 	private static HotelData hoteldata = null;

@@ -3,7 +3,6 @@ package data.dataHelper.folder;
 import java.io.File;
 
 public class orderFolderHelper {
-	private String path = "src/main/resources/order/";
 
 	/**
 	 * 用于新建订单文件夹文件夹
