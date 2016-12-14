@@ -240,9 +240,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return userdataservice.findPerson(personID);
 	}
 
-	public boolean isExist(String username, String usertype)
-			throws RemoteException {
-		return userdataservice.isExist(username, usertype);
-	}
+	
 
 }
