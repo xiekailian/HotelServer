@@ -2,6 +2,7 @@ package dataService.userDataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.*;
 import po.personPO.PersonPO;
@@ -48,5 +49,5 @@ public interface UserDataService extends Remote {
 
 	public boolean writeRecord(String personname, RecordPO record)
 			throws RemoteException;// 新增用于写入客户信用记录，传入客户名和此次写入的record对象
-
+	ArrayList<RecordPO> getRecord(String personname)throws RemoteException;
 }

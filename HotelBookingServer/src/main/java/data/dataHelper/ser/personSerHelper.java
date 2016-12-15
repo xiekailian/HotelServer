@@ -67,6 +67,10 @@ public class personSerHelper {
 		ArrayList<RecordPO> result = new ArrayList<RecordPO>();
 		String path = "src/main/resources/person/";
 		path = path + personname + "/" + "record.txt";
+		File a=new File(path);
+		if(a.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);

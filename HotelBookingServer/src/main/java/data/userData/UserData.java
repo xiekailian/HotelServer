@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import po.HotelWorkerPO;
 import po.MarketPO;
@@ -516,4 +517,15 @@ public class UserData  implements UserDataService {
 
 		return null;
 	}
+
+	@Override
+	public ArrayList<RecordPO> getRecord(String personname)throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			return personserhelper.readRecordSer(personname);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		}
 }

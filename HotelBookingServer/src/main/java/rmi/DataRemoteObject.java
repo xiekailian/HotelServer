@@ -7,13 +7,9 @@ import java.util.ArrayList;
 import data.hotelData.HotelData;
 //import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
-
 import data.promotionData.PromotionData;
-
 import data.searchData.SearchData;
-
 import data.userData.UserData;
-
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
@@ -23,6 +19,7 @@ import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
 import po.personPO.PersonPO;
+import po.personPO.RecordPO;
 import po.HotelWorkerPO;
 import po.MarketPO;
 import po.OrderPO;
@@ -238,6 +235,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	public PersonPO findPerson(int personID) throws RemoteException {
 	
 		return userdataservice.findPerson(personID);
+	}
+
+	@Override
+	public ArrayList<RecordPO> getRecord(String personname)throws RemoteException {
+		// TODO Auto-generated method stub
+		return userdataservice.getRecord(personname);
 	}
 
 	
