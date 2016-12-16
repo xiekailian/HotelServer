@@ -518,7 +518,6 @@ public class UserData  implements UserDataService {
 		return null;
 	}
 
-	@Override
 	public ArrayList<RecordPO> getRecord(String personname)throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
