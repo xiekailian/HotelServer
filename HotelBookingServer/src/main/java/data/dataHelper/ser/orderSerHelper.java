@@ -59,6 +59,9 @@ public class orderSerHelper {
 		path = path + orderID + "/" + "room.txt";
 		File comment = new File(path);
 		boolean exists = comment.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			comment.createNewFile();
 		}

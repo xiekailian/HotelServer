@@ -122,8 +122,16 @@ public class HotelData  implements HotelDataService {
 			rs.close();
 			ps.close();
 			conn.close();
+			if(hotelinfo.getRoom()!=null){
+				hsh.writeRoomSer(hotelinfo.getHotelname(), hotelinfo.getRoom());
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+
 		}
 
 		return false;
@@ -181,7 +189,9 @@ public class HotelData  implements HotelDataService {
 			ps.setString(12, hotel.getHotelworker());
 			ps.setString(13, hotel.getHotelPhone());
 			try {
-				hsh.writeRoomSer(hotel.getHotelname(), hotel.getRoom());
+				if(hotel.getRoom()!=null){
+					hsh.writeRoomSer(hotel.getHotelname(), hotel.getRoom());
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

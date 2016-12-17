@@ -28,6 +28,9 @@ public class personSerHelper {
 		ArrayList<RecordPO> origin=new ArrayList<RecordPO>();
 		File record = new File(path);
 		boolean exists = record.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			record.createNewFile();
 		}
