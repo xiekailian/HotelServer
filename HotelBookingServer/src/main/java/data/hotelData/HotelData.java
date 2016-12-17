@@ -61,6 +61,7 @@ public class HotelData  implements HotelDataService {
 					hp.setCircle(rs.getString(10));
 					hp.setScore(rs.getDouble(11));
 					hp.setHotelworker(rs.getString(12));
+					hp.setHotelPhone(rs.getString(13));
 					hp.setRoom(hsh.readRoomSer(Hotelname));
 					hp.setComment(hsh.readCommentSer(Hotelname));
 					return hp;
@@ -163,7 +164,7 @@ public class HotelData  implements HotelDataService {
 			}
 		try{
 			hfh.mkdirs(hotel.getHotelname());
-			String insert = "insert into `hotel` (酒店ID,酒店名,酒店星级,酒店简介,wifi,电视,沙发,餐厅,地址,商圈,平均评分,酒店工作人员) values(?,?,?,?,?,?,?,?,?,?,?,?);";
+			String insert = "insert into `hotel` (酒店ID,酒店名,酒店星级,酒店简介,wifi,电视,沙发,餐厅,地址,商圈,平均评分,酒店工作人员,联系方式) values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(insert);
 			ps.setInt(1, lastID+1);
@@ -178,6 +179,7 @@ public class HotelData  implements HotelDataService {
 			ps.setString(10, hotel.getCircle());
 			ps.setDouble(11, hotel.getScore());
 			ps.setString(12, hotel.getHotelworker());
+			ps.setString(13, hotel.getHotelPhone());
 			try {
 				hsh.writeRoomSer(hotel.getHotelname(), hotel.getRoom());
 			} catch (IOException e) {
