@@ -3,7 +3,6 @@ package data.dataHelper.folder;
 import java.io.*;
 
 public class personFolderHelper {
-	private  String path = "src/main/resources/person/";
 
 	/**
 	 * 用于新建客户个人文件夹

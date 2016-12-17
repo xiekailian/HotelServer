@@ -36,6 +36,7 @@ public class personSerHelper {
 				origin = this.readRecordSer(personname);
 				origin.add(object);
 				FileOutputStream fos = new FileOutputStream(record);
+				@SuppressWarnings("resource")
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(origin);
 			} else {
@@ -60,12 +61,16 @@ public class personSerHelper {
 	 * @param personname
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	public ArrayList<RecordPO> readRecordSer(String personname)
 			throws IOException {
 		ArrayList<RecordPO> result = new ArrayList<RecordPO>();
 		String path = "src/main/resources/person/";
 		path = path + personname + "/" + "record.txt";
+		File a=new File(path);
+		if(a.exists()==false){
+			return null;
+		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -110,6 +115,7 @@ public class personSerHelper {
 					return true;
 				}
 				FileOutputStream fos = new FileOutputStream(orderedHotel);
+				@SuppressWarnings("resource")
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(origin);
 			} else {
@@ -135,7 +141,7 @@ public class personSerHelper {
 	 * @param personname
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	public ArrayList<String> readOrderedHotelSer(String personname)
 			throws IOException {
 		ArrayList<String> result = new ArrayList<String>();

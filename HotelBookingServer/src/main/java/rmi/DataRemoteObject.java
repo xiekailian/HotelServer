@@ -7,13 +7,9 @@ import java.util.ArrayList;
 import data.hotelData.HotelData;
 //import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
-
 import data.promotionData.PromotionData;
-
 import data.searchData.SearchData;
-
 import data.userData.UserData;
-
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
@@ -241,9 +237,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return userdataservice.findPerson(personID);
 	}
 
-	public boolean isExist(String username, String usertype)
-			throws RemoteException {
-		return userdataservice.isExist(username, usertype);
+	public ArrayList<RecordPO> getRecord(String personname)throws RemoteException {
+		// TODO Auto-generated method stub
+		return userdataservice.getRecord(personname);
 	}
+
+	
 
 }

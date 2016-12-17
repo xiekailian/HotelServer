@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import po.hotelPO.CommentPO;
 import po.hotelPO.RoomPO;
 
 public class orderSerHelper {
@@ -21,7 +20,7 @@ public class orderSerHelper {
 	 * @param orderID
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	public ArrayList<RoomPO> readRoomSer(String orderID)
 			throws IOException {
 		ArrayList<RoomPO> result = new ArrayList<RoomPO>();

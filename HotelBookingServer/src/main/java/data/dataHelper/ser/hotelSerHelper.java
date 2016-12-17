@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import org.w3c.dom.Comment;
 
 import po.hotelPO.CommentPO;
 import po.hotelPO.RoomPO;

@@ -1,14 +1,14 @@
 package data.dataHelper.ser;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import po.personPO.RecordPO;
+//import java.util.ArrayList;
+//import java.util.Calendar;
+//
+//import po.personPO.RecordPO;
 
 public class test {
 	public static void main(String args[]) throws IOException {
-		String personname = "wuxiufeng";
+//		String personname = "wuxiufeng";
 		// RecordPO rp=new RecordPO();
 		// rp.setChangeCredit(5);
 		// rp.setOperation("执行");

@@ -3,13 +3,10 @@ package data.userData;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 
 import po.HotelWorkerPO;
 import po.MarketPO;
@@ -17,8 +14,6 @@ import po.personPO.*;
 import data.dataHelper.folder.personFolderHelper;
 import data.dataHelper.jdbc.*;
 import data.dataHelper.ser.personSerHelper;
-import data.promotionData.PromotionData;
-import dataService.*;
 import dataService.userDataService.UserDataService;
 
 public class UserData  implements UserDataService {
@@ -522,4 +517,14 @@ public class UserData  implements UserDataService {
 
 		return null;
 	}
+
+	public ArrayList<RecordPO> getRecord(String personname)throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			return personserhelper.readRecordSer(personname);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		}
 }
