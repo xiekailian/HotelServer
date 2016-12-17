@@ -19,6 +19,8 @@ public class HotelPO implements Serializable {
 	private ArrayList<RoomPO> room;
 	private ArrayList<CommentPO> comment;
 	private String hotelworker;
+	private String hotelPhone;//酒店电话号码
+
 
 	public HotelPO() {
 		super();
@@ -127,6 +129,14 @@ public class HotelPO implements Serializable {
 
 	public void setHotelID(int hotelID) {
 		this.hotelID = hotelID;
+	}
+
+	public String getHotelPhone() {
+		return hotelPhone;
+	}
+
+	public void setHotelPhone(String hotelPhone) {
+		this.hotelPhone = hotelPhone;
 	}
 
 }

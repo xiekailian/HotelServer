@@ -35,6 +35,9 @@ public class hotelSerHelper {
 		ArrayList<CommentPO> origin = new ArrayList<CommentPO>();
 		File comment = new File(path);
 		boolean exists = comment.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			comment.createNewFile();
 		}
@@ -70,6 +73,9 @@ public class hotelSerHelper {
 		ArrayList<PeriodHotelproPO> origin = new ArrayList<PeriodHotelproPO>();
 		File comment = new File(path);
 		boolean exists = comment.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			comment.createNewFile();
 		}
@@ -105,6 +111,9 @@ public class hotelSerHelper {
 		ArrayList<PeriodHotelproPO> origin = new ArrayList<PeriodHotelproPO>();
 		File comment = new File(path);
 		boolean exists = comment.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			comment.createNewFile();
 		}
@@ -408,6 +417,9 @@ public class hotelSerHelper {
 		path = path + hotelname + "/" + "room.txt";
 		File room = new File(path);
 		boolean exists = room.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			room.createNewFile();
 		}
@@ -432,6 +444,9 @@ public class hotelSerHelper {
 		path = path + hotelname + "/" + "BirthdayHotelPromotion.txt";
 		File room = new File(path);
 		boolean exists = room.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			room.createNewFile();
 		}
@@ -456,6 +471,9 @@ public class hotelSerHelper {
 		path = path + hotelname + "/" + "EnterpriseHotelPromotion.txt";
 		File room = new File(path);
 		boolean exists = room.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			room.createNewFile();
 		}
@@ -480,6 +498,9 @@ public class hotelSerHelper {
 		path = path + hotelname + "/" + "LargeAmountHotelPromotion.txt";
 		File room = new File(path);
 		boolean exists = room.exists();
+		if(object==null){
+			return false;
+		}
 		if (exists == false) {
 			room.createNewFile();
 		}
