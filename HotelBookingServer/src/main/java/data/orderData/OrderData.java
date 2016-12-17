@@ -238,8 +238,8 @@ public class OrderData implements OrderDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(3).equals("nonExecute")
-						|| rs.getString(3).equals("abnormal")) {
+				if (rs.getString(3).equals("异常")
+						|| rs.getString(3).equals("未执行")) {
 					op.setOrderID(rs.getString(1));
 					op.setOrderprice(rs.getInt(2));
 					op.setOrderstate(rs.getString(3));

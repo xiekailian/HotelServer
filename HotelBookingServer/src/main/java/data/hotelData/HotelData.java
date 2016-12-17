@@ -96,7 +96,7 @@ public class HotelData  implements HotelDataService {
 	public boolean modify(HotelPO hotelinfo) {
 		try {
 			String select = "select * from `hotel`;";
-			String update = "update person set `酒店名`=?,`酒店星级`=?,`酒店简介`=?,`wifi`=?,`电视`=?,`沙发`=?,`餐厅`=?,`地址`=?,`商圈`=?,`平均评分`=?,`酒店工作人员`=? where 酒店ID=?;";
+			String update = "update person set `酒店名`=?,`酒店星级`=?,`酒店简介`=?,`wifi`=?,`电视`=?,`沙发`=?,`餐厅`=?,`地址`=?,`商圈`=?,`平均评分`=?,`酒店工作人员`=?,`联系方式`=? where 酒店ID=?;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -114,6 +114,7 @@ public class HotelData  implements HotelDataService {
 					ps.setString(9, hotelinfo.getCircle());
 					ps.setDouble(10, hotelinfo.getScore());
 					ps.setString(11, hotelinfo.getHotelworker());
+					ps.setString(12, hotelinfo.getHotelPhone());
 					ps.setInt(12, hotelinfo.getHotelID());
 					ps.execute();
 					return true;
