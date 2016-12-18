@@ -17,6 +17,7 @@ public interface OrderDataService extends Remote {
 	 * 
 	 * @param order
 	 */
+	public OrderPO getOrderInfo(String orderID) throws RemoteException;
 	public boolean add(OrderPO order) throws RemoteException;
 
 	/**

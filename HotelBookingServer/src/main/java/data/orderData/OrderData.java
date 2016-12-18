@@ -229,6 +229,51 @@ public class OrderData implements OrderDataService {
 	}
 
 
+	public OrderPO getOrderInfo(String orderID) {
+		OrderPO op = new OrderPO();
+		try {
+			String select = "select * from `order`;";
+			conn = builder.BuildConnection();
+			ps = conn.prepareStatement(select);
+			rs = ps.executeQuery();
+			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				if (rs.getString(1).equals(orderID)) {
+					op.setOrderID(rs.getString(1));
+					op.setOrderprice(rs.getInt(2));
+					op.setOrderstate(rs.getString(3));
+					op.setHotelname(rs.getString(4));
+					op.setPersonname(rs.getString(5));
+					op.setRealname(rs.getString(6));
+					op.setPeoplenum(rs.getInt(7));
+					op.setChildnum(rs.getInt(8));
+					op.setProducttime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(9)));
+					op.setExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(10)));
+					op.setCanceltime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(11)));
+					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(12)));
+					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(13)));
+					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
+							.getTimestamp(14)));
+					try {
+						op.setRoom(osh.readRoomSer(op.getOrderID()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+			return op;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+
 	public ArrayList<OrderPO> exceptionFind() {
 		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
