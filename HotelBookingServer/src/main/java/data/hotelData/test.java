@@ -15,14 +15,22 @@ public class test {
 		RoomPO rpw=new RoomPO();
 		RoomPO rpb=new RoomPO();
 		RoomPO rp=new RoomPO();
+		RoomPO rp1=new RoomPO();
 
 
 		HotelPO hp=new HotelPO();
 		ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
 		rp.setRoomnum("513");
-		rp.setRoomPrice(-1);
+		rp.setRoomPrice(1000);
 		rp.setRoomType("大床房");
+		rp1.setRoomnum("514");
+		rp1.setRoomPrice(800);
+		rp1.setRoomType("标准间");
 		rpList.add(rp);
+		rpList.add(rp);
+		rpList.add(rp);
+		rpList.add(rp1);
+		rpList.add(rp1);
 		
 		CommentPO cp=new CommentPO();
 		ArrayList<CommentPO> cpList=new ArrayList<CommentPO>();
@@ -40,7 +48,7 @@ public class test {
 		ServiceList.add(true);
 		ServiceList.add(true);
 		ServiceList.add(true);
-//
+		hd.roomModify("njuHotel4", rpList);
 //		hp.setHotelname("南京大酒店1");
 //		hp.setAddress("南京");
 //		hp.setCircle("新街口");
@@ -56,15 +64,15 @@ public class test {
 //		hd.addComment(cp);
 //		System.out.println(hd.showHotelinfo("南京大酒店1").getHotelPhone());
 //		System.out.println(hd.showHotelinfo("南京大酒店1").getComment().get(0).getContent());
-		hpw.setRoom(rpList);
-		hpb.setRoom(rpList);
-		hpw.setScore(0);
-		hpb.setScore(5);
-		hpw.setStar(0);
-		hpb.setStar(5);
-		hpw.setCircle("商圈1");
-		hpb.setCircle("商圈1");
-		System.out.println(hd.findWithReq(hpw, hpb).get(0).getRoom().get(0).getRoomType());
+//		hpw.setRoom(rpList);
+//		hpb.setRoom(rpList);
+//		hpw.setScore(0);
+//		hpb.setScore(5);
+//		hpw.setStar(0);
+//		hpb.setStar(5);
+//		hpw.setCircle("商圈1");
+//		hpb.setCircle("商圈1");
+//		System.out.println(hd.findWithReq(hpw, hpb).get(0).getRoom().get(0).getRoomType());
 
 	
 	}

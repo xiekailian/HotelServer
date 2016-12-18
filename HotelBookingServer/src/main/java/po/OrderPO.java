@@ -35,7 +35,7 @@ public class OrderPO implements Serializable {
 	private Calendar producttime;// 订单生成时间
 	private Calendar executetime;// 订单执行时间
 	private Calendar canceltime;// 订单取消时间
-	private Calendar latestExecutetime;// 订单最晚执行时间
+	private Calendar predictExecutetime;// 订单最晚执行时间
 	private Calendar predictLeaveTime;// 预计退房时间
 	private Calendar actualLeaveTime;// 实际退房时间
 
@@ -66,7 +66,7 @@ public class OrderPO implements Serializable {
 		this.producttime = producttime;
 		this.executetime = executetime;
 		this.canceltime = canceltime;
-		this.latestExecutetime = latestExecutetime;
+		this.predictExecutetime = latestExecutetime;
 		this.predictLeaveTime = predictLeaveTime;
 		this.actualLeaveTime = actualLeaveTime;
 	}
@@ -174,12 +174,12 @@ public class OrderPO implements Serializable {
 		this.canceltime = canceltime;
 	}
 
-	public Calendar getLatestExecutetime() {
-		return latestExecutetime;
+	public Calendar getPredictExecutetime() {
+		return predictExecutetime;
 	}
 
-	public void setLatestExecutetime(Calendar latestExecutetime) {
-		this.latestExecutetime = latestExecutetime;
+	public void setPredictExecutetime(Calendar latestExecutetime) {
+		this.predictExecutetime = latestExecutetime;
 	}
 
 	public Calendar getPredictLeaveTime() {
