@@ -234,9 +234,9 @@ public class hotelSerHelper {
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "room.txt";
 		File comment = new File(path);
-		if (comment.exists() == false) {
-			return null;
-		}
+//		if (comment.exists() == false) {
+//			return null;
+//		}
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -246,10 +246,12 @@ public class hotelSerHelper {
 				return result;
 
 			} catch (ClassNotFoundException e) {
+				System.out.println("no");
 				e.printStackTrace();
 				return null;
 			}
 		} catch (FileNotFoundException e) {
+			System.out.println("no");
 			e.printStackTrace();
 			return null;
 
