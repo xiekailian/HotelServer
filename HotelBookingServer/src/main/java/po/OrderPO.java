@@ -23,7 +23,17 @@ public class OrderPO implements Serializable {
 
 	// 酒店信息
 	private String hotelname;
+	public int getRoomNum() {
+		return roomNum;
+	}
+
+	public void setRoomNum(int roomNum) {
+		this.roomNum = roomNum;
+	}
+
 	private ArrayList<RoomPO> room;//包括房间类型、房间号、房间价格
+	private int roomNum;//房间数量
+
 
 	// 入住者信息
 	private String personname;
