@@ -71,10 +71,9 @@ public class HotelData  implements HotelDataService {
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -202,6 +201,7 @@ public class HotelData  implements HotelDataService {
 			conn.close();
 			return true;}
 		catch (SQLException e){
+			e.printStackTrace();
 			return false;
 		}
 		
@@ -236,8 +236,10 @@ public class HotelData  implements HotelDataService {
 					hp.setCircle(rs.getString(10));
 					hp.setScore(rs.getDouble(11));
 					hp.setHotelworker(rs.getString(12));
+					hp.setHotelPhone(rs.getString(13));
 					hp.setRoom(hsh.readRoomSer(worstCondition.getHotelname()));
 					hp.setComment(hsh.readCommentSer(worstCondition.getHotelname()));
+					
 					hpList.add(hp);
 				}
 			}
