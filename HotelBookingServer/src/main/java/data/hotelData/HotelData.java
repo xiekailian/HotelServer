@@ -216,7 +216,13 @@ public class HotelData  implements HotelDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();		
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				boolean name=rs.getString(2).contains(worstCondition.getHotelname())||worstCondition.getHotelname().equals(null);
+				boolean name=false;
+				if(worstCondition.getHotelname().equals(null)){
+					name=true;
+				}
+				else{
+					name=rs.getString(2).contains(worstCondition.getHotelname());
+				}
 				boolean circle=rs.getString(10).equals(worstCondition.getCircle());
 				boolean socre=rs.getDouble(11)>=worstCondition.getScore()&&rs.getDouble(11)<=bestCondition.getScore();
 				boolean star=rs.getInt(3)>=worstCondition.getStar()&&rs.getInt(3)<=bestCondition.getStar();
