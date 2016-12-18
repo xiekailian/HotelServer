@@ -242,7 +242,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 		return userdataservice.getRecord(personname);
 	}
 
-	@Override
 	public OrderPO getOrderInfo(String orderID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderdataService.getOrderInfo(orderID);

@@ -59,7 +59,7 @@ public class OrderData implements OrderDataService {
 			ps.setTimestamp(11,
 					ChangerHelper.changeToTimestamp(order.getCanceltime()));
 			ps.setTimestamp(12, ChangerHelper.changeToTimestamp(order
-					.getLatestExecutetime()));
+					.getPredictExecutetime()));
 			ps.setTimestamp(13, ChangerHelper.changeToTimestamp(order
 					.getPredictLeaveTime()));
 			ps.setTimestamp(14,
@@ -99,7 +99,7 @@ public class OrderData implements OrderDataService {
 							.getTimestamp(10)));
 					op.setCanceltime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(11)));
-					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+					op.setPredictExecutetime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(12)));
 					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(13)));
@@ -157,7 +157,7 @@ public class OrderData implements OrderDataService {
 					ps.setTimestamp(10,
 							ChangerHelper.changeToTimestamp(order.getCanceltime()));
 					ps.setTimestamp(11, ChangerHelper.changeToTimestamp(order
-							.getLatestExecutetime()));
+							.getPredictExecutetime()));
 					ps.setTimestamp(12, ChangerHelper.changeToTimestamp(order
 							.getPredictLeaveTime()));
 					ps.setTimestamp(13,
@@ -200,7 +200,7 @@ public class OrderData implements OrderDataService {
 							.getTimestamp(10)));
 					op.setCanceltime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(11)));
-					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+					op.setPredictExecutetime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(12)));
 					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(13)));
@@ -252,7 +252,7 @@ public class OrderData implements OrderDataService {
 							.getTimestamp(10)));
 					op.setCanceltime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(11)));
-					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+					op.setPredictExecutetime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(12)));
 					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(13)));
@@ -299,7 +299,7 @@ public class OrderData implements OrderDataService {
 							.getTimestamp(10)));
 					op.setCanceltime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(11)));
-					op.setLatestExecutetime(ChangerHelper.changeToCalendar(rs
+					op.setPredictExecutetime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(12)));
 					op.setPredictLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(13)));
