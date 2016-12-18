@@ -243,15 +243,15 @@ public class HotelData  implements HotelDataService {
 					hp.setScore(rs.getDouble(11));
 					hp.setHotelworker(rs.getString(12));
 					hp.setHotelPhone(rs.getString(13));
-					hp.setRoom(hsh.readRoomSer(worstCondition.getHotelname()));
-					hp.setComment(hsh.readCommentSer(worstCondition.getHotelname()));
-					
+					hp.setRoom(hsh.readRoomSer(rs.getString(2)));
+					hp.setComment(hsh.readCommentSer(rs.getString(2)));
 					hpList.add(hp);
 				}
 			}
 			rs.close();
 			ps.close();
 			conn.close();
+			System.out.println(hpList.size());
 				if(hpList.size()!=0){
 				int expensivest=bestCondition.getRoom().get(0).getRoomPrice();
 				System.out.println("best is "+expensivest);
@@ -264,36 +264,34 @@ public class HotelData  implements HotelDataService {
 					ArrayList<RoomPO> rpList=new ArrayList<RoomPO>();
 					hp=hpList.get(i);
 					rpList=hsh.readRoomSer(hp.getHotelname());
-					for(int t=0;t<rpList.size();t++){
-						if(rpList.get(t).getRoomPrice()>thisBest){
-							thisBest=rpList.get(t).getRoomPrice();
+					if(rpList!=null){
+						for(int t=0;t<rpList.size();t++){
+							if(rpList.get(t).getRoomPrice()>thisBest){
+								thisBest=rpList.get(t).getRoomPrice();
+							}
+							if(rpList.get(t).getRoomPrice()<thisWorst){
+								thisWorst=rpList.get(t).getRoomPrice();
+							}
 						}
-						if(rpList.get(t).getRoomPrice()<thisWorst){
-							thisWorst=rpList.get(t).getRoomPrice();
+						boolean Best=(thisWorst<=expensivest)||(expensivest==-1);
+						boolean Worst=(thisBest>=cheapest);
+						if(Best&&Worst){			
+						}
+						else{
+							hpList.remove(i);
+							i=i-1;
 						}
 					}
-					System.out.println("thisBest "+thisBest);
-					System.out.println("thisWorst "+thisWorst);
-					boolean Best=(thisWorst<=expensivest)||(expensivest==-1);
-					boolean Worst=(thisBest>=cheapest);
-					if(Best&&Worst){			
-					}
-					else{
-						hpList.remove(i);
-						i=i-1;
-					}	
 				}
-				System.out.println("have room now have "+hpList.size());
 				return hpList;
 			}
 				else{
 					return null;
 				}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
