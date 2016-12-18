@@ -217,7 +217,7 @@ public class HotelData  implements HotelDataService {
 			rs = ps.executeQuery();		
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
 				boolean name=false;
-				if(worstCondition.getHotelname().equals(null)){
+				if(worstCondition.getHotelname()==(null)){
 					name=true;
 				}
 				else{
