@@ -26,10 +26,10 @@ public class UserData  implements UserDataService {
 	static UserData userdata = null;
 
 	/**
-	 * 增加一个客户
+	 * 返回唯一的Userdata对象
 	 * 
 	 * @author xiamutian
-	 * @return boolean
+	 * @return Userdata
 	 */
 	public static UserData getInstance() {
 		if (userdata == null)

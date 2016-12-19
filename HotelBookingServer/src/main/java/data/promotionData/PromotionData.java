@@ -38,7 +38,10 @@ public class PromotionData implements PromotionDataService {
 			promotiondata = new PromotionData();
 		return promotiondata;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.promotionDataService.PromotionDataService#add(po.PromotionPO)
+	 */
 	public boolean add(PromotionPO promotion) {
 		try {
 			int lastID = 0;
@@ -151,7 +154,10 @@ public class PromotionData implements PromotionDataService {
 		
 
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.promotionDataService.PromotionDataService#find(java.lang.String)
+	 */
 	public ArrayList<PromotionPO> find(String hotelnames)  {
 		ArrayList<PromotionPO> result=new ArrayList<PromotionPO>();
 		String Cricleselect = "select * from `CircleWebpromotion`;";
@@ -241,7 +247,10 @@ public class PromotionData implements PromotionDataService {
 		
 		return result;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.promotionDataService.PromotionDataService#modify(po.PromotionPO)
+	 */
 	public boolean modify(PromotionPO promotion) {
 		try {
 			int lastID = 0;
@@ -325,7 +334,10 @@ public class PromotionData implements PromotionDataService {
 			}
 		return false;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.promotionDataService.PromotionDataService#delete(po.PromotionPO)
+	 */
 	public boolean delete(PromotionPO promotion) {
 		try {
 			String Circledelete="delete from circlewebpromotion  where 策略ID=?;";

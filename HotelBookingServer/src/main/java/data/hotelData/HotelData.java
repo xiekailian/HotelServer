@@ -37,7 +37,9 @@ public class HotelData  implements HotelDataService {
 			hoteldata = new HotelData();
 		return hoteldata;
 	}
-
+	/* (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#showHotelinfo(java.lang.String)
+	 */
 	public HotelPO showHotelinfo(String Hotelname) {
 		HotelPO hp = new HotelPO();
 		try {
@@ -79,7 +81,10 @@ public class HotelData  implements HotelDataService {
 		}
 		return null;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#addComment(po.hotelPO.CommentPO)
+	 */
 	public boolean addComment(CommentPO comment)  {
 		try {
 			hsh.writeCommentSer(comment.getHotelname(), comment);
@@ -91,7 +96,10 @@ public class HotelData  implements HotelDataService {
 		}
 
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#modify(po.hotelPO.HotelPO)
+	 */
 	public boolean modify(HotelPO hotelinfo) {
 		try {
 			String select = "select * from `hotel`;";
@@ -136,7 +144,10 @@ public class HotelData  implements HotelDataService {
 
 		return false;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#roomModify(java.lang.String, java.util.ArrayList)
+	 */
 	public boolean roomModify(String hotelname, ArrayList<RoomPO> rooms) {
 		try {
 			hsh.writeRoomSer(hotelname, rooms);
@@ -146,7 +157,10 @@ public class HotelData  implements HotelDataService {
 		}
 		return true;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#addHotel(po.hotelPO.HotelPO)
+	 */
 	public boolean addHotel(HotelPO hotel)  {
 		int lastID = 0;
 		hfh.mkdirs(hotel.getHotelname());
@@ -206,7 +220,10 @@ public class HotelData  implements HotelDataService {
 		}
 		
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.hotelDataService.HotelDataService#findWithReq(po.hotelPO.HotelPO, po.hotelPO.HotelPO)
+	 */
 	public ArrayList<HotelPO> findWithReq(HotelPO worstCondition,
 			HotelPO bestCondition)  {
 		ArrayList<HotelPO> hpList=new ArrayList<HotelPO>();

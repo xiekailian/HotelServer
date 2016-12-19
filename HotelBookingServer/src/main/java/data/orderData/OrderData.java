@@ -30,7 +30,10 @@ public class OrderData implements OrderDataService {
 		}
 		return orderData;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#add(po.OrderPO)
+	 */
 	public boolean add(OrderPO order) {
 		ofh.mkdirs(order.getOrderID());
 		try {
@@ -76,7 +79,10 @@ public class OrderData implements OrderDataService {
 		return true;
 
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#personFind(java.lang.String)
+	 */
 	public ArrayList<OrderPO> personFind(String personname) {
 		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
@@ -131,7 +137,10 @@ public class OrderData implements OrderDataService {
 			return null;
 		}
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#modify(po.OrderPO)
+	 */
 	public boolean modify(OrderPO order) {
 		try {
 			try {
@@ -182,7 +191,10 @@ public class OrderData implements OrderDataService {
 		}
 	}
 	
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#hotelFind(java.lang.String)
+	 */
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
 		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
@@ -237,7 +249,10 @@ public class OrderData implements OrderDataService {
 		}
 	}
 
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#getOrderInfo(java.lang.String)
+	 */
 	public OrderPO getOrderInfo(String orderID) {
 		OrderPO op = new OrderPO();
 		try {
@@ -284,7 +299,10 @@ public class OrderData implements OrderDataService {
 			return null;
 		}
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.orderDataService.OrderDataService#exceptionFind()
+	 */
 	public ArrayList<OrderPO> exceptionFind() {
 		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
