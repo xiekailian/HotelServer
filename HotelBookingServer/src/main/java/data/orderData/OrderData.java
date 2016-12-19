@@ -41,7 +41,7 @@ public class OrderData implements OrderDataService {
 				e.printStackTrace();
 				return false;
 			}
-			String insert = "insert into `order` (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			String insert = "insert into `order` (订单号,订单价格,订单状态,酒店名,入住人用户名,入住人真实姓名,总人数,儿童人数,生成时间,执行时间,取消时间,最晚执行时间,预计退房时间,实际退房时间,房间数量,客户电话) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(insert);
 			ps.setString(1, order.getOrderID());
@@ -65,6 +65,7 @@ public class OrderData implements OrderDataService {
 			ps.setTimestamp(14,
 					ChangerHelper.changeToTimestamp(order.getActualLeaveTime()));
 			ps.setInt(15, order.getRoomNum());
+			ps.setString(16, order.getPersonPhone());
 			ps.execute();
 			ps.close();
 			conn.close();
@@ -107,6 +108,7 @@ public class OrderData implements OrderDataService {
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
 					op.setRoomNum(rs.getInt(15));
+					op.setPersonPhone(rs.getString(16));
 
 					try {
 						op.setRoom(osh.readRoomSer(op.getOrderID()));
@@ -138,7 +140,7 @@ public class OrderData implements OrderDataService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String update="update `order` set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=?,`房间数量`=? where 订单号=?;";
+			String update="update `order` set `订单价格`=?,`订单状态`=?,`酒店名`=?,`入住人用户名`=?,`入住人真实姓名`=?,`总人数`=?,`儿童人数`=?,`生成时间`=?,`执行时间`=?,`取消时间`=?,`最晚执行时间`=?,`预计退房时间`=?,`实际退房时间`=?,`房间数量`=?,`客户电话`=? where 订单号=?;";
 			String select = "select * from `order`;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
@@ -166,7 +168,8 @@ public class OrderData implements OrderDataService {
 					ps.setTimestamp(13,
 							ChangerHelper.changeToTimestamp(order.getActualLeaveTime()));
 					ps.setInt(14, order.getRoomNum());
-					ps.setString(15, order.getOrderID());
+					ps.setString(15, order.getPersonPhone());
+					ps.setString(16, order.getOrderID());
 					ps.execute();
 				}
 			}
@@ -211,6 +214,7 @@ public class OrderData implements OrderDataService {
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
 					op.setRoomNum(rs.getInt(15));
+					op.setPersonPhone(rs.getString(16));
 					try {
 						op.setRoom(osh.readRoomSer(op.getOrderID()));
 					} catch (IOException e) {
@@ -264,6 +268,7 @@ public class OrderData implements OrderDataService {
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
 					op.setRoomNum(rs.getInt(15));
+					op.setPersonPhone(rs.getString(16));
 					try {
 						op.setRoom(osh.readRoomSer(op.getOrderID()));
 					} catch (IOException e) {
@@ -312,6 +317,7 @@ public class OrderData implements OrderDataService {
 					op.setActualLeaveTime(ChangerHelper.changeToCalendar(rs
 							.getTimestamp(14)));
 					op.setRoomNum(rs.getInt(15));
+					op.setPersonPhone(rs.getString(16));
 					try {
 						op.setRoom(osh.readRoomSer(op.getOrderID()));
 					} catch (IOException e) {

@@ -37,6 +37,7 @@ public class OrderPO implements Serializable {
 
 	// 入住者信息
 	private String personname;
+	private String personPhone;//客户电话
 	private String realname;// 客户真实姓名
 	private int peoplenum;// 包括child的人数
 	private int childnum;// 儿童的人数。默认为0
@@ -206,6 +207,14 @@ public class OrderPO implements Serializable {
 
 	public void setActualLeaveTime(Calendar actualLeaveTime) {
 		this.actualLeaveTime = actualLeaveTime;
+	}
+
+	public String getPersonPhone() {
+		return personPhone;
+	}
+
+	public void setPersonPhone(String personPhone) {
+		this.personPhone = personPhone;
 	}
 
 }
