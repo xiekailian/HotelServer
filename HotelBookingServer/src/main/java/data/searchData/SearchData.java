@@ -17,6 +17,9 @@ public class SearchData implements SearchDataService {
 	PreparedStatement ps = null;
 	Builder builder = new Builder();
 	ResultSet rs = null;
+	/*
+	 * 返回唯一的searchData对象
+	 */
 	public static SearchData getInstance() {
 		if (searchData == null) {
 			searchData = new SearchData();
@@ -25,7 +28,10 @@ public class SearchData implements SearchDataService {
 		return searchData;
 	}
 	private static SearchData searchData = null;
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.searchDataService.SearchDataService#showSearchHistory(java.lang.String)
+	 */
 	public ArrayList<SearchPO> showSearchHistory(String username) {
 		ArrayList<SearchPO> spList = new ArrayList<SearchPO>();
 		SearchPO sp = new SearchPO();
@@ -58,7 +64,10 @@ public class SearchData implements SearchDataService {
 
 		return null;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.searchDataService.SearchDataService#addSearchHistory(po.SearchPO)
+	 */
 	public boolean addSearchHistory(SearchPO s) {
 		String insert = "insert into search (用户名,时间,酒店名) values(?,?,?);";
 		conn = builder.BuildConnection();
@@ -81,7 +90,10 @@ public class SearchData implements SearchDataService {
 		}
 
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see dataService.searchDataService.SearchDataService#deleteSearchHistory(po.SearchPO)
+	 */
 	public boolean deleteSearchHistory(SearchPO s) {
 		String delete = "delete from search where 时间=?;";
 		conn = builder.BuildConnection();
