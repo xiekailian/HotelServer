@@ -286,10 +286,13 @@ public class HotelData  implements HotelDataService {
 							if(rpList.get(t).getRoomPrice()>thisBest){
 								thisBest=rpList.get(t).getRoomPrice();
 							}
+							thisWorst=thisBest;
 							if(rpList.get(t).getRoomPrice()<thisWorst){
 								thisWorst=rpList.get(t).getRoomPrice();
 							}
 						}
+						System.out.println("this Best is "+thisBest);
+						System.out.println("this Worst is "+thisWorst);
 						boolean Best=(thisWorst<=expensivest)||(expensivest==-1);
 						boolean Worst=(thisBest>=cheapest);
 						if(Best&&Worst){			
