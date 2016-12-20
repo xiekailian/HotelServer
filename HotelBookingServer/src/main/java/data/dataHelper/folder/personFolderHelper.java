@@ -11,6 +11,7 @@ public class personFolderHelper {
 	 */
 	public void mkdirs(String personname) {
 		String path = "src/main/resources/person/";
+		path=path+personname;
 		File A = new File(path);
 		if (A.exists() == false) {
 			A.mkdirs();
