@@ -122,7 +122,7 @@ public class HotelData  implements HotelDataService {
 					ps.setDouble(10, hotelinfo.getScore());
 					ps.setString(11, hotelinfo.getHotelworker());
 					ps.setString(12, hotelinfo.getHotelPhone());
-					ps.setInt(12, hotelinfo.getHotelID());
+					ps.setInt(13, hotelinfo.getHotelID());
 					ps.execute();
 					return true;
 				}
