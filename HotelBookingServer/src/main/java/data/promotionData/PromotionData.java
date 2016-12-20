@@ -163,9 +163,6 @@ public class PromotionData implements PromotionDataService {
 		String Cricleselect = "select * from `CircleWebpromotion`;";
 		String Periodselect = "select * from `PeriodWebpromotion`;";
 		String VipLevelselect = "select * from `VipLevelWebpromotion`;";
-		CircleWebproPO cp=new CircleWebproPO();
-		PeriodWebproPO pp=new PeriodWebproPO();
-		VipLevelWebproPO vp=new VipLevelWebproPO();
 		try {
 			if(hsh.readBirthdayPromotionSer(hotelnames)!=null){
 				result.add(hsh.readBirthdayPromotionSer(hotelnames));
@@ -185,6 +182,7 @@ public class PromotionData implements PromotionDataService {
 			ps = conn.prepareStatement(Cricleselect);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				CircleWebproPO cp=new CircleWebproPO();
 				cp.setPromotionName(rs.getString(1));
 				cp.setPromotionID(rs.getInt(2));
 				cp.setDiscount(rs.getInt(3));
@@ -203,6 +201,7 @@ public class PromotionData implements PromotionDataService {
 			ps = conn.prepareStatement(Periodselect);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				PeriodWebproPO pp=new PeriodWebproPO();
 				pp.setPromotionName(rs.getString(1));
 				pp.setPromotionID(rs.getInt(2));
 				pp.setDiscount(rs.getInt(3));
@@ -221,6 +220,7 @@ public class PromotionData implements PromotionDataService {
 			rs = ps.executeQuery();
 			ArrayList<Integer> list=new ArrayList<Integer>();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				VipLevelWebproPO vp=new VipLevelWebproPO();
 				vp.setPromotionName(rs.getString(1));
 				vp.setPromotionID(rs.getInt(2));
 				vp.setPromotionType(rs.getString(3));

@@ -84,7 +84,6 @@ public class OrderData implements OrderDataService {
 	 * @see dataService.orderDataService.OrderDataService#personFind(java.lang.String)
 	 */
 	public ArrayList<OrderPO> personFind(String personname) {
-		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
 		try {
 			String select = "select * from `order`;";
@@ -92,6 +91,7 @@ public class OrderData implements OrderDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				OrderPO op = new OrderPO();
 				if (rs.getString(5).equals(personname)) {
 					op.setOrderID(rs.getString(1));
 					op.setOrderprice(rs.getInt(2));
@@ -196,7 +196,6 @@ public class OrderData implements OrderDataService {
 	 * @see dataService.orderDataService.OrderDataService#hotelFind(java.lang.String)
 	 */
 	public ArrayList<OrderPO> hotelFind(String hotelname) {
-		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
 		try {
 			String select = "select * from `order`;";
@@ -204,6 +203,7 @@ public class OrderData implements OrderDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				OrderPO op = new OrderPO();
 				if (rs.getString(4).equals(hotelname)) {
 					op.setOrderID(rs.getString(1));
 					op.setOrderprice(rs.getInt(2));
@@ -254,8 +254,8 @@ public class OrderData implements OrderDataService {
 	 * @see dataService.orderDataService.OrderDataService#getOrderInfo(java.lang.String)
 	 */
 	public OrderPO getOrderInfo(String orderID) {
-		OrderPO op = new OrderPO();
 		try {
+			OrderPO op = new OrderPO();
 			String select = "select * from `order`;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
@@ -304,7 +304,6 @@ public class OrderData implements OrderDataService {
 	 * @see dataService.orderDataService.OrderDataService#exceptionFind()
 	 */
 	public ArrayList<OrderPO> exceptionFind() {
-		OrderPO op = new OrderPO();
 		ArrayList<OrderPO> aop = new ArrayList<OrderPO>();
 		try {
 			String select = "select * from `order`;";
@@ -312,6 +311,7 @@ public class OrderData implements OrderDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				OrderPO op = new OrderPO();
 				if (rs.getString(3).equals("异常")
 						|| rs.getString(3).equals("未执行")) {
 					op.setOrderID(rs.getString(1));
