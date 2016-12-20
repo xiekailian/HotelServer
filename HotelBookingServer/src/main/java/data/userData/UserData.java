@@ -192,9 +192,13 @@ public class UserData  implements UserDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
+				System.out.println("has it");
+				System.out.println(marketname);
+				System.out.println(rs.getString(1));
 				if (rs.getString(1).equals(marketname)) {
 					mp.setUsername(rs.getString(1));
 					mp.setPassword(rs.getString(2));
+					System.out.println("has it");
 					return mp;
 				}
 			}
@@ -202,7 +206,7 @@ public class UserData  implements UserDataService {
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return null;

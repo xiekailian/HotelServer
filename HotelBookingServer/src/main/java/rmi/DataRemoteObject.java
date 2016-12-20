@@ -78,6 +78,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 
 	public MarketPO findMarket(String marketname) throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println("1 has it");
 		return userdataservice.findMarket(marketname);
 	}
 
