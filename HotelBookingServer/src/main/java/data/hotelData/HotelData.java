@@ -103,12 +103,12 @@ public class HotelData  implements HotelDataService {
 	public boolean modify(HotelPO hotelinfo) {
 		try {
 			String select = "select * from `hotel`;";
-			String update = "update person set `酒店名`=?,`酒店星级`=?,`酒店简介`=?,`wifi`=?,`电视`=?,`沙发`=?,`餐厅`=?,`地址`=?,`商圈`=?,`平均评分`=?,`酒店工作人员`=?,`联系方式`=? where 酒店ID=?;";
+			String update = "update hotel set `酒店名`=?,`酒店星级`=?,`酒店简介`=?,`wifi`=?,`电视`=?,`沙发`=?,`餐厅`=?,`地址`=?,`商圈`=?,`平均评分`=?,`酒店工作人员`=?,`联系方式`=? where 酒店ID=?;";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(1).equals(hotelinfo.getHotelname())) {
+				if (rs.getString(2).equals(hotelinfo.getHotelname())) {
 					ps = conn.prepareStatement(update);
 					ps.setString(1, hotelinfo.getHotelname());
 					ps.setInt(2, hotelinfo.getStar());

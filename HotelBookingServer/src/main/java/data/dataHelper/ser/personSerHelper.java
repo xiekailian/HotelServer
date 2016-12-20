@@ -23,6 +23,7 @@ public class personSerHelper {
 	 */
 	public boolean writeRecordSer(String personname, RecordPO object)
 			throws IOException {
+		System.out.println("used");
 		String path = "src/main/resources/person/";
 		path = path + personname + "/" + "record.txt";
 		ArrayList<RecordPO> origin=new ArrayList<RecordPO>();

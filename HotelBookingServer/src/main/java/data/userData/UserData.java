@@ -479,6 +479,7 @@ public class UserData  implements UserDataService {
 	 */
 	public boolean writeRecord(String personname, RecordPO record) {
 		try {
+			System.out.println("used");
 			return personserhelper.writeRecordSer(personname, record);
 		} catch (IOException e) {
 			e.printStackTrace();
