@@ -46,7 +46,8 @@ public class personSerHelper {
 			} else {
 				FileOutputStream fos = new FileOutputStream(record);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(object);
+				origin.add(object);
+				oos.writeObject(origin);
 				oos.flush();
 				oos.close();
 			}
