@@ -42,7 +42,7 @@ public class UserData  implements UserDataService {
 		try {
 			personhelper.mkdirs(personInfo.getUsername());
 			String select = "select * from `Person`;";
-			String insert = "insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日,手机号) values(?,?,?,?,?,?,?,?,?);";
+			String insert = "insert into Person (id,用户名,密码,vip类型,vip等级,企业会员名,信用值,生日,手机号) values(?,?,MD5(?),?,?,?,?,?,?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -93,7 +93,7 @@ public class UserData  implements UserDataService {
 				if (rs.getString(2).equals(personname)) { 
 					pp.setPersonID(rs.getInt(1));
 					pp.setUsername(rs.getString(2));
-					pp.setPassword(rs.getString(3));
+					pp.setPassword(null);
 					pp.setVipType(rs.getString(4));
 					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
@@ -161,15 +161,14 @@ public class UserData  implements UserDataService {
 	public boolean personLogin(String personname, String password) {
 
 		try {
-			String select = "select * from `person`;";
+			String select = "select * from `person` where `用户名`=? AND `密码`=MD5(?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
+			ps.setString(1, personname);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(2).equals(personname)
-						&& rs.getString(3).equals(password)) {
 					return true;
-				}
 			}
 			rs.close();
 			ps.close();
@@ -192,13 +191,9 @@ public class UserData  implements UserDataService {
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				System.out.println("has it");
-				System.out.println(marketname);
-				System.out.println(rs.getString(1));
 				if (rs.getString(1).equals(marketname)) {
 					mp.setUsername(rs.getString(1));
-					mp.setPassword(rs.getString(2));
-					System.out.println("has it");
+					mp.setPassword(null);
 					return mp;
 				}
 			}
@@ -248,15 +243,14 @@ public class UserData  implements UserDataService {
 	public boolean marketLogin(String marketname, String password) {
 
 		try {
-			String select = "select * from `market`;";
+			String select = "select * from `market` where `用户名`=? AND `密码`=MD5(?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
+			ps.setString(1, marketname);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(1).equals(marketname)
-						&& rs.getString(2).equals(password)) {
 					return true;
-				}
 			}
 			rs.close();
 			ps.close();
@@ -311,7 +305,7 @@ public class UserData  implements UserDataService {
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
 				if (rs.getString(1).equals(hotelWorkername)) {
 					hp.setUsername(rs.getString(1));
-					hp.setPassword(rs.getString(2));
+					hp.setPassword(null);
 					hp.setHotelname(rs.getString(3));
 					return hp;
 				}
@@ -364,15 +358,14 @@ public class UserData  implements UserDataService {
 	public boolean hotelWorkerLogin(String hotelWorkername, String password) {
 
 		try {
-			String select = "select * from `hotelworker`;";
+			String select = "select * from `hotelworker` where `用户名`=? AND `密码`=MD5(?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
+			ps.setString(1, hotelWorkername);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(1).equals(hotelWorkername)
-						&& rs.getString(2).equals(password)) {
 					return true;
-				}
 			}
 			rs.close();
 			ps.close();
@@ -390,7 +383,7 @@ public class UserData  implements UserDataService {
 	public boolean addMarket(MarketPO marketInfo) {
 		try {
 			String select = "select * from `market`;";
-			String insert = "insert into market (用户名,密码) values(?,?);";
+			String insert = "insert into market (用户名,密码) values(?,MD5(?));";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -418,15 +411,14 @@ public class UserData  implements UserDataService {
 	 */
 	public boolean managerLogin(String managername, String password) {
 		try {
-			String select = "select * from `manager`;";
+			String select = "select * from `manager` where `用户名`=? AND `密码`=MD5(?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
+			ps.setString(1, managername);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
-				if (rs.getString(1).equals(managername)
-						&& rs.getString(2).equals(password)) {
 					return true;
-				}
 			}
 			rs.close();
 			ps.close();
@@ -444,7 +436,7 @@ public class UserData  implements UserDataService {
 		 */
 		try {
 			String select = "select * from `hotelworker`;";
-			String insert = "insert into hotelworker (用户名,密码,酒店名) values(?,?,?);";
+			String insert = "insert into hotelworker (用户名,密码,酒店名) values(?,MD5(?),?);";
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
@@ -487,10 +479,6 @@ public class UserData  implements UserDataService {
 			
 		}
 	}
-	public boolean isExist(String username, String usertype)
-			throws RemoteException {
-		return false;
-	}
 
 	public PersonPO findPerson(int personID) throws RemoteException {
 		PersonPO pp = new PersonPO();
@@ -503,7 +491,7 @@ public class UserData  implements UserDataService {
 				if (rs.getString(1).equals(personID)) { 
 					pp.setPersonID(rs.getInt(1));
 					pp.setUsername(rs.getString(2));
-					pp.setPassword(rs.getString(3));
+					pp.setPassword(null);
 					pp.setVipType(rs.getString(4));
 					pp.setVipLevel(rs.getInt(5));
 					pp.setEnterpriseName(rs.getString(6));
