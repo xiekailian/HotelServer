@@ -121,9 +121,10 @@ public class UserData  implements UserDataService {
 	 */
 	public boolean modifyPerson(PersonPO personInfo) {
 		try {
+			String select="select * from `person`;";
 			String update = "update person set `用户名`=?,`vip类型`=?,`vip等级`=?,`企业会员名`=?,`信用值`=?,`生日`=?,`手机号`=? where id=?;";
 			conn = builder.BuildConnection();
-			ps = conn.prepareStatement(update);
+			ps = conn.prepareStatement(select);
 			rs = ps.executeQuery();
 			while (rs.next()) {// next函数 第一次调用先指向第一条，返回bool提示是否有下一条
 				if (rs.getString(2).equals(personInfo.getUsername())) {
@@ -144,6 +145,7 @@ public class UserData  implements UserDataService {
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			// TODO Auto-generated catch block
 		}
 
