@@ -442,11 +442,13 @@ public class hotelSerHelper {
 
 	public boolean writeBirthdayPromotionSer(String hotelname,
 			BirthdayHotelproPO object) throws IOException {
+		System.out.println("promiton used!!!!");
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "BirthdayHotelPromotion.txt";
 		File room = new File(path);
 		boolean exists = room.exists();
 		if(object==null){
+			System.out.println("promiton nullllll!!!!");
 			return false;
 		}
 		if (exists == false) {
