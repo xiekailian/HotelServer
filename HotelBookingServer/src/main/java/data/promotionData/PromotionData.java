@@ -51,15 +51,15 @@ public class PromotionData implements PromotionDataService {
 			String Cricleinsert = "insert into circlewebpromotion (策略名,策略ID,折扣,策略类型,酒店名或网站,商圈,vip等级) values(?,?,?,?,?,?,?);";
 			String Periodinsert = "insert into periodwebpromotion (策略名,策略ID,折扣,策略类型,酒店名或网站,开始时间,结束时间) values(?,?,?,?,?,?,?);";
 			String VipLevelinsert = "insert into vipLevelwebpromotion (策略名,策略ID,策略类型,酒店名或网站,等级1折扣,等级2折扣,等级3折扣,等级4折扣,等级5折扣) values(?,?,?,?,?,?,?,?,?);";
-			if(promotion.getPromotionType().equals("BirthdayHotelPromotion")){
+			if(promotion.getPromotionType().equals("生日优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeBirthdayPromotionSer(promotion.getHotelnameOrWeb(), (BirthdayHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("EnterpriseHotelPromotion")){
+			if(promotion.getPromotionType().equals("企业优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeEnterprisePromotionSer(promotion.getHotelnameOrWeb(), (EnterpriseHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("LargeAmountHotelPromotion")){
+			if(promotion.getPromotionType().equals("多购优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeLargeAmountPromotionSer(promotion.getHotelnameOrWeb(), (LargeAmountHotelproPO)promotion);
 					return true;}
@@ -258,19 +258,19 @@ public class PromotionData implements PromotionDataService {
 			String Circleupdate="update circlewebpromotion set `策略名`=?,`折扣`=?,`策略类型`=?,`酒店名或网站`=?,`商圈`=?,`vip等级`=? where 策略ID=?;";
 			String Periodupdate="update periodwebpromotion set `策略名`=?,`折扣`=?,`策略类型`=?,`酒店名或网站`=?,`开始时间`=?,`结束时间`=? where 策略ID=?;";
 			String VipLevelupdate = "update vipLevelwebpromotion set `策略名`=?,`策略类型`=?,`酒店名或网站`=?,`等级1折扣`=?,`等级2折扣`=?,`等级4折扣`=?,`等级5折扣`=?,`等级3折扣`=? where 策略ID=?;";
-			if(promotion.getPromotionType().equals("BirthdayHotelPromotion")){
+			if(promotion.getPromotionType().equals("生日优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeBirthdayPromotionSer(promotion.getHotelnameOrWeb(), (BirthdayHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("EnterpriseHotelPromotion")){
+			if(promotion.getPromotionType().equals("企业优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeEnterprisePromotionSer(promotion.getHotelnameOrWeb(), (EnterpriseHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("LargeAmountHotelPromotion")){
+			if(promotion.getPromotionType().equals("多购优惠策略")){
 				promotion.setPromotionID(1);
 					hsh.writeLargeAmountPromotionSer(promotion.getHotelnameOrWeb(), (LargeAmountHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("PeriodHotelPromotion")){
+			if(promotion.getPromotionType().equals("特定时间优惠策略")){
 				hsh.modifyPeriodHotelSer(promotion.getHotelnameOrWeb(), (PeriodHotelproPO)promotion);
 				return true;}
 			
@@ -344,13 +344,13 @@ public class PromotionData implements PromotionDataService {
 			String Perioddelete="delete from periodwebpromotion  where 策略ID=?;";
 			String VipLeveldelete = "delete from vipLevelwebpromotion  where 策略ID=?;";
 			
-			if(promotion.getPromotionType().equals("BirthdayHotelPromotion")){
+			if(promotion.getPromotionType().equals("生日优惠策略")){
 				hsh.deleteBirthdayPromotionSer(promotion.getHotelnameOrWeb());
 					return true;}
-			if(promotion.getPromotionType().equals("EnterpriseHotelPromotion")){
+			if(promotion.getPromotionType().equals("企业优惠策略")){
 				hsh.deleteEnterprisePromotionSer(promotion.getHotelnameOrWeb());
 					return true;}
-			if(promotion.getPromotionType().equals("LargeAmountHotelPromotion")){
+			if(promotion.getPromotionType().equals("多购优惠策略")){
 				hsh.deleteLargeAmountPromotionSer(promotion.getHotelnameOrWeb());
 					return true;}
 			if(promotion.getPromotionType().equals("PeriodHotelPromotion")){
