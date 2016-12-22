@@ -63,7 +63,7 @@ public class PromotionData implements PromotionDataService {
 				promotion.setPromotionID(1);
 					hsh.writeLargeAmountPromotionSer(promotion.getHotelnameOrWeb(), (LargeAmountHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("PeriodHotelPromotion")){
+			if(promotion.getPromotionType().equals("特定时间优惠策略")){
 				if(hsh.readPeriodPromotionSer(promotion.getHotelnameOrWeb())!=null){
 					ArrayList<PeriodHotelproPO> list=hsh.readPeriodPromotionSer(promotion.getHotelnameOrWeb());
 					promotion.setPromotionID(list.get(list.size()-1).getPromotionID()+1);
@@ -73,7 +73,7 @@ public class PromotionData implements PromotionDataService {
 				}
 					hsh.writePeriodHotelSer(promotion.getHotelnameOrWeb(), (PeriodHotelproPO)promotion);
 					return true;}
-			if(promotion.getPromotionType().equals("CircleWebPromotion")){
+			if(promotion.getPromotionType().equals("网站商圈优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Cricleselect);
 				rs = ps.executeQuery();
@@ -95,7 +95,7 @@ public class PromotionData implements PromotionDataService {
 				ps.close();
 				conn.close();
 				return true;}
-			if(promotion.getPromotionType().equals("PeriodWebPromotion")){
+			if(promotion.getPromotionType().equals("网站特定时间优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Periodselect);
 				rs = ps.executeQuery();
@@ -275,7 +275,7 @@ public class PromotionData implements PromotionDataService {
 				return true;}
 			
 			
-			if(promotion.getPromotionType().equals("CircleWebPromotion")){
+			if(promotion.getPromotionType().equals("网站商圈优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Circleupdate);
 				ps.setString(1, ((CircleWebproPO)promotion).getPromotionName());
@@ -290,7 +290,7 @@ public class PromotionData implements PromotionDataService {
 				conn.close();
 				return true;
 			}
-			if(promotion.getPromotionType().equals("PeriodWebPromotion")){
+			if(promotion.getPromotionType().equals("网站特定时间优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Periodupdate);
 				ps.setString(1, ((PeriodWebproPO)promotion).getPromotionName());
@@ -305,7 +305,7 @@ public class PromotionData implements PromotionDataService {
 				conn.close();	
 				return true;
 				}
-			
+	
 			
 			if(promotion.getPromotionType().equals("VipLevelWebPromotion")){
 				conn = builder.BuildConnection();
