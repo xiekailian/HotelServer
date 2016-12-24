@@ -164,6 +164,7 @@ public class PromotionData implements PromotionDataService {
 		String Periodselect = "select * from `PeriodWebpromotion`;";
 		String VipLevelselect = "select * from `VipLevelWebpromotion`;";
 		try {
+		if(hotelnames!="WebPromotion"){
 			if(hsh.readBirthdayPromotionSer(hotelnames)!=null){
 				result.add(hsh.readBirthdayPromotionSer(hotelnames));
 			}
@@ -178,6 +179,9 @@ public class PromotionData implements PromotionDataService {
 					result.add(hsh.readPeriodPromotionSer(hotelnames).get(i));
 				}
 			}
+			return result;
+		}
+		else{
 			conn = builder.BuildConnection();
 			ps = conn.prepareStatement(Cricleselect);
 			rs = ps.executeQuery();
@@ -236,16 +240,15 @@ public class PromotionData implements PromotionDataService {
 			rs.close();
 			ps.close();
 			conn.close();
-			
+			return result;
+		}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 		
-		return result;
 	}
 	/*
 	 * (non-Javadoc)
