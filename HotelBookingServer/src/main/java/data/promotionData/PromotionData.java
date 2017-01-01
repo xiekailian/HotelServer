@@ -363,7 +363,7 @@ public class PromotionData implements PromotionDataService {
 				return true;}
 			
 			
-			if(promotion.getPromotionType().equals("CircleWebPromotion")){
+			if(promotion.getPromotionType().equals("网站商圈优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Circledelete);
 				ps.setInt(1, ((CircleWebproPO)promotion).getPromotionID());
@@ -372,7 +372,7 @@ public class PromotionData implements PromotionDataService {
 				conn.close();
 				return true;
 			}
-			if(promotion.getPromotionType().equals("PeriodWebPromotion")){
+			if(promotion.getPromotionType().equals("网站特定时间优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(Perioddelete);
 				ps.setInt(1, ((PeriodWebproPO)promotion).getPromotionID());
@@ -383,7 +383,7 @@ public class PromotionData implements PromotionDataService {
 				}
 			
 			
-			if(promotion.getPromotionType().equals("VipLevelWebPromotion")){
+			if(promotion.getPromotionType().equals("网站VIP优惠策略")){
 				conn = builder.BuildConnection();
 				ps = conn.prepareStatement(VipLeveldelete);
 				ps.setInt(1, ((VipLevelWebproPO)promotion).getPromotionID());
