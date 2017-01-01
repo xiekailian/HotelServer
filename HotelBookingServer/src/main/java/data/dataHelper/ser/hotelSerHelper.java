@@ -68,6 +68,7 @@ public class hotelSerHelper {
 
 	public boolean writePeriodHotelSer(String hotelname, PeriodHotelproPO object)
 			throws IOException {
+		int lastID=0;
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "PeriodHotelPromotion.txt";
 		ArrayList<PeriodHotelproPO> origin = new ArrayList<PeriodHotelproPO>();
@@ -82,6 +83,12 @@ public class hotelSerHelper {
 		try {
 			if (exists) {
 				origin = this.readPeriodPromotionSer(hotelname);
+				for(int i=0;i<origin.size();i++){
+					if(origin.get(i).getPromotionID()>lastID){
+						lastID=origin.get(i).getPromotionID();
+					}
+				}
+				object.setPromotionID(lastID+1);
 				origin.add(object);
 				FileOutputStream fos = new FileOutputStream(comment);
 				@SuppressWarnings("resource")
@@ -90,7 +97,9 @@ public class hotelSerHelper {
 			} else {
 				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				object.setPromotionID(1);
 				origin.add(object);
+				System.out.println("now ID has "+origin.get(0).getPromotionID());
 				oos.writeObject(origin);
 				oos.flush();
 				oos.close();
@@ -106,6 +115,8 @@ public class hotelSerHelper {
 
 	public boolean modifyPeriodHotelSer(String hotelname,
 			PeriodHotelproPO object) throws IOException {
+		System.out.println("This promotionID is  "+object.getPromotionID());
+
 		String path = "src/main/resources/hotel/";
 		path = path + hotelname + "/" + "PeriodHotelPromotion.txt";
 		ArrayList<PeriodHotelproPO> origin = new ArrayList<PeriodHotelproPO>();
@@ -119,12 +130,13 @@ public class hotelSerHelper {
 		}
 		try {
 			if (exists) {
+				origin = this.readPeriodPromotionSer(hotelname);
 				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin = this.readPeriodPromotionSer(hotelname);
 				for (int i = 0; i < origin.size(); i++) {
 					if (origin.get(i).getPromotionID() == object
 							.getPromotionID()) {
+						System.out.println("find");
 						origin.remove(i);
 						origin.add(object);
 					}
@@ -143,7 +155,6 @@ public class hotelSerHelper {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
