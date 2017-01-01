@@ -213,7 +213,7 @@ public class PromotionData implements PromotionDataService {
 				pp.setPromotionType(rs.getString(4));
 				pp.setHotelnameOrWeb(rs.getString(5));
 				pp.setStartTime(ChangerHelper.changeToCalendar(rs.getTimestamp(6)));
-				pp.setEndTime(ChangerHelper.changeToCalendar(rs.getTimestamp(6)));
+				pp.setEndTime(ChangerHelper.changeToCalendar(rs.getTimestamp(7)));
 				result.add(pp);
 			}
 			rs.close();
@@ -241,7 +241,6 @@ public class PromotionData implements PromotionDataService {
 			rs.close();
 			ps.close();
 			conn.close();
-			System.out.println(result.get(0).getPromotionName());
 			return result;
 		}
 		} catch (IOException e) {
