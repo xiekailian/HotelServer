@@ -358,7 +358,7 @@ public class PromotionData implements PromotionDataService {
 			if(promotion.getPromotionType().equals("多购优惠策略")){
 				hsh.deleteLargeAmountPromotionSer(promotion.getHotelnameOrWeb());
 					return true;}
-			if(promotion.getPromotionType().equals("PeriodHotelPromotion")){
+			if(promotion.getPromotionType().equals("特定时间优惠策略")){
 				hsh.deletePeriodHotelSer(promotion.getHotelnameOrWeb(), (PeriodHotelproPO)promotion);
 				return true;}
 			

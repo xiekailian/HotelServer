@@ -171,30 +171,35 @@ public class hotelSerHelper {
 		}
 		try {
 			if (exists) {
+				origin = this.readPeriodPromotionSer(hotelname);
 				FileOutputStream fos = new FileOutputStream(comment);// out和in不能同时被实例化
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				origin = this.readPeriodPromotionSer(hotelname);
 				for (int i = 0; i < origin.size(); i++) {
 					if (origin.get(i).getPromotionID() == object
 							.getPromotionID()) {
 						origin.remove(i);
 					}
 				}
-				oos.writeObject(origin);
-				oos.flush();
-				oos.close();
-
+				System.out.println("Now size is +++"+origin.size());
+				if(origin.size()!=0){
+					oos.writeObject(origin);
+					oos.flush();
+					oos.close();
+					return true;
+				}
+				else{
+					oos.close();
+					return comment.delete();
+				}
 			} 
 			else{
 				return true;
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
-		return true;
 	}
 	
 
