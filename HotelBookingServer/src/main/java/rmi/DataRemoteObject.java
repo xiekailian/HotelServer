@@ -8,12 +8,10 @@ import data.hotelData.HotelData;
 //import data.hotelData.HotelDataMock;
 import data.orderData.OrderData;
 import data.promotionData.PromotionData;
-import data.searchData.SearchData;
 import data.userData.UserData;
 import dataService.hotelDataService.HotelDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
-import dataService.searchDataService.SearchDataService;
 import dataService.userDataService.UserDataService;
 import po.hotelPO.CommentPO;
 import po.hotelPO.HotelPO;
@@ -28,7 +26,7 @@ import po.SearchPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements
 		HotelDataService, OrderDataService, PromotionDataService,
-		UserDataService, SearchDataService {
+		UserDataService {
 	/**
 	 * 
 	 */
@@ -36,33 +34,14 @@ public class DataRemoteObject extends UnicastRemoteObject implements
 	private HotelDataService hoteldataservice;
 	private OrderDataService orderdataService;
 	private PromotionDataService promotiondataService;
-	private SearchDataService searchdataservice;
 	private UserDataService userdataservice;
 
 	protected DataRemoteObject() throws RemoteException {// ���췽������ʵ��Service�ľ��巽��
 		hoteldataservice = new HotelData();
 		orderdataService = new OrderData();
 		promotiondataService = new PromotionData();
-		searchdataservice = new SearchData();
 		userdataservice = new UserData();
 	}
-
-	public ArrayList<SearchPO> showSearchHistory(String username)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return searchdataservice.showSearchHistory(username);
-	}
-
-	public boolean addSearchHistory(SearchPO s) throws RemoteException {
-		// TODO Auto-generated method stub
-		return searchdataservice.addSearchHistory(s);
-	}
-
-	public boolean deleteSearchHistory(SearchPO s) throws RemoteException {
-		// TODO Auto-generated method stub
-		return searchdataservice.deleteSearchHistory(s);
-	}
-
 
 	public PersonPO findPerson(String personname) throws RemoteException {
 		// TODO Auto-generated method stub
